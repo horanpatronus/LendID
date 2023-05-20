@@ -14,6 +14,12 @@ class SearchButton extends StatelessWidget {
       home: Scaffold(
         body: Stack(
           children: [
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+              child: ListView(
+                children: [Container(), Container()],
+              ),
+            ),
             Navigasi(),
             NavigasiMid(),
           ],
