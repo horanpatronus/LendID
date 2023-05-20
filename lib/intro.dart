@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:homepage/landing_page.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'settings.dart';
+import 'login_page.dart';
 
 void main() => runApp(const App());
 
@@ -72,7 +74,7 @@ class OnBoardingPageState extends State<OnBoardingPage> {
 
       // button
       onDone: () => Navigator.of(context).push(
-        MaterialPageRoute(builder: (_) => const HomePage()),
+        MaterialPageRoute(builder: (_) => const MyApp()),
       ),
       skipOrBackFlex: 0,
       nextFlex: 0,
