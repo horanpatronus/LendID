@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+
 import 'package:homepage/search.dart';
 
+import 'carousel.dart';
 import 'navigasi.dart';
 import 'navigasi_mid.dart';
 import 'progress_bar.dart';
@@ -497,103 +498,21 @@ class LandingPage extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                MyCarousel(),
+                                Carousel(),
                               ],
                             ),
                           ),
                     //end content 5
+                    Container(
+                      color: Colors.white,
+                      height: 50,
+                    ),
                   ],
                 ),
               ),
               Navigasi(),
               NavigasiMid(),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class MyCarousel extends StatelessWidget {
-  final List<String> imageList = [
-    "https://picsum.photos/id/1011/300/200",
-    "https://picsum.photos/id/1015/300/200",
-    "https://picsum.photos/id/1033/300/200",
-    "https://picsum.photos/id/1040/300/200",
-    "https://picsum.photos/id/1051/300/200"
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 250,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: imageList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => DetailPage(
-                    image: imageList[index],
-                  ),
-                ),
-              );
-            },
-            child: Card(
-              child: Column(
-                children: [
-                  Container(
-                    child: Text("Aww"),
-                  ),
-                  Container(
-                    width: 250,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(imageList[index]),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
-
-class DetailPage extends StatelessWidget {
-  final String image;
-
-  const DetailPage({Key? key, required this.image}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Detail Page"),
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage(image),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Center(
-          child: Text(
-            "Detail Page",
-            style: TextStyle(
-              fontSize: 24,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
           ),
         ),
       ),
