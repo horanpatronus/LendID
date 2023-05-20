@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class Navigasi extends StatelessWidget {
   const Navigasi({super.key});
@@ -12,12 +10,12 @@ class Navigasi extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Container(
         height: 80,
-        color: Color(0xff005555),
+        color: const Color(0xff005555),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Container(
-              child: Flexible(
+              child: const Flexible(
                   flex: 1,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -38,7 +36,7 @@ class Navigasi extends StatelessWidget {
                   )),
             ),
             Container(
-              child: Flexible(
+              child: const Flexible(
                   flex: 1,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -58,9 +56,9 @@ class Navigasi extends StatelessWidget {
                     ],
                   )),
             ),
-            Spacer(),
+            const Spacer(),
             Container(
-              child: Flexible(
+              child: const Flexible(
                   flex: 1,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -81,7 +79,7 @@ class Navigasi extends StatelessWidget {
                   )),
             ),
             Container(
-              child: Flexible(
+              child: const Flexible(
                   flex: 1,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

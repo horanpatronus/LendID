@@ -49,7 +49,7 @@ class MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(
           // leading:Image.asset("images/logo_lendid.png", height: 20,),
-          backgroundColor: Color(0xFF005555),
+          backgroundColor: const Color(0xFF005555),
           title: const Text('Login Page'), // judul di header app
       ),
 
@@ -60,7 +60,7 @@ class MyAppState extends State<MyApp> {
             Container(
               height: 150,
               width: 190,
-              padding: EdgeInsets.only(top: 40),
+              padding: const EdgeInsets.only(top: 40),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(200),
               ),
@@ -130,7 +130,7 @@ class MyAppState extends State<MyApp> {
             ),
             
             Padding(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 child: ElevatedButton(
                   onPressed: () {
                     setState(() {
@@ -139,10 +139,10 @@ class MyAppState extends State<MyApp> {
                       
                     });
                   },
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('LOG IN', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),),
+                      Text('LOG IN', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),),
                       Icon(Icons.navigate_next_sharp, size: 15,),
                     ],
                   ),
@@ -150,19 +150,19 @@ class MyAppState extends State<MyApp> {
               ),
              
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const Text('Belum memiliki akun?'),
                 TextButton(
-                  child: const Text(
-                    'Sign up',
-                  ),
                   onPressed: () {
                     //home screen
                   },
-                  style: TextButton.styleFrom(primary: Color(0xff069a8e)),
+                  style: TextButton.styleFrom(foregroundColor: const Color(0xff069a8e)),
+                  child: const Text(
+                    'Sign up',
+                  ),
                 )
               ],
-              mainAxisAlignment: MainAxisAlignment.center,
             ),
 
             Text(

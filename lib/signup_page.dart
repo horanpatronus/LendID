@@ -41,9 +41,12 @@ class MyAppState extends State<MyApp> {
   RegExp passwordValid = RegExp(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)");
   
   bool validatePassword(String pass) {
-    String _password = pass.trim();
-    if(passwordValid.hasMatch(_password)) return true;
-    else return false;
+    String password = pass.trim();
+    if(passwordValid.hasMatch(password)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @override
@@ -63,7 +66,7 @@ class MyAppState extends State<MyApp> {
       title: 'Register Page',
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xff005555),
+          backgroundColor: const Color(0xff005555),
           title: const Text('Register Page'), // judul di header app
       ),
 
@@ -74,7 +77,7 @@ class MyAppState extends State<MyApp> {
             Container(
               height: 150,
               width: 190,
-              padding: EdgeInsets.only(top: 40),
+              padding: const EdgeInsets.only(top: 40),
               child: Center(
                 child: Image.asset("images/logo_lendid.png", height: 150,),
               ),
@@ -200,7 +203,7 @@ class MyAppState extends State<MyApp> {
             ),
 
             Padding(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 child: ElevatedButton(
                   onPressed: () {
                     setState(() {
@@ -215,19 +218,19 @@ class MyAppState extends State<MyApp> {
               ),
              
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const Text('Sudah memiliki akun?'),
                 TextButton(
-                  child: const Text(
-                    'Sign in',
-                  ),
                   onPressed: () {
                     // pilih role screen
                   },
-                  style: TextButton.styleFrom(primary: Color(0xff069a8e)),
+                  style: TextButton.styleFrom(foregroundColor: const Color(0xff069a8e)),
+                  child: const Text(
+                    'Sign in',
+                  ),
                 )
               ],
-              mainAxisAlignment: MainAxisAlignment.center,
             ),
 
             Text(

@@ -16,7 +16,7 @@ class MyAppState extends State<MyApp> {
   
   // final textEditController = TextEditingController();
   String _chooseRole = "";
-  String _role = "";
+  final String _role = "";
 
   @override
   void dispose() {
@@ -32,7 +32,7 @@ class MyAppState extends State<MyApp> {
       title: 'Choose Role Page',
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xFF005555),
+          backgroundColor: const Color(0xFF005555),
           title: const Text('Choose Role Page'), // judul di header app
       ),
 
@@ -42,7 +42,7 @@ class MyAppState extends State<MyApp> {
           children: [
             Container(
               height: 120,
-              padding: EdgeInsets.only(top: 40),
+              padding: const EdgeInsets.only(top: 40),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(200),
               ),
@@ -85,16 +85,16 @@ class MyAppState extends State<MyApp> {
                 _chooseRole = "UMKM";
                 });},
               child: Ink(
-                decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)), color: Color(0xFF069A8E),),
+                decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)), color: Color(0xFF069A8E),),
                 height: 120,
                 width: 180,
                 // color: Color(0xFF069A8E),
                 padding: const EdgeInsets.all(10),
-                child: Column(
+                child: const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.emoji_people, size: 80, color: Colors.white,),
-                    const Text('UMKM', style: TextStyle(color: Colors.white)),
+                    Text('UMKM', style: TextStyle(color: Colors.white)),
                   ],
               ),
               ),
@@ -111,16 +111,16 @@ class MyAppState extends State<MyApp> {
                 _chooseRole = "Investor";
                 });},
               child: Ink(
-                decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)), color: Color(0xFF069A8E),),
+                decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)), color: Color(0xFF069A8E),),
                 height: 120,
                 width: 180,
                 // color: Color(0xFF069A8E),
                 padding: const EdgeInsets.all(10),
-                child: Column(
+                child: const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.money_sharp, size: 80, color: Colors.white,),
-                    const Text('Investor', style: TextStyle(color: Colors.white)),
+                    Text('Investor', style: TextStyle(color: Colors.white)),
                   ],
                 ),
               ),
