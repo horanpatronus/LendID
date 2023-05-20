@@ -32,7 +32,7 @@ class MyAppState extends State<MyApp> {
   final textEditControllerPassword = TextEditingController();
   String _email = "";
   String _password = "";
-  
+
   @override
   void dispose() {
     textEditControllerEmail.dispose();
@@ -42,143 +42,128 @@ class MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-
     // main
     return MaterialApp(
-      title: 'Login Page',
-      home: Scaffold(
-        appBar: AppBar(
-          // leading:Image.asset("images/logo_lendid.png", height: 20,),
-          backgroundColor: Color(0xFF005555),
-          title: const Text('Login Page'), // judul di header app
-      ),
-
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              height: 150,
-              width: 190,
-              padding: EdgeInsets.only(top: 40),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(200),
-              ),
-              child: Center(
-                child: Image.asset("images/logo_lendid.png", height: 150,),
-              ),
+        title: 'Login Page',
+        home: Scaffold(
+            appBar: AppBar(
+              // leading:Image.asset("images/logo_lendid.png", height: 20,),
+              backgroundColor: Color(0xFF005555),
+              title: const Text('Login Page'), // judul di header app
             ),
-            
-            const Padding(
-              padding: EdgeInsets.all(20),
-              
-            ),
-
-            const Padding(
-              padding: EdgeInsets.all(20),
-              child: Text( 
-                'Log In',
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
-              ), 
-              ),
-            
-            const Text( 
-              'Silakan log in untuk melanjutkan.',
-              style: TextStyle(
-                fontSize: 15,
-                color: Color.fromARGB(255, 102, 102, 102)
-              ),
-            ),  
-
-            Form(
-              autovalidateMode: AutovalidateMode.always,
-              child: 
-                Container(                  
-                  padding: const EdgeInsets.all(5),
-                  child: TextFormField(
-                    validator: validateEmail,
-                    controller: textEditControllerEmail,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Email',
-                      hintText: 'Masukkan email yang valid, seperti abc@gmail.com'
-                    ),
-                  ),
-                ), 
-            ),
-
-            Form(
-              autovalidateMode: AutovalidateMode.always,
-              child: 
+            body: SingleChildScrollView(
+              child: Column(mainAxisSize: MainAxisSize.min, children: [
                 Container(
-                  padding: const EdgeInsets.all(5),
-                  child: TextField(
-                    obscureText: true,
-                    enableSuggestions: false,
-                    autocorrect: false,
-                    controller: textEditControllerPassword,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Password',
-                      hintText: 'Masukkan password yang aman'
+                  height: 150,
+                  width: 190,
+                  padding: EdgeInsets.only(top: 40),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(200),
+                  ),
+                  child: Center(
+                    child: Image.asset(
+                      "images/logo_lendid.png",
+                      height: 150,
                     ),
                   ),
-                ), 
-            ),
-            
-            Padding(
-                padding: EdgeInsets.all(20),
-                child: ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      _email = textEditControllerEmail.text;
-                      _password = textEditControllerPassword.text;
-                      
-                    });
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text('LOG IN', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),),
-                      Icon(Icons.navigate_next_sharp, size: 15,),
-                    ],
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(20),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Text(
+                    'Log In',
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-              ),
-             
-            Row(
-              children: <Widget>[
-                const Text('Belum memiliki akun?'),
-                TextButton(
-                  child: const Text(
-                    'Sign up',
-                  ),
-                  onPressed: () {
-                    //home screen
-                  },
-                  style: TextButton.styleFrom(primary: Color(0xff069a8e)),
-                )
-              ],
-              mainAxisAlignment: MainAxisAlignment.center,
-            ),
-
-            Text(
-                'Halo email kamu $_email, password kamu $_password',
-                style: const TextStyle(
-                  fontSize: 30, 
-                  fontWeight: FontWeight.bold, 
-                  color: Color.fromARGB(255, 120, 214, 13)
+                const Text(
+                  'Silakan log in untuk melanjutkan.',
+                  style: TextStyle(
+                      fontSize: 15, color: Color.fromARGB(255, 102, 102, 102)),
                 ),
-            ),
-            
-            
-          ]
-        ),
-      )
-      )
-    );
+                Form(
+                  autovalidateMode: AutovalidateMode.always,
+                  child: Container(
+                    padding: const EdgeInsets.all(5),
+                    child: TextFormField(
+                      validator: validateEmail,
+                      controller: textEditControllerEmail,
+                      decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Email',
+                          hintText:
+                              'Masukkan email yang valid, seperti abc@gmail.com'),
+                    ),
+                  ),
+                ),
+                Form(
+                  autovalidateMode: AutovalidateMode.always,
+                  child: Container(
+                    padding: const EdgeInsets.all(5),
+                    child: TextField(
+                      obscureText: true,
+                      enableSuggestions: false,
+                      autocorrect: false,
+                      controller: textEditControllerPassword,
+                      decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Password',
+                          hintText: 'Masukkan password yang aman'),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(20),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _email = textEditControllerEmail.text;
+                        _password = textEditControllerPassword.text;
+                      });
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'LOG IN',
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
+                        ),
+                        Icon(
+                          Icons.navigate_next_sharp,
+                          size: 15,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Row(
+                  children: <Widget>[
+                    const Text('Belum memiliki akun?'),
+                    TextButton(
+                      child: const Text(
+                        'Sign up',
+                      ),
+                      onPressed: () {
+                        //home screen
+                      },
+                      style: TextButton.styleFrom(primary: Color(0xff069a8e)),
+                    )
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.center,
+                ),
+                Text(
+                  'Halo email kamu $_email, password kamu $_password',
+                  style: const TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 120, 214, 13)),
+                ),
+              ]),
+            )));
   }
 }
