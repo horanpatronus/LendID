@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:homepage/search.dart';
 
 import 'navigasi.dart';
 import 'navigasi_mid.dart';
@@ -79,20 +80,35 @@ class LandingPage extends StatelessWidget {
                             ),
                           ),
                           Container(
-                              margin: EdgeInsets.symmetric(vertical: 5),
-                              padding: EdgeInsets.symmetric(vertical: 5),
-                              color: Color(0xff069A8E),
-                              child: FractionallySizedBox(
-                                widthFactor: 1,
-                                child: Text(
-                                  "Lengkapi Profilmu",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
+                            margin: EdgeInsets.symmetric(vertical: 5),
+                            padding: EdgeInsets.symmetric(vertical: 5),
+                            color: Color(0xff069A8E),
+                            child: FractionallySizedBox(
+                              widthFactor: 1,
+                              child: Material(
+                                color: Colors.transparent,
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        //pergi ke halaman akun
+                                        builder: (context) => SearchButton(),
+                                      ),
+                                    );
+                                  },
+                                  child: Text(
+                                    "Lengkapi Profilmu",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                  ),
                                 ),
-                              )),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -127,66 +143,98 @@ class LandingPage extends StatelessWidget {
                           ),
                           Flexible(
                             flex: 1,
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
-                              child: Column(
-                                children: [
-                                  Icon(
-                                    Icons.arrow_circle_up,
-                                    size: 15,
-                                    color: Colors.black,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SearchButton(),
                                   ),
-                                  Text(
-                                    "Top Up",
-                                    style: TextStyle(fontSize: 10),
-                                  ),
-                                ],
+                                );
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      Icons.arrow_circle_up,
+                                      size: 15,
+                                      color: Colors.black,
+                                    ),
+                                    Text(
+                                      "Top Up",
+                                      style: TextStyle(fontSize: 10),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                           Flexible(
                             flex: 1,
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
-                              child: Column(
-                                children: [
-                                  Icon(
-                                    Icons.arrow_circle_down,
-                                    size: 15,
-                                    color: Colors.black,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    //pergi ke halaman withdraw
+                                    builder: (context) => SearchButton(),
                                   ),
-                                  Text("Withdraw",
-                                      style: TextStyle(fontSize: 10)),
-                                ],
+                                );
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      Icons.arrow_circle_down,
+                                      size: 15,
+                                      color: Colors.black,
+                                    ),
+                                    Text("Withdraw",
+                                        style: TextStyle(fontSize: 10)),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                           Flexible(
                             flex: 1,
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
-                              child: Column(
-                                children: [
-                                  Icon(
-                                    Icons.description,
-                                    size: 15,
-                                    color: Colors.black,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    //pergi ke halaman riwayat
+                                    builder: (context) => SearchButton(),
                                   ),
-                                  Text("Top Up",
-                                      style: TextStyle(fontSize: 10)),
-                                ],
+                                );
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      Icons.description,
+                                      size: 15,
+                                      color: Colors.black,
+                                    ),
+                                    Text("Riwayat",
+                                        style: TextStyle(fontSize: 10)),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
