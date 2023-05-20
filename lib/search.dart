@@ -21,6 +21,11 @@ List<Product> products = [
   Product(name: 'Product 4', description: 'Description of Product 4'),
   Product(name: 'Product 5', description: 'Description of Product 5'),
   Product(name: 'Product 6', description: 'Description of Product 6'),
+  Product(name: 'Product 6', description: 'Description of Product 6'),
+  Product(name: 'Product 6', description: 'Description of Product 6'),
+  Product(name: 'Product 6', description: 'Description of Product 6'),
+  Product(name: 'Product 6', description: 'Description of Product 6'),
+  Product(name: 'Product 6', description: 'Description of Product 6'),
 ];
 
 class SearchButton extends StatelessWidget {
