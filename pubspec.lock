@@ -49,7 +49,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
 <<<<<<< HEAD
-=======
+
     version: "1.17.0"
   crypto:
     dependency: transitive
@@ -415,7 +415,7 @@ packages:
     version: "1.0.0"
 sdks:
 <<<<<<< HEAD
-=======
+
   dart: ">=2.19.2 <3.0.0"
   flutter: ">=3.3.0"
 >>>>>>> fe533436af50b923674a32aa20eaa1e3b777da8a
