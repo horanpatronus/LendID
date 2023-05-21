@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:homepage/search.dart';
+import 'package:homepage/views/search.dart';
 
 bool isMember = false;
 
@@ -11,7 +9,7 @@ class NavigasiMid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment(0, 0.9),
+      alignment: const Alignment(0, 0.9),
       child: GestureDetector(
         onTap: () {
           Navigator.push(
@@ -19,11 +17,11 @@ class NavigasiMid extends StatelessWidget {
               isMember
                   ? MaterialPageRoute(
                       //pergi ke halaman plus button
-                      builder: (context) => SearchButton(),
+                      builder: (context) => const SearchButton(),
                     )
                   : MaterialPageRoute(
                       //pergi ke halaman search button
-                      builder: (context) => SearchButton(),
+                      builder: (context) => const SearchButton(),
                     ));
         },
         child: Container(
@@ -31,7 +29,7 @@ class NavigasiMid extends StatelessWidget {
           width: 70,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Color(0xff005555),
+            color: const Color(0xff005555),
             border: Border.all(
               color: Colors.white,
               width: 5.0,

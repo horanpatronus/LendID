@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../viewmodels/login_viewmodel.dart';
-import 'register_user_view.dart';
-import 'landing_page.dart';
+import 'package:homepage/viewmodels/login_viewmodel.dart';
+import 'package:homepage/views/register_user_view.dart';
+import 'package:homepage/views/landing_page.dart';
 
 String? validateEmail(String? value) {
   const pattern = r"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'"
@@ -32,7 +32,7 @@ class LoginPageState extends State<LoginPage> {
   final textEditControllerPassword = TextEditingController();
   String _email = "";
   String _password = "";
-  String? errorMessage;
+  String? _errorMessage;
 
   @override
   void dispose() {
@@ -45,11 +45,12 @@ class LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     // main
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Login Page',
         home: Scaffold(
             appBar: AppBar(
               // leading:Image.asset("images/logo_lendid.png", height: 20,),
-              backgroundColor: Color(0xFF005555),
+              backgroundColor: const Color(0xFF005555),
               title: const Text('Login Page'), // judul di header app
             ),
             body: SingleChildScrollView(
@@ -57,7 +58,7 @@ class LoginPageState extends State<LoginPage> {
                 Container(
                   height: 150,
                   width: 190,
-                  padding: EdgeInsets.only(top: 40),
+                  padding: const EdgeInsets.only(top: 40),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(200),
                   ),
@@ -118,40 +119,40 @@ class LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 Text(
-                  errorMessage ?? '',
-                  style: TextStyle(
+                  _errorMessage ?? '',
+                  style: const TextStyle(
                     color: Colors.red,
                     fontSize: 16.0,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: ElevatedButton(
                     onPressed: () async {
-                      final email = textEditControllerEmail.text;
-                      final password = textEditControllerPassword.text;
+                      _email = textEditControllerEmail.text;
+                      _password = textEditControllerPassword.text;
                       final loggedIn =
-                          await _viewModel.loginUser(email, password);
+                          await _viewModel.loginUser(_email, _password);
 
                       if (loggedIn) {
                         // Navigate to the landing page
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => LandingPage(),
+                            builder: (context) => const LandingPage(),
                           ),
                         );
                       } else {
                         setState(() {
-                          errorMessage =
+                          _errorMessage =
                               'E-mail atau password yang anda masukkan salah!';
                         });
                       }
                     },
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
+                        Text(
                           'LOG IN',
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.bold),
@@ -165,19 +166,26 @@ class LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     const Text('Belum memiliki akun?'),
                     TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            //pergi ke halaman search button
+                            builder: (context) => const RegisterUserView(),
+                          ),
+                        );
+                      },
+                      style: TextButton.styleFrom(
+                          foregroundColor: const Color(0xff069a8e)),
                       child: const Text(
                         'Sign up',
                       ),
-                      onPressed: () {
-                        RegisterUserView();
-                      },
-                      style: TextButton.styleFrom(primary: Color(0xff069a8e)),
                     )
                   ],
-                  mainAxisAlignment: MainAxisAlignment.center,
                 ),
                 // Text(
                 //   'Halo email kamu $_email, password kamu $_password',

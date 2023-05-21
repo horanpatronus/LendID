@@ -158,7 +158,7 @@ List<Product> products = [
 class ProductCard extends StatelessWidget {
   final Product product;
 
-  const ProductCard({required this.product});
+  const ProductCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -179,14 +179,14 @@ class ProductCard extends StatelessWidget {
                 top: 8,
                 right: 8,
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: Colors.red,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
                     '${product.discount}% OFF',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 12,
@@ -196,30 +196,30 @@ class ProductCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Text(
               product.name,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Text(
               'Price: \$${product.price.toStringAsFixed(2)}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
               ),
             ),
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Text(
               product.description,
               style: TextStyle(
@@ -230,11 +230,11 @@ class ProductCard extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Align(
             alignment: Alignment.centerRight,
             child: Padding(
-              padding: EdgeInsets.only(right: 8),
+              padding: const EdgeInsets.only(right: 8),
               child: ElevatedButton(
                 onPressed: () {
                   // Tambahkan logika saat tombol ditekan
@@ -245,7 +245,7 @@ class ProductCard extends StatelessWidget {
                     ),
                   );
                 },
-                child: Text('Details'),
+                child: const Text('Details'),
               ),
             ),
           ),
@@ -258,7 +258,7 @@ class ProductCard extends StatelessWidget {
 class ProductDetailPage extends StatelessWidget {
   final Product product;
 
-  const ProductDetailPage({required this.product});
+  const ProductDetailPage({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -266,7 +266,7 @@ class ProductDetailPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(product.name),
       ),
-      body: Center(
+      body: const Center(
         child: Text('Product Detail Page'),
       ),
     );
@@ -274,11 +274,13 @@ class ProductDetailPage extends StatelessWidget {
 }
 
 class ProductListPage extends StatelessWidget {
+  const ProductListPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      padding: EdgeInsets.all(8),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      padding: const EdgeInsets.all(8),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         mainAxisSpacing: 8,
         crossAxisSpacing: 8,
@@ -293,7 +295,7 @@ class ProductListPage extends StatelessWidget {
 }
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
     home: ProductListPage(),
   ));

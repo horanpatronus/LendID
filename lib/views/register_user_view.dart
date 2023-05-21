@@ -1,8 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import '../viewmodels/register_user_viewmodel.dart';
-import '../models/user_model.dart';
-import 'landing_page.dart';
-import 'login_page.dart';
+import 'package:homepage/viewmodels/register_user_viewmodel.dart';
+import 'package:homepage/models/user_model.dart';
+import 'package:homepage/views/landing_page.dart';
+import 'package:homepage/views/login_page.dart';
+import 'package:homepage/views/choose_role.dart';
 
 class RegisterUserView extends StatefulWidget {
   const RegisterUserView({Key? key}) : super(key: key);
@@ -73,11 +75,13 @@ class _RegisterUserViewState extends State<RegisterUserView> {
       // Registration successful
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => LandingPage()),
+        MaterialPageRoute(builder: (context) => const LandingPage()),
       );
     }).catchError((error) {
       // Handle registration error
-      print('Registration failed: $error');
+      if (kDebugMode) {
+        print('Registration failed: $error');
+      }
     });
   }
 
@@ -198,8 +202,9 @@ class _RegisterUserViewState extends State<RegisterUserView> {
                         ),
                         validator: (val) {
                           if (val == null) return 'Password tidak boleh kosong';
-                          if (val != textEditControllerPassword.text)
+                          if (val != textEditControllerPassword.text) {
                             return 'Password tidak sesuai';
+                          }
                           return null;
                         }),
                   ),
@@ -214,9 +219,14 @@ class _RegisterUserViewState extends State<RegisterUserView> {
                         _password = textEditControllerPassword.text;
                         _konfirmasiPassword =
                             textEditControllerKonfirmasiPassword.text;
-
-                        registerUser();
                       });
+                      registerUser();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ChooseRole(),
+                        ),
+                      );
                     },
                     child: const Text('NEXT'),
                   ),
@@ -227,7 +237,12 @@ class _RegisterUserViewState extends State<RegisterUserView> {
                     const Text('Sudah memiliki akun?'),
                     TextButton(
                       onPressed: () {
-                        LoginPage();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginPage(),
+                          ),
+                        );
                       },
                       style: TextButton.styleFrom(
                           foregroundColor: const Color(0xff069a8e)),

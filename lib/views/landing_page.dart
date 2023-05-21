@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:homepage/search.dart';
+import 'package:homepage/views/search.dart';
 
 import 'carousel.dart';
 import 'navigasi.dart';
@@ -22,13 +22,13 @@ class LandingPage extends StatelessWidget {
           child: Stack(
             children: [
               Container(
-                margin: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+                margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
                 child: ListView(
                   children: [
                     //content 1
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 10),
-                      child: Text(
+                      margin: const EdgeInsets.symmetric(vertical: 10),
+                      child: const Text(
                         "Hai Username",
                         textAlign: TextAlign.start,
                         style: TextStyle(
@@ -38,20 +38,20 @@ class LandingPage extends StatelessWidget {
                     //end content 1
                     //content 2
                     Container(
-                      color: Color(0xFFA1E3D8),
-                      padding: EdgeInsets.all(20),
+                      color: const Color(0xFFA1E3D8),
+                      padding: const EdgeInsets.all(20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text(
+                          const Text(
                             "Progress Profile",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 11),
                           ),
                           Container(
-                            margin: EdgeInsets.symmetric(vertical: 5),
-                            child: Row(
+                            margin: const EdgeInsets.symmetric(vertical: 5),
+                            child: const Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Flexible(
@@ -72,8 +72,8 @@ class LandingPage extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.symmetric(vertical: 5),
-                            child: Text(
+                            margin: const EdgeInsets.symmetric(vertical: 5),
+                            child: const Text(
                               "Lorem Ipsum ntuk merubah ukuran teks di Flutter, Anda dapat menggunakan properti",
                               style: TextStyle(fontSize: 11),
                               overflow: TextOverflow.clip,
@@ -82,9 +82,9 @@ class LandingPage extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.symmetric(vertical: 5),
-                            padding: EdgeInsets.symmetric(vertical: 5),
-                            color: Color(0xff069A8E),
+                            margin: const EdgeInsets.symmetric(vertical: 5),
+                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            color: const Color(0xff069A8E),
                             child: FractionallySizedBox(
                               widthFactor: 1,
                               child: Material(
@@ -99,7 +99,7 @@ class LandingPage extends StatelessWidget {
                                       ),
                                     );
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     "Lengkapi Profilmu",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
@@ -117,21 +117,21 @@ class LandingPage extends StatelessWidget {
                     //end content 2
                     //content 3
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 10),
-                      color: Color(0xffA1E3D8),
-                      padding: EdgeInsets.all(20),
+                      margin: const EdgeInsets.symmetric(vertical: 10),
+                      color: const Color(0xffA1E3D8),
+                      padding: const EdgeInsets.all(20),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Flexible(
                             flex: 2,
                             child: Container(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
-                              child: Column(
+                              child: const Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text("Saldo", style: TextStyle(fontSize: 10)),
@@ -156,12 +156,12 @@ class LandingPage extends StatelessWidget {
                                 );
                               },
                               child: Container(
-                                padding: EdgeInsets.all(10),
+                                padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(5.0),
                                 ),
-                                child: Column(
+                                child: const Column(
                                   children: [
                                     Icon(
                                       Icons.arrow_circle_up,
@@ -190,12 +190,12 @@ class LandingPage extends StatelessWidget {
                                 );
                               },
                               child: Container(
-                                padding: EdgeInsets.all(10),
+                                padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(5.0),
                                 ),
-                                child: Column(
+                                child: const Column(
                                   children: [
                                     Icon(
                                       Icons.arrow_circle_down,
@@ -222,12 +222,12 @@ class LandingPage extends StatelessWidget {
                                 );
                               },
                               child: Container(
-                                padding: EdgeInsets.all(10),
+                                padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(5.0),
                                 ),
-                                child: Column(
+                                child: const Column(
                                   children: [
                                     Icon(
                                       Icons.description,
@@ -249,8 +249,8 @@ class LandingPage extends StatelessWidget {
                     isMember
                         ? Container(
                             //dashboard umkm
-                            padding: EdgeInsets.all(20),
-                            color: Color(0xffA1E3D8),
+                            padding: const EdgeInsets.all(20),
+                            color: const Color(0xffA1E3D8),
                             child: Column(
                               children: [
                                 Row(
@@ -260,14 +260,14 @@ class LandingPage extends StatelessWidget {
                                     Flexible(
                                       flex: 1,
                                       child: Container(
-                                        margin: EdgeInsets.all(5),
-                                        padding: EdgeInsets.all(20),
+                                        margin: const EdgeInsets.all(5),
+                                        padding: const EdgeInsets.all(20),
                                         decoration: BoxDecoration(
                                           color: Colors.white,
                                           borderRadius:
                                               BorderRadius.circular(10.0),
                                         ),
-                                        child: FractionallySizedBox(
+                                        child: const FractionallySizedBox(
                                           widthFactor: 1,
                                           child: Column(
                                             children: [
@@ -286,14 +286,14 @@ class LandingPage extends StatelessWidget {
                                     Flexible(
                                       flex: 1,
                                       child: Container(
-                                        margin: EdgeInsets.all(5),
-                                        padding: EdgeInsets.all(20),
+                                        margin: const EdgeInsets.all(5),
+                                        padding: const EdgeInsets.all(20),
                                         decoration: BoxDecoration(
                                           color: Colors.white,
                                           borderRadius:
                                               BorderRadius.circular(10.0),
                                         ),
-                                        child: FractionallySizedBox(
+                                        child: const FractionallySizedBox(
                                           widthFactor: 1,
                                           child: Column(
                                             children: [
@@ -318,14 +318,14 @@ class LandingPage extends StatelessWidget {
                                     Flexible(
                                       flex: 1,
                                       child: Container(
-                                        margin: EdgeInsets.all(5),
-                                        padding: EdgeInsets.all(20),
+                                        margin: const EdgeInsets.all(5),
+                                        padding: const EdgeInsets.all(20),
                                         decoration: BoxDecoration(
                                           color: Colors.white,
                                           borderRadius:
                                               BorderRadius.circular(10.0),
                                         ),
-                                        child: FractionallySizedBox(
+                                        child: const FractionallySizedBox(
                                           widthFactor: 1,
                                           child: Column(
                                             children: [
@@ -344,14 +344,14 @@ class LandingPage extends StatelessWidget {
                                     Flexible(
                                       flex: 1,
                                       child: Container(
-                                        margin: EdgeInsets.all(5),
-                                        padding: EdgeInsets.all(20),
+                                        margin: const EdgeInsets.all(5),
+                                        padding: const EdgeInsets.all(20),
                                         decoration: BoxDecoration(
                                           color: Colors.white,
                                           borderRadius:
                                               BorderRadius.circular(10.0),
                                         ),
-                                        child: FractionallySizedBox(
+                                        child: const FractionallySizedBox(
                                           widthFactor: 1,
                                           child: Column(
                                             children: [
@@ -374,8 +374,8 @@ class LandingPage extends StatelessWidget {
                           )
                         : Container(
                             //dashboard investor
-                            padding: EdgeInsets.all(20),
-                            color: Color(0xffA1E3D8),
+                            padding: const EdgeInsets.all(20),
+                            color: const Color(0xffA1E3D8),
                             child: Column(
                               children: [
                                 Row(
@@ -385,14 +385,14 @@ class LandingPage extends StatelessWidget {
                                     Flexible(
                                       flex: 1,
                                       child: Container(
-                                        margin: EdgeInsets.all(5),
-                                        padding: EdgeInsets.all(20),
+                                        margin: const EdgeInsets.all(5),
+                                        padding: const EdgeInsets.all(20),
                                         decoration: BoxDecoration(
                                           color: Colors.white,
                                           borderRadius:
                                               BorderRadius.circular(10.0),
                                         ),
-                                        child: Column(
+                                        child: const Column(
                                           children: [
                                             Text(
                                               "Total Investasi yang Berjalan",
@@ -407,14 +407,14 @@ class LandingPage extends StatelessWidget {
                                     Flexible(
                                       flex: 1,
                                       child: Container(
-                                        margin: EdgeInsets.all(5),
-                                        padding: EdgeInsets.all(20),
+                                        margin: const EdgeInsets.all(5),
+                                        padding: const EdgeInsets.all(20),
                                         decoration: BoxDecoration(
                                           color: Colors.white,
                                           borderRadius:
                                               BorderRadius.circular(10.0),
                                         ),
-                                        child: Column(
+                                        child: const Column(
                                           children: [
                                             Text(
                                               "Total Investasi yang Selesai",
@@ -435,14 +435,14 @@ class LandingPage extends StatelessWidget {
                                     Flexible(
                                       flex: 1,
                                       child: Container(
-                                        margin: EdgeInsets.all(5),
-                                        padding: EdgeInsets.all(20),
+                                        margin: const EdgeInsets.all(5),
+                                        padding: const EdgeInsets.all(20),
                                         decoration: BoxDecoration(
                                           color: Colors.white,
                                           borderRadius:
                                               BorderRadius.circular(10.0),
                                         ),
-                                        child: Column(
+                                        child: const Column(
                                           children: [
                                             Text(
                                               "Jumlah Dana yang Diberikan",
@@ -457,14 +457,14 @@ class LandingPage extends StatelessWidget {
                                     Flexible(
                                       flex: 1,
                                       child: Container(
-                                        margin: EdgeInsets.all(5),
-                                        padding: EdgeInsets.all(20),
+                                        margin: const EdgeInsets.all(5),
+                                        padding: const EdgeInsets.all(20),
                                         decoration: BoxDecoration(
                                           color: Colors.white,
                                           borderRadius:
                                               BorderRadius.circular(10.0),
                                         ),
-                                        child: Column(
+                                        child: const Column(
                                           children: [
                                             Text(
                                               "Estimasi Hasil Imbal",
@@ -486,13 +486,13 @@ class LandingPage extends StatelessWidget {
                     isMember
                         ? Container()
                         : Container(
-                            margin: EdgeInsets.symmetric(vertical: 20),
+                            margin: const EdgeInsets.symmetric(vertical: 20),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
-                                  margin: EdgeInsets.symmetric(vertical: 10),
-                                  child: Text(
+                                  margin: const EdgeInsets.symmetric(vertical: 10),
+                                  child: const Text(
                                     "Rekomendasi Investasi",
                                     style: TextStyle(
                                       fontSize: 11,
@@ -512,8 +512,8 @@ class LandingPage extends StatelessWidget {
                   ],
                 ),
               ),
-              Navigasi(),
-              NavigasiMid(),
+              const Navigasi(),
+              const NavigasiMid(),
             ],
           ),
         ),

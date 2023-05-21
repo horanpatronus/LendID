@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:homepage/navigasi.dart';
-import 'package:homepage/navigasi_mid.dart';
+import 'package:homepage/views/navigasi.dart';
+import 'package:homepage/views/navigasi_mid.dart';
 
 class SettingsPage extends StatefulWidget {
+  const SettingsPage({super.key});
+
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
@@ -19,7 +21,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pengaturan'),
+        title: const Text('Pengaturan'),
       ),
       body: Stack(
         children: [
@@ -28,7 +30,7 @@ class _SettingsPageState extends State<SettingsPage> {
               children: <Widget>[
                 ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: listViewItems.length,
                   itemBuilder: (BuildContext context, int index) {
                     final item = listViewItems[index];
@@ -40,7 +42,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             _showModal(context, item);
                           },
                         ),
-                        Divider(
+                        const Divider(
                           height: 1,
                           color: Colors.grey,
                           indent: 16,
@@ -51,7 +53,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   },
                 ),
                 Container(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -61,8 +63,8 @@ class _SettingsPageState extends State<SettingsPage> {
                         height: 150,
                         fit: BoxFit.contain, // Atur properti fit
                       ),
-                      SizedBox(height: 16.0),
-                      Text(
+                      const SizedBox(height: 16.0),
+                      const Text(
                         'LENDID - V1.0',
                         style: TextStyle(fontSize: 16),
                       ),
@@ -72,8 +74,8 @@ class _SettingsPageState extends State<SettingsPage> {
               ],
             ),
           ),
-          Navigasi(),
-          NavigasiMid(),
+          const Navigasi(),
+          const NavigasiMid(),
         ],
       ),
     );
@@ -108,7 +110,7 @@ class _SettingsPageState extends State<SettingsPage> {
           content: contentWidget,
           actions: <Widget>[
             TextButton(
-              child: Text('Tutup'),
+              child: const Text('Tutup'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -123,7 +125,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return RichText(
       text: TextSpan(
         style: DefaultTextStyle.of(context).style,
-        children: <TextSpan>[
+        children: const <TextSpan>[
           TextSpan(
             text: 'Pertanyaan yang Sering Ditanyakan\n\n',
             style: TextStyle(
@@ -145,14 +147,14 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget _buildHelpContent() {
-    return Text('Ini adalah konten Bantuan yang khusus');
+    return const Text('Ini adalah konten Bantuan yang khusus');
   }
 
   Widget _buildTermsContent() {
-    return Text('Ini adalah konten Ketentuan Layanan yang khusus');
+    return const Text('Ini adalah konten Ketentuan Layanan yang khusus');
   }
 
   Widget _buildPrivacyContent() {
-    return Text('Ini adalah konten Kebijakan Privasi yang khusus');
+    return const Text('Ini adalah konten Kebijakan Privasi yang khusus');
   }
 }

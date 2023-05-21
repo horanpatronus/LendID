@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'login_page.dart';
+import 'package:homepage/views/login_page.dart';
 
 // void main() {
 //   runApp(const MyApp());
@@ -33,14 +33,14 @@ class _ChooseRoleState extends State<ChooseRole> {
         title: 'Choose Role Page',
         home: Scaffold(
             appBar: AppBar(
-              backgroundColor: Color(0xFF005555),
+              backgroundColor: const Color(0xFF005555),
               title: const Text('Choose Role Page'), // judul di header app
             ),
             body: Center(
               child: Column(mainAxisSize: MainAxisSize.min, children: [
                 Container(
                   height: 120,
-                  padding: EdgeInsets.only(top: 40),
+                  padding: const EdgeInsets.only(top: 40),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(200),
                   ),
@@ -79,7 +79,7 @@ class _ChooseRoleState extends State<ChooseRole> {
                     });
                   },
                   child: Ink(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       color: Color(0xFF069A8E),
                     ),
@@ -87,7 +87,7 @@ class _ChooseRoleState extends State<ChooseRole> {
                     width: 180,
                     // color: Color(0xFF069A8E),
                     padding: const EdgeInsets.all(10),
-                    child: Column(
+                    child: const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
@@ -95,8 +95,7 @@ class _ChooseRoleState extends State<ChooseRole> {
                           size: 80,
                           color: Colors.white,
                         ),
-                        const Text('UMKM',
-                            style: TextStyle(color: Colors.white)),
+                        Text('UMKM', style: TextStyle(color: Colors.white)),
                       ],
                     ),
                   ),
@@ -111,7 +110,7 @@ class _ChooseRoleState extends State<ChooseRole> {
                     });
                   },
                   child: Ink(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       color: Color(0xFF069A8E),
                     ),
@@ -119,7 +118,7 @@ class _ChooseRoleState extends State<ChooseRole> {
                     width: 180,
                     // color: Color(0xFF069A8E),
                     padding: const EdgeInsets.all(10),
-                    child: Column(
+                    child: const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
@@ -127,14 +126,13 @@ class _ChooseRoleState extends State<ChooseRole> {
                           size: 80,
                           color: Colors.white,
                         ),
-                        const Text('Investor',
-                            style: TextStyle(color: Colors.white)),
+                        Text('Investor', style: TextStyle(color: Colors.white)),
                       ],
                     ),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: ElevatedButton(
                     onPressed: () {
                       setState(() {
@@ -144,7 +142,7 @@ class _ChooseRoleState extends State<ChooseRole> {
                         context,
                         MaterialPageRoute(
                           //pergi ke halaman Login page
-                          builder: (context) => Login_Page(),
+                          builder: (context) => const LoginPage(),
                         ),
                       );
                     },
