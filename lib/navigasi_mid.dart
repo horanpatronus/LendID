@@ -15,12 +15,16 @@ class NavigasiMid extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.push(
-            context,
-            MaterialPageRoute(
-              //pergi ke halaman top up
-              builder: (context) => SearchButton(),
-            ),
-          );
+              context,
+              isMember
+                  ? MaterialPageRoute(
+                      //pergi ke halaman plus button
+                      builder: (context) => SearchButton(),
+                    )
+                  : MaterialPageRoute(
+                      //pergi ke halaman search button
+                      builder: (context) => SearchButton(),
+                    ));
         },
         child: Container(
           height: 70,

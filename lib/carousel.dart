@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:homepage/progress_bar.dart';
-
 import 'landing_page.dart';
 
 class Carousel extends StatelessWidget {
