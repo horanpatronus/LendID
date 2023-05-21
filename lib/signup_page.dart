@@ -60,6 +60,7 @@ class MyAppState extends State<SignUp> {
   Widget build(BuildContext context) {
     // main
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Register Page',
         home: Scaffold(
             appBar: AppBar(
@@ -74,7 +75,7 @@ class MyAppState extends State<SignUp> {
                   padding: EdgeInsets.only(top: 40),
                   child: Center(
                     child: Image.asset(
-                      "images/logo_lendid.png",
+                      "lendid_trans.png",
                       height: 150,
                     ),
                   ),

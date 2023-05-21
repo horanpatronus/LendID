@@ -43,6 +43,7 @@ class MyAppState extends State<Login_Page> {
   Widget build(BuildContext context) {
     // main
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Login Page',
         home: Scaffold(
             appBar: AppBar(

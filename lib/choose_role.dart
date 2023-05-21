@@ -29,6 +29,7 @@ class _ChooseRoleState extends State<ChooseRole> {
   Widget build(BuildContext context) {
     // main
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Choose Role Page',
         home: Scaffold(
             appBar: AppBar(
