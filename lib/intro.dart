@@ -1,24 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:homepage/login_page.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'settings.dart';
-import 'profile_user.dart';
-import 'edit_profile_user.dart';
-
-void main() => runApp(const App());
-
-class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Introduction screen',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: SettingsPage(),
-    );
-  }
-}
 
 class OnBoardingPage extends StatefulWidget {
   const OnBoardingPage({Key? key}) : super(key: key);
@@ -74,7 +56,7 @@ class OnBoardingPageState extends State<OnBoardingPage> {
 
       // button
       onDone: () => Navigator.of(context).push(
-        MaterialPageRoute(builder: (_) => SettingsPage()),
+        MaterialPageRoute(builder: (_) => const Login_Page()),
       ),
       skipOrBackFlex: 0,
       nextFlex: 0,

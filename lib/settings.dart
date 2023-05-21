@@ -1,5 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:homepage/navigasi.dart';
+import 'package:homepage/navigasi_mid.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -20,75 +21,60 @@ class _SettingsPageState extends State<SettingsPage> {
       appBar: AppBar(
         title: Text('Pengaturan'),
       ),
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: ListView.builder(
-              itemCount: listViewItems.length,
-              itemBuilder: (BuildContext context, int index) {
-                final item = listViewItems[index];
-                return Column(
-                  children: <Widget>[
-                    ListTile(
-                      title: Text(item),
-                      onTap: () {
-                        _showModal(context, item);
-                      },
-                    ),
-                    Divider(
-                      height: 1,
-                      color: Colors.grey,
-                      indent: 16,
-                      endIndent: 16,
-                    ),
-                  ],
-                );
-              },
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: listViewItems.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final item = listViewItems[index];
+                    return Column(
+                      children: <Widget>[
+                        ListTile(
+                          title: Text(item),
+                          onTap: () {
+                            _showModal(context, item);
+                          },
+                        ),
+                        Divider(
+                          height: 1,
+                          color: Colors.grey,
+                          indent: 16,
+                          endIndent: 16,
+                        ),
+                      ],
+                    );
+                  },
+                ),
+                Container(
+                  padding: EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'page2.png', // Ganti dengan path gambar Anda
+                        width: 150,
+                        height: 150,
+                        fit: BoxFit.contain, // Atur properti fit
+                      ),
+                      SizedBox(height: 16.0),
+                      Text(
+                        'LENDID - V1.0',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'page2.png', // Ganti dengan path gambar Anda
-                    width: 200,
-                    height: 200,
-                    fit: BoxFit.contain, // Atur properti fit
-                  ),
-                  SizedBox(height: 16.0),
-                  Text(
-                    'LENDID - V1.0',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          Navigasi(),
+          NavigasiMid(),
         ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Beranda',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Pengaturan',
-          ),
-        ],
-        currentIndex: 1,
-        selectedItemColor: Colors.blue,
-        onTap: (int index) {
-          if (index == 0) {
-            // Navigasi ke halaman beranda
-          } else if (index == 1) {
-            // Tetap di halaman pengaturan (current page)
-          }
-        },
       ),
     );
   }

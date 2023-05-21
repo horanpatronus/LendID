@@ -6,6 +6,7 @@ import 'carousel.dart';
 import 'navigasi.dart';
 import 'navigasi_mid.dart';
 import 'progress_bar.dart';
+import 'profile_user.dart';
 
 bool isMember = false;
 
@@ -94,7 +95,7 @@ class LandingPage extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                         //pergi ke halaman akun
-                                        builder: (context) => SearchButton(),
+                                        builder: (context) => ProfilePage(),
                                       ),
                                     );
                                   },
@@ -149,6 +150,7 @@ class LandingPage extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
+                                    //ke halaman top up page
                                     builder: (context) => SearchButton(),
                                   ),
                                 );
