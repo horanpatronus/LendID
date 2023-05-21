@@ -1,33 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:homepage/viewmodels/register_user_viewmodel.dart';
+import 'package:homepage/models/user_model.dart';
+import 'package:homepage/views/login_page.dart';
+import 'package:homepage/views/choose_role.dart';
 
-import 'choose_role.dart';
-import 'landing_page.dart';
-import 'login_page.dart';
+class RegisterUserView extends StatefulWidget {
+  const RegisterUserView({Key? key}) : super(key: key);
 
-String? validateEmail(String? value) {
-  const pattern = r"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'"
-      r'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-'
-      r'\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*'
-      r'[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4]'
-      r'[0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9]'
-      r'[0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\'
-      r'x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])';
-  final regex = RegExp(pattern);
-
-  return value!.isNotEmpty && !regex.hasMatch(value)
-      ? 'Masukkan alamat email yang valid'
-      : null;
-}
-
-class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
   @override
-  MyAppState createState() {
-    return MyAppState();
-  }
+  _RegisterUserViewState createState() => _RegisterUserViewState();
 }
 
-class MyAppState extends State<SignUp> {
+class _RegisterUserViewState extends State<RegisterUserView> {
+  final RegisterViewModel _userViewModel = RegisterViewModel();
   final textEditControllerNamaLengkap = TextEditingController();
   final textEditControllerEmail = TextEditingController();
   final textEditControllerPassword = TextEditingController();
@@ -37,14 +22,30 @@ class MyAppState extends State<SignUp> {
   String _password = "";
   String _konfirmasiPassword = "";
 
+  String? validateEmail(String? value) {
+    const pattern = r"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'"
+        r'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-'
+        r'\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*'
+        r'[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4]'
+        r'[0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9]'
+        r'[0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\'
+        r'x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])';
+    final regex = RegExp(pattern);
+
+    return value!.isNotEmpty && !regex.hasMatch(value)
+        ? 'Masukkan alamat email yang valid'
+        : null;
+  }
+
   RegExp passwordValid = RegExp(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)");
 
   bool validatePassword(String pass) {
-    String _password = pass.trim();
-    if (passwordValid.hasMatch(_password))
+    String password = pass.trim();
+    if (passwordValid.hasMatch(password)) {
       return true;
-    else
+    } else {
       return false;
+    }
   }
 
   @override
@@ -56,15 +57,39 @@ class MyAppState extends State<SignUp> {
     super.dispose();
   }
 
+  void registerUser() {
+    UserModel user = UserModel(
+      email: textEditControllerEmail.text,
+      foto: '', // Set the value accordingly
+      ktp: '', // Set the value accordingly
+      nama: textEditControllerNamaLengkap.text,
+      password: textEditControllerPassword.text,
+      role: '', // Set the value accordingly
+      saldo: 0, // Set the value accordingly
+      perusahaan: {}, // Set the value accordingly
+    );
+
+    _userViewModel.handleUserData(user);
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ChooseRole(
+          userViewModel: _userViewModel,
+          onRoleSelected: _userViewModel.handleSelectedRole,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // main
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
         title: 'Register Page',
         home: Scaffold(
             appBar: AppBar(
-              backgroundColor: Color(0xff005555),
+              backgroundColor: const Color(0xff005555),
               title: const Text('Register Page'), // judul di header app
             ),
             body: SingleChildScrollView(
@@ -72,10 +97,10 @@ class MyAppState extends State<SignUp> {
                 Container(
                   height: 150,
                   width: 190,
-                  padding: EdgeInsets.only(top: 40),
+                  padding: const EdgeInsets.only(top: 40),
                   child: Center(
                     child: Image.asset(
-                      "lendid_trans.png",
+                      "images/logo_lendid.png",
                       height: 150,
                     ),
                   ),
@@ -174,14 +199,15 @@ class MyAppState extends State<SignUp> {
                         ),
                         validator: (val) {
                           if (val == null) return 'Password tidak boleh kosong';
-                          if (val != textEditControllerPassword.text)
+                          if (val != textEditControllerPassword.text) {
                             return 'Password tidak sesuai';
+                          }
                           return null;
                         }),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: ElevatedButton(
                     onPressed: () {
                       setState(() {
@@ -191,11 +217,14 @@ class MyAppState extends State<SignUp> {
                         _konfirmasiPassword =
                             textEditControllerKonfirmasiPassword.text;
                       });
+                      registerUser();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          //pergi ke halaman Login page
-                          builder: (context) => ChooseRole(),
+                          builder: (context) => ChooseRole(
+                            userViewModel: _userViewModel,
+                            onRoleSelected: _userViewModel.handleSelectedRole,
+                          ),
                         ),
                       );
                     },
@@ -203,33 +232,25 @@ class MyAppState extends State<SignUp> {
                   ),
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     const Text('Sudah memiliki akun?'),
                     TextButton(
-                      child: const Text(
-                        'Sign in',
-                      ),
                       onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            //pergi ke halaman Login page
-                            builder: (context) => Login_Page(),
+                            builder: (context) => const LoginPage(),
                           ),
                         );
-                        // pilih role screen
                       },
-                      style: TextButton.styleFrom(primary: Color(0xff069a8e)),
+                      style: TextButton.styleFrom(
+                          foregroundColor: const Color(0xff069a8e)),
+                      child: const Text(
+                        'Sign in',
+                      ),
                     )
                   ],
-                  mainAxisAlignment: MainAxisAlignment.center,
-                ),
-                Text(
-                  'Halo $_namaLengkap, email kamu $_email, password kamu $_password, konfirmasi kamu $_konfirmasiPassword',
-                  style: const TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 120, 214, 13)),
                 ),
               ]),
             )));

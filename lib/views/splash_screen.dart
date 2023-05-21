@@ -12,9 +12,9 @@ class SplashScreen extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Color(0xFFE1E2DB),
+        backgroundColor: const Color(0xFFE1E2DB),
         body: Center(
-          child: Container(
+          child: SizedBox(
             width: width * 0.4,
             height: height * 0.6,
             child: Image.asset("lendID_trans.png"),

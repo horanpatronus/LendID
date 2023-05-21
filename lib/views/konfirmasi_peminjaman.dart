@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 void main() {
@@ -68,14 +67,14 @@ class UsulanPeminjamanKonfirmasiState extends State<UsulanPeminjamanKonfirmasi> 
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              padding: EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 10),
-              child: Text('Konfirmasi Peminjaman', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),),
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 10),
+              child: const Text('Konfirmasi Peminjaman', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),),
             ),
             Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Container(
-                padding: EdgeInsets.all(30),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.all(30),
+                decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   color: Color(0xffA1E3D8)),
                 alignment: Alignment.center,
@@ -92,13 +91,13 @@ class UsulanPeminjamanKonfirmasiState extends State<UsulanPeminjamanKonfirmasi> 
                             // image: DecorationImage(
                             //   image: NetworkImage('https://www.google.com/url?sa=i&url=https%3A%2F%2Fmydramalist.com%2Fpeople%2F16137-mark-lee&psig=AOvVaw0IVo12jyaJ0g29KJbjfCUn&ust=1684761623123000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCNjRgKPAhv8CFQAAAAAdAAAAABAH'),
                             //   fit: BoxFit.fill,
-                            color: Color(0xf000000),
+                            color: Color(0x0f000000),
                           ),
                           // shape: BoxShape.circle,
                         ),
                         // ),
                         Container(
-                          child: Column(
+                          child: const Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text('Proyek Proyekan', style: TextStyle(fontWeight: FontWeight.bold),),
