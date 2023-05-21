@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 void main() {
   runApp(const KonfirmasiUsulanPeminjaman());
@@ -33,16 +32,16 @@ class KonfirmasiUsulanPeminjamanState extends State<KonfirmasiUsulanPeminjaman> 
 
               // container judul //
               Container(
-                padding: EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 10),
-                child: Text('Konfirmasi Peminjaman', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),),
+                padding: const EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 10),
+                child: const Text('Konfirmasi Peminjaman', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),),
               ),
               
               // container utama //
               Container(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 child: Container(
-                  padding: EdgeInsets.all(30),
-                  decoration: BoxDecoration(
+                  padding: const EdgeInsets.all(30),
+                  decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                     color: Color(0xffA1e3d8),
                   ),
@@ -59,20 +58,18 @@ class KonfirmasiUsulanPeminjamanState extends State<KonfirmasiUsulanPeminjaman> 
                               color: Color(0xff00000),
                             ),
                           ),
-                          Container(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text('Proyek Proyekan', style: TextStyle(fontWeight: FontWeight.bold),),
-                                ),
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text('datadatadatadatadatadatadatadatadatadatadatadata ', overflow: TextOverflow.clip,)
-                                ),
-                              ],
-                            ),
+                          const Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text('Proyek Proyekan', style: TextStyle(fontWeight: FontWeight.bold),),
+                              ),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text('datadatadatadatadatadatadatadatadatadatadatadata ', overflow: TextOverflow.clip,)
+                              ),
+                            ],
                           )
                         ],
                       ),

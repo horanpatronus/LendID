@@ -1,8 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:homepage/viewmodels/register_user_viewmodel.dart';
 import 'package:homepage/models/user_model.dart';
-import 'package:homepage/views/landing_page.dart';
 import 'package:homepage/views/login_page.dart';
 import 'package:homepage/views/choose_role.dart';
 
