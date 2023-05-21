@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:homepage/login_page.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'login_page.dart';
 
 class OnBoardingPage extends StatefulWidget {
   const OnBoardingPage({Key? key}) : super(key: key);
@@ -14,7 +14,7 @@ class OnBoardingPageState extends State<OnBoardingPage> {
 
   // image widget
   Widget _buildImage(String assetName, [double width = 350]) {
-    return Image.asset(assetName, width: width);
+    return Image.asset('$assetName', width: width);
   }
 
   @override
@@ -56,7 +56,7 @@ class OnBoardingPageState extends State<OnBoardingPage> {
 
       // button
       onDone: () => Navigator.of(context).push(
-        MaterialPageRoute(builder: (_) => const LoginPage()),
+        MaterialPageRoute(builder: (_) => const Login_Page()),
       ),
       skipOrBackFlex: 0,
       nextFlex: 0,
@@ -67,8 +67,8 @@ class OnBoardingPageState extends State<OnBoardingPage> {
       baseBtnStyle: TextButton.styleFrom(
         backgroundColor: Colors.white,
       ),
-      doneStyle: TextButton.styleFrom(foregroundColor: Colors.blue),
-      nextStyle: TextButton.styleFrom(foregroundColor: Colors.blue),
+      doneStyle: TextButton.styleFrom(primary: Colors.blue),
+      nextStyle: TextButton.styleFrom(primary: Colors.blue),
 
       // dots
       controlsMargin: const EdgeInsets.all(16),
