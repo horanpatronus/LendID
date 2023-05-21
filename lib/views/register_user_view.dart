@@ -61,28 +61,27 @@ class _RegisterUserViewState extends State<RegisterUserView> {
 
   void registerUser() {
     UserModel user = UserModel(
-      email: _email,
+      email: textEditControllerEmail.text,
       foto: '', // Set the value accordingly
       ktp: '', // Set the value accordingly
-      nama: _namaLengkap,
-      password: _password,
+      nama: textEditControllerNamaLengkap.text,
+      password: textEditControllerPassword.text,
       role: '', // Set the value accordingly
       saldo: 0, // Set the value accordingly
       perusahaan: {}, // Set the value accordingly
     );
 
-    _userViewModel.registerUser(user).then((_) {
-      // Registration successful
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const LandingPage()),
-      );
-    }).catchError((error) {
-      // Handle registration error
-      if (kDebugMode) {
-        print('Registration failed: $error');
-      }
-    });
+    _userViewModel.handleUserData(user);
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ChooseRole(
+          userViewModel: _userViewModel,
+          onRoleSelected: _userViewModel.handleSelectedRole,
+        ),
+      ),
+    );
   }
 
   @override
@@ -224,7 +223,10 @@ class _RegisterUserViewState extends State<RegisterUserView> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const ChooseRole(),
+                          builder: (context) => ChooseRole(
+                            userViewModel: _userViewModel,
+                            onRoleSelected: _userViewModel.handleSelectedRole,
+                          ),
                         ),
                       );
                     },

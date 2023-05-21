@@ -1,13 +1,17 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
+import 'package:homepage/models/user_model.dart';
 import 'package:homepage/views/login_page.dart';
-
-// void main() {
-//   runApp(const MyApp());
-// }
+import 'package:homepage/viewmodels/register_user_viewmodel.dart';
 
 class ChooseRole extends StatefulWidget {
-  const ChooseRole({Key? key}) : super(key: key);
+  const ChooseRole(
+      {Key? key, required this.userViewModel, required this.onRoleSelected})
+      : super(key: key);
+
+  final RegisterViewModel userViewModel;
+  final Function(String) onRoleSelected;
+
   @override
   _ChooseRoleState createState() {
     return _ChooseRoleState();
@@ -18,6 +22,7 @@ class _ChooseRoleState extends State<ChooseRole> {
   // final textEditController = TextEditingController();
   String _chooseRole = "";
   String _role = "";
+  RegisterViewModel _registerViewModel = RegisterViewModel();
 
   @override
   void dispose() {
@@ -135,27 +140,32 @@ class _ChooseRoleState extends State<ChooseRole> {
                   padding: const EdgeInsets.all(20),
                   child: ElevatedButton(
                     onPressed: () {
-                      setState(() {
-                        _role = _chooseRole;
+                      widget.onRoleSelected(_chooseRole);
+                      widget.userViewModel.registerUser().then((_) {
+                        // Registration successful
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LoginPage(),
+                          ),
+                        );
+                      }).catchError((error) {
+                        // Handle registration error
+                        if (kDebugMode) {
+                          print('Registration failed: $error');
+                        }
                       });
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          //pergi ke halaman Login page
-                          builder: (context) => const LoginPage(),
-                        ),
-                      );
                     },
                     child: const Text('SIGN UP'),
                   ),
                 ),
-                Text(
-                  'Halo role kamu $_chooseRole',
-                  style: const TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 120, 214, 13)),
-                ),
+                // Text(
+                //   'Halo role kamu $_chooseRole',
+                //   style: const TextStyle(
+                //       fontSize: 30,
+                //       fontWeight: FontWeight.bold,
+                //       color: Color.fromARGB(255, 120, 214, 13)),
+                // ),
               ]),
             )));
   }

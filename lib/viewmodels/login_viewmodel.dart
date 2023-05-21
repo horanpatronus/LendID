@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:crypto/crypto.dart';
 
 class LoginViewModel {
   final CollectionReference usersCollection =
@@ -7,9 +10,14 @@ class LoginViewModel {
 
   Future<bool> loginUser(String email, String password) async {
     try {
+      final passwordBytes =
+          utf8.encode(password); // Convert entered password to bytes
+      final hashedPassword =
+          sha256.convert(passwordBytes).toString(); // Generate hash value
+
       final QuerySnapshot snapshot = await usersCollection
           .where('email', isEqualTo: email)
-          .where('password', isEqualTo: password)
+          .where('password', isEqualTo: hashedPassword)
           .limit(1)
           .get();
 
