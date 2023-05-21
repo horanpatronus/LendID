@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:homepage/landing_page.dart';
+import 'package:homepage/profile_user.dart';
 import 'package:homepage/search.dart';
+import 'package:homepage/settings.dart';
 
 class Navigasi extends StatelessWidget {
   const Navigasi({super.key});
@@ -24,7 +26,7 @@ class Navigasi extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      //pergi ke halaman top up
+                      //pergi ke halaman Landing Page
                       builder: (context) => LandingPage(),
                     ),
                   );
@@ -55,10 +57,10 @@ class Navigasi extends StatelessWidget {
             Container(
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pop(
                     context,
                     MaterialPageRoute(
-                      //pergi ke halaman top up
+                      //pergi ke halaman Search
                       builder: (context) => SearchButton(),
                     ),
                   );
@@ -103,8 +105,8 @@ class Navigasi extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      //pergi ke halaman top up
-                      builder: (context) => SearchButton(),
+                      //pergi ke halaman Profile
+                      builder: (context) => ProfilePage(),
                     ),
                   );
                 },
@@ -138,7 +140,7 @@ class Navigasi extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       //pergi ke halaman top up
-                      builder: (context) => SearchButton(),
+                      builder: (context) => SettingsPage(),
                     ),
                   );
                 },

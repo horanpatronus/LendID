@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:homepage/signup_page.dart';
+
+import 'landing_page.dart';
 
 String? validateEmail(String? value) {
   const pattern = r"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'"
@@ -15,19 +18,15 @@ String? validateEmail(String? value) {
       : null;
 }
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class Login_Page extends StatefulWidget {
+  const Login_Page({Key? key}) : super(key: key);
   @override
   MyAppState createState() {
     return MyAppState();
   }
 }
 
-class MyAppState extends State<MyApp> {
+class MyAppState extends State<Login_Page> {
   final textEditControllerEmail = TextEditingController();
   final textEditControllerPassword = TextEditingController();
   String _email = "";
@@ -44,6 +43,7 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     // main
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Login Page',
         home: Scaffold(
             appBar: AppBar(
@@ -62,7 +62,7 @@ class MyAppState extends State<MyApp> {
                   ),
                   child: Center(
                     child: Image.asset(
-                      "images/logo_lendid.png",
+                      "lendid_trans.png",
                       height: 150,
                     ),
                   ),
@@ -124,6 +124,13 @@ class MyAppState extends State<MyApp> {
                         _email = textEditControllerEmail.text;
                         _password = textEditControllerPassword.text;
                       });
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          //pergi ke halaman search button
+                          builder: (context) => LandingPage(),
+                        ),
+                      );
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -150,6 +157,13 @@ class MyAppState extends State<MyApp> {
                       ),
                       onPressed: () {
                         //home screen
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            //pergi ke halaman search button
+                            builder: (context) => SignUp(),
+                          ),
+                        );
                       },
                       style: TextButton.styleFrom(primary: Color(0xff069a8e)),
                     )
