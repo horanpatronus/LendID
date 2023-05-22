@@ -50,7 +50,7 @@ class Navigasi extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pop(
+                Navigator.push(
                   context,
                   MaterialPageRoute(
                     //pergi ke halaman Search

@@ -100,7 +100,7 @@ class _RegisterUserViewState extends State<RegisterUserView> {
                   padding: const EdgeInsets.only(top: 40),
                   child: Center(
                     child: Image.asset(
-                      "images/logo_lendid.png",
+                      "lendid_trans.png",
                       height: 150,
                     ),
                   ),
