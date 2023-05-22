@@ -19,7 +19,7 @@ abstract class BaseViewModel<T extends ChangeNotifier?> extends ChangeNotifier {
 class LoginViewModel extends BaseViewModel<ChangeNotifier?> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final CollectionReference usersCollection =
-      FirebaseFirestore.instance.collection('user');
+      FirebaseFirestore.instance.collection('users');
 
   UserModel? currentUser;
 
@@ -30,24 +30,17 @@ class LoginViewModel extends BaseViewModel<ChangeNotifier?> {
       final hashedPassword =
           sha256.convert(passwordBytes).toString(); // Generate hash value
 
-      final QuerySnapshot snapshot = await usersCollection
-          .where('email', isEqualTo: email)
-          .where('password', isEqualTo: hashedPassword)
-          .limit(1)
-          .get();
+      final UserCredential userCredential =
+          await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: hashedPassword,
+      );
 
-      if (snapshot.docs.isNotEmpty) {
-        // User exists, login successful
-        return true;
-      } else {
-        // User does not exist or invalid credentials
-        return false;
-      }
+      // Proceed to retrieve user data or navigate to the next screen
+      return true;
     } catch (e) {
-      // Handle error
-      if (kDebugMode) {
-        print('Error logging in user: $e');
-      }
+      // Handle authentication error
+      print('Error signing in: $e');
       return false;
     }
   }
@@ -56,12 +49,14 @@ class LoginViewModel extends BaseViewModel<ChangeNotifier?> {
     User? user = _auth.currentUser;
     if (user != null) {
       DocumentSnapshot snapshot = await usersCollection.doc(user.uid).get();
-      currentUser = UserModel(
-        email: snapshot.get('email'),
-        nama: snapshot.get('nama'),
-        password: snapshot.get('password'),
-        role: snapshot.get('role'),
-      );
+      if (snapshot.exists) {
+        currentUser = UserModel(
+          email: snapshot.get('email'),
+          nama: snapshot.get('nama'),
+          password: snapshot.get('password'),
+          role: snapshot.get('role'),
+        );
+      }
     }
   }
 }
