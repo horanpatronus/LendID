@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:homepage/signup_page.dart';
-
-import 'landing_page.dart';
+import 'package:homepage/viewmodels/login_viewmodel.dart';
+import 'package:homepage/views/register_user_view.dart';
+import 'package:homepage/views/landing_page.dart';
 
 String? validateEmail(String? value) {
   const pattern = r"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'"
@@ -18,19 +18,21 @@ String? validateEmail(String? value) {
       : null;
 }
 
-class Login_Page extends StatefulWidget {
-  const Login_Page({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
   @override
-  MyAppState createState() {
-    return MyAppState();
+  LoginPageState createState() {
+    return LoginPageState();
   }
 }
 
-class MyAppState extends State<Login_Page> {
+class LoginPageState extends State<LoginPage> {
+  final LoginViewModel _viewModel = LoginViewModel();
   final textEditControllerEmail = TextEditingController();
   final textEditControllerPassword = TextEditingController();
   String _email = "";
   String _password = "";
+  String? _errorMessage;
 
   @override
   void dispose() {
@@ -48,7 +50,7 @@ class MyAppState extends State<Login_Page> {
         home: Scaffold(
             appBar: AppBar(
               // leading:Image.asset("images/logo_lendid.png", height: 20,),
-              backgroundColor: Color(0xFF005555),
+              backgroundColor: const Color(0xFF005555),
               title: const Text('Login Page'), // judul di header app
             ),
             body: SingleChildScrollView(
@@ -56,7 +58,7 @@ class MyAppState extends State<Login_Page> {
                 Container(
                   height: 150,
                   width: 190,
-                  padding: EdgeInsets.only(top: 40),
+                  padding: const EdgeInsets.only(top: 40),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(200),
                   ),
@@ -116,26 +118,41 @@ class MyAppState extends State<Login_Page> {
                     ),
                   ),
                 ),
+                Text(
+                  _errorMessage ?? '',
+                  style: const TextStyle(
+                    color: Colors.red,
+                    fontSize: 16.0,
+                  ),
+                ),
                 Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        _email = textEditControllerEmail.text;
-                        _password = textEditControllerPassword.text;
-                      });
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          //pergi ke halaman search button
-                          builder: (context) => LandingPage(),
-                        ),
-                      );
+                    onPressed: () async {
+                      _email = textEditControllerEmail.text;
+                      _password = textEditControllerPassword.text;
+                      final loggedIn =
+                          await _viewModel.loginUser(_email, _password);
+
+                      if (loggedIn) {
+                        // Navigate to the landing page
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LandingPage(),
+                          ),
+                        );
+                      } else {
+                        setState(() {
+                          _errorMessage =
+                              'E-mail atau password yang anda masukkan salah!';
+                        });
+                      }
                     },
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
+                        Text(
                           'LOG IN',
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.bold),
@@ -149,34 +166,34 @@ class MyAppState extends State<Login_Page> {
                   ),
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     const Text('Belum memiliki akun?'),
                     TextButton(
-                      child: const Text(
-                        'Sign up',
-                      ),
                       onPressed: () {
-                        //home screen
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             //pergi ke halaman search button
-                            builder: (context) => SignUp(),
+                            builder: (context) => const RegisterUserView(),
                           ),
                         );
                       },
-                      style: TextButton.styleFrom(primary: Color(0xff069a8e)),
+                      style: TextButton.styleFrom(
+                          foregroundColor: const Color(0xff069a8e)),
+                      child: const Text(
+                        'Sign up',
+                      ),
                     )
                   ],
-                  mainAxisAlignment: MainAxisAlignment.center,
                 ),
-                Text(
-                  'Halo email kamu $_email, password kamu $_password',
-                  style: const TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 120, 214, 13)),
-                ),
+                // Text(
+                //   'Halo email kamu $_email, password kamu $_password',
+                //   style: const TextStyle(
+                //       fontSize: 30,
+                //       fontWeight: FontWeight.bold,
+                //       color: Color.fromARGB(255, 120, 214, 13)),
+                // ),
               ]),
             )));
   }

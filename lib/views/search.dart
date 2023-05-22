@@ -1,11 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:homepage/card.dart';
-import 'package:homepage/navigasi.dart';
-import 'package:homepage/navigasi_mid.dart';
+import 'package:homepage/views/card.dart';
+import 'package:homepage/views/navigasi.dart';
+import 'package:homepage/views/navigasi_mid.dart';
 
 class Product {
   final String name;
@@ -30,7 +26,7 @@ List<Product> products = [
 ];
 
 class SearchButton extends StatelessWidget {
-  const SearchButton({Key? key});
+  const SearchButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +36,8 @@ class SearchButton extends StatelessWidget {
         body: Stack(
           children: [
             Container(
-              margin: EdgeInsets.only(top: 30, left: 20, right: 20),
-              child: Column(
+              margin: const EdgeInsets.only(top: 30, left: 20, right: 20),
+              child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -56,7 +52,8 @@ class SearchButton extends StatelessWidget {
               ),
             ),
             Container(
-                margin: EdgeInsets.symmetric(vertical: 100, horizontal: 20),
+                margin:
+                    const EdgeInsets.symmetric(vertical: 100, horizontal: 20),
                 child: ProductListPage()
                 // GridView.builder(
                 //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -83,8 +80,8 @@ class SearchButton extends StatelessWidget {
                 //   },
                 // ),
                 ),
-            Navigasi(),
-            NavigasiMid(),
+            const Navigasi(),
+            const NavigasiMid(),
           ],
         ),
       ),
@@ -95,7 +92,7 @@ class SearchButton extends StatelessWidget {
 class ProductDetailPage extends StatelessWidget {
   final Product product;
 
-  const ProductDetailPage({required this.product});
+  const ProductDetailPage({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -104,21 +101,21 @@ class ProductDetailPage extends StatelessWidget {
         title: Text(product.name),
       ),
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               product.name,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               product.description,
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
           ],
         ),

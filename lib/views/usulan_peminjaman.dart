@@ -13,6 +13,7 @@ class CurrencyInputFormatter extends TextInputFormatter {
     decimalDigits: 0,
   );
 
+  @override
   TextEditingValue formatEditUpdate(
     TextEditingValue oldValue,
     TextEditingValue newValue,
@@ -86,10 +87,10 @@ class UsulanPeminjamanState extends State<UsulanPeminjaman> {
             body: SingleChildScrollView(
           child: Column(mainAxisSize: MainAxisSize.min, children: [
             Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Container(
-                padding: EdgeInsets.all(30),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.all(30),
+                decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                     color: Color(0xffA1E3D8)),
                 alignment: Alignment.center,
@@ -112,38 +113,36 @@ class UsulanPeminjamanState extends State<UsulanPeminjaman> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Align(
+                            const Align(
                               alignment: Alignment.centerLeft,
                               child: Text('Nominal Pinjaman'),
                             ),
                             Form(
                               autovalidateMode: AutovalidateMode.always,
-                              child: Container(
-                                child: TextFormField(
-                                  controller: textEditControllerJumlahPinjaman,
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly,
-                                    CurrencyInputFormatter(),
-                                  ],
-                                  decoration: const InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      fillColor: Colors.white,
-                                      hintText:
-                                          'Jumlah Pinjaman (masukkan hanya angka)'),
-                                ),
+                              child: TextFormField(
+                                controller: textEditControllerJumlahPinjaman,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly,
+                                  CurrencyInputFormatter(),
+                                ],
+                                decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    fillColor: Colors.white,
+                                    hintText:
+                                        'Jumlah Pinjaman (masukkan hanya angka)'),
                               ),
                             ),
                           ],
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                             left: 5, right: 5, top: 5, bottom: 10),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Align(
+                            const Align(
                               alignment: Alignment.centerLeft,
                               child: Text('Periode Pembayaran'),
                             ),
@@ -185,12 +184,12 @@ class UsulanPeminjamanState extends State<UsulanPeminjaman> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                             top: 5, bottom: 10, left: 5, right: 5),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Align(
+                            const Align(
                               alignment: Alignment.centerLeft,
                               child: Text('Cicilan Perbulan'),
                             ),
@@ -204,8 +203,8 @@ class UsulanPeminjamanState extends State<UsulanPeminjaman> {
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  '$_cicilanRp',
-                                  style: TextStyle(fontSize: 15),
+                                  _cicilanRp,
+                                  style: const TextStyle(fontSize: 15),
                                 ),
                               ),
                             ),
@@ -216,10 +215,10 @@ class UsulanPeminjamanState extends State<UsulanPeminjaman> {
               ),
             ),
             Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Container(
-                padding: EdgeInsets.all(30),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.all(30),
+                decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                     color: Color(0xffA1E3D8)),
                 alignment: Alignment.center,
@@ -237,12 +236,12 @@ class UsulanPeminjamanState extends State<UsulanPeminjaman> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                             left: 5, right: 5, top: 5, bottom: 10),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Align(
+                            const Align(
                               alignment: Alignment.centerLeft,
                               child: Text('Nama Proyek'),
                             ),
@@ -262,12 +261,12 @@ class UsulanPeminjamanState extends State<UsulanPeminjaman> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                             left: 5, right: 5, top: 5, bottom: 10),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Align(
+                            const Align(
                               alignment: Alignment.centerLeft,
                               child: Text('Deskripsi Proyek'),
                             ),
@@ -291,7 +290,7 @@ class UsulanPeminjamanState extends State<UsulanPeminjaman> {
               ),
             ),
             Container(
-                padding: EdgeInsets.only(left: 20, right: 20, top: 10),
+                padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
                 child: SizedBox(
                   height: 50,
                   width: double.infinity,

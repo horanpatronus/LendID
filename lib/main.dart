@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:homepage/edit_profile_user.dart';
-// import 'package:carousel_slider/carousel_slider.dart';
-// import 'package:homepage/carousel.dart';
-import 'package:homepage/intro.dart';
-// import 'package:homepage/search.dart';
-// import 'package:homepage/settings.dart';
-// import 'landing_page.dart';
 
-void main() {
+import 'views/intro.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+void main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MyApp());
 }
 
@@ -17,6 +18,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false, home: OnBoardingPage());
+      title: 'Introduction screen',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: const OnBoardingPage(),
+    );
   }
 }
