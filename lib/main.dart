@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:homepage/views/search.dart';
 
 import 'views/intro.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,10 +19,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Introduction screen',
+      // title: 'Introduction screen',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const OnBoardingPage(),
+      // theme: ThemeData(primarySwatch: Colors.blue),
+      home: const SearchButton(),
     );
   }
 }
