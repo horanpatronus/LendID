@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:homepage/views/navigasi.dart';
 import 'package:homepage/views/navigasi_mid.dart';
 
+import '../profile_user.dart';
+import '../progress_bar.dart';
+
 class SearchButton extends StatelessWidget {
   const SearchButton({super.key});
 
@@ -25,26 +28,348 @@ class SearchButton extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text("Search Bar"),
-                  Row(
+                  Text(
+                    "Filter :",
+                    style: TextStyle(fontSize: 12),
+                  ),
+
+                  Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Hasil Pencarian Anda"),
-                      Text("Drop Down"),
+                      DropdownGenerate(
+                        title: 'Imbal',
+                        menuItems: [
+                          '3%',
+                          '7%',
+                          '9%',
+                        ],
+                      ),
+                      DropdownGenerate(
+                        title: 'Dana Terkumpul',
+                        menuItems: [
+                          ' > 25%',
+                          ' > 50%',
+                          ' > 90%',
+                        ],
+                      ),
+                      DropdownGenerate(
+                        title: 'Waktu Tersisa',
+                        menuItems: [
+                          'Kurang dari 1 Hari',
+                          'Kurang dari 1 Minggu',
+                          'Kurang dari 1 Bulan',
+                        ],
+                      ),
                     ],
-                  )
+                  ),
+                  Text(
+                    "Hasil Filter :",
+                    style: TextStyle(fontSize: 12),
+                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Text("Hasil Pencarian Anda : "),
+                  //   ],
+                  // )
                 ],
               ),
             ),
             Container(
-              margin: const EdgeInsets.symmetric(vertical: 100, horizontal: 20),
-              child: Text("Grid View"),
+              margin: const EdgeInsets.only(
+                top: 260,
+                right: 20,
+                left: 20,
+              ),
+              child: InvestItems(),
             ),
             const Navigasi(),
             const NavigasiMid(),
           ],
         ),
       ),
+    );
+  }
+}
+
+class InvestItems extends StatelessWidget {
+  const InvestItems({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 5,
+        mainAxisSpacing: 20,
+        childAspectRatio: 9 / 19,
+      ),
+      itemCount: 1000,
+      itemBuilder: (BuildContext context, int index) {
+        // final product = products[index];
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                //pergi ke halaman akun
+                builder: (context) => ProfilePage(),
+              ),
+            );
+          },
+          child: Stack(
+            children: [
+              Container(
+                // margin: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                  color: Color(0xffA1E3D8),
+                  // border: Border.all(width: 2),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Image(
+                      image: NetworkImage(
+                        "https://picsum.photos/id/1011/300/300",
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                    Container(
+                        margin: EdgeInsets.symmetric(
+                          vertical: 10,
+                        ),
+                        child: Text(
+                          "Nama Proyek",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )),
+                    Container(
+                      margin: EdgeInsets.symmetric(
+                        horizontal: 10,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Dana Proyek",
+                            style: TextStyle(
+                              fontSize: 12,
+                            ),
+                          ),
+                          Text(
+                            "Rp2.000.000,-",
+                            style: TextStyle(
+                              fontSize: 12,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(bottom: 20, left: 10, right: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Imbal",
+                            style: TextStyle(
+                              fontSize: 12,
+                            ),
+                          ),
+                          Text(
+                            "3%",
+                            style: TextStyle(
+                              fontSize: 12,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                        right: 10,
+                        left: 10,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Dana Terkumpul",
+                            style: TextStyle(
+                              fontSize: 12,
+                            ),
+                          ),
+                          Text(
+                            "50%",
+                            style: TextStyle(
+                              fontSize: 12,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    CustomProgressBar(
+                      width: 150,
+                      height: 10,
+                      value: 0.6,
+                      backgroundColor: Colors.white,
+                      foregroundColor: Color(0xff069A8E),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 20),
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                        ),
+                        color: Color(0xff005555),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Detail Investasi",
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                // alignment: Alignment.topLeft,
+                height: 25,
+                width: 100,
+                decoration: BoxDecoration(
+                    color: Color(0xffF7FF93),
+                    borderRadius: BorderRadius.only(
+                        // topLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10))),
+                child: Center(
+                  child: Text(
+                    "30 Hari lagi",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xff005555),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+        // Column(
+        //   children: [
+        //     Image.network(product.imageUrl),
+        //     SizedBox(height: 8),
+        //     Text(product.name),
+        //     Text(product.price),
+        //   ],
+        // );
+      },
+    );
+  }
+}
+
+class DropdownGenerate extends StatefulWidget {
+  final String title;
+  final List<String> menuItems;
+
+  const DropdownGenerate({
+    Key? key,
+    required this.title,
+    required this.menuItems,
+  }) : super(key: key);
+
+  @override
+  State<DropdownGenerate> createState() => _DropdownGenerateState();
+}
+
+class _DropdownGenerateState extends State<DropdownGenerate> {
+  String? selectedValue;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        final double dropdownWidth = constraints.maxWidth;
+
+        return Container(
+          margin: EdgeInsets.all(5),
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            color: Color(0xffA1E3D8),
+          ),
+          child: Column(
+            children: [
+              DropdownButtonHideUnderline(
+                child: Stack(
+                  children: [
+                    DropdownButton2(
+                      hint: Text(
+                        widget.title,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Theme.of(context).hintColor,
+                        ),
+                      ),
+                      items: widget.menuItems
+                          .map((item) => DropdownMenuItem<String>(
+                                value: item,
+                                child: Text(
+                                  item,
+                                  style: const TextStyle(
+                                      fontSize: 12,
+                                      overflow: TextOverflow.ellipsis),
+                                ),
+                              ))
+                          .toList(),
+                      value: selectedValue,
+                      onChanged: (value) {
+                        setState(() {
+                          selectedValue = value as String;
+                        });
+                      },
+                      buttonStyleData: ButtonStyleData(
+                        height: 40,
+                        width: dropdownWidth,
+                      ),
+                      menuItemStyleData: const MenuItemStyleData(
+                        height: 40,
+                      ),
+                    ),
+                    if (selectedValue != null)
+                      Positioned(
+                        right: 20,
+                        top: 10,
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectedValue = null;
+                            });
+                          },
+                          child: Icon(
+                            Icons.clear,
+                            size: 20,
+                            color: Colors.black54,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
