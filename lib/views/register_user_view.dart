@@ -217,16 +217,20 @@ class _RegisterUserViewState extends State<RegisterUserView> {
                         _konfirmasiPassword =
                             textEditControllerKonfirmasiPassword.text;
                       });
-                      registerUser();
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ChooseRole(
-                            userViewModel: _userViewModel,
-                            onRoleSelected: _userViewModel.handleSelectedRole,
+                      if (textEditControllerPassword.text ==
+                          textEditControllerKonfirmasiPassword.text) {
+                        registerUser();
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ChooseRole(
+                              userViewModel: _userViewModel,
+                              onRoleSelected: _userViewModel.handleSelectedRole,
+                            ),
                           ),
-                        ),
-                      );
+                        );
+                      }
                     },
                     child: const Text('NEXT'),
                   ),
