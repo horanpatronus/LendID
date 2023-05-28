@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:homepage/views/dropdown.dart';
 import 'package:homepage/views/navigasi.dart';
 import 'package:homepage/views/navigasi_mid.dart';
-
-import '../profile_user.dart';
-import '../progress_bar.dart';
+import 'package:homepage/views/profile_user.dart';
+import 'package:homepage/views/progress_bar.dart';
 
 class SearchButton extends StatelessWidget {
   const SearchButton({super.key});

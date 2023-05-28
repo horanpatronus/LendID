@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'choose_role.dart';
-import 'landing_page.dart';
-import 'login_page.dart';
+import 'package:homepage/views/choose_role.dart';
+import 'package:homepage/views/login_page.dart';
 
 String? validateEmail(String? value) {
   const pattern = r"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'"
@@ -214,7 +212,7 @@ class MyAppState extends State<SignUp> {
                           context,
                           MaterialPageRoute(
                             //pergi ke halaman Login page
-                            builder: (context) => Login_Page(),
+                            builder: (context) => LoginPage(),
                           ),
                         );
                         // pilih role screen
