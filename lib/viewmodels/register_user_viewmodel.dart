@@ -45,6 +45,7 @@ class RegisterViewModel {
         'nama': userData?.nama,
         'password': hashedPassword,
         'role': selectedRole,
+        'saldo': 0,
       });
 
       // Update the user profile in Firebase Authentication
