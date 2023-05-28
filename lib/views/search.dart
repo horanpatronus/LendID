@@ -4,6 +4,7 @@ import 'package:homepage/views/navigasi.dart';
 import 'package:homepage/views/navigasi_mid.dart';
 import 'package:homepage/views/profile_user.dart';
 import 'package:homepage/views/progress_bar.dart';
+import 'package:homepage/views/search_detail.dart';
 
 class SearchButton extends StatelessWidget {
   const SearchButton({super.key});
@@ -105,7 +106,7 @@ class InvestItems extends StatelessWidget {
               context,
               MaterialPageRoute(
                 //pergi ke halaman akun
-                builder: (context) => ProfilePage(),
+                builder: (context) => SearchDetail(),
               ),
             );
           },

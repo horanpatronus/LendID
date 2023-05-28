@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:homepage/views/choose_role.dart';
-import 'package:homepage/views/login_page.dart';
 
 String? validateEmail(String? value) {
   const pattern = r"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'"
@@ -17,15 +15,19 @@ String? validateEmail(String? value) {
       : null;
 }
 
-class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
   @override
   MyAppState createState() {
     return MyAppState();
   }
 }
 
-class MyAppState extends State<SignUp> {
+class MyAppState extends State<MyApp> {
   final textEditControllerNamaLengkap = TextEditingController();
   final textEditControllerEmail = TextEditingController();
   final textEditControllerPassword = TextEditingController();
@@ -58,7 +60,6 @@ class MyAppState extends State<SignUp> {
   Widget build(BuildContext context) {
     // main
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
         title: 'Register Page',
         home: Scaffold(
             appBar: AppBar(
@@ -73,7 +74,7 @@ class MyAppState extends State<SignUp> {
                   padding: EdgeInsets.only(top: 40),
                   child: Center(
                     child: Image.asset(
-                      "lendid_trans.png",
+                      "images/logo_lendid.png",
                       height: 150,
                     ),
                   ),
@@ -189,13 +190,6 @@ class MyAppState extends State<SignUp> {
                         _konfirmasiPassword =
                             textEditControllerKonfirmasiPassword.text;
                       });
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          //pergi ke halaman Login page
-                          builder: (context) => ChooseRole(),
-                        ),
-                      );
                     },
                     child: const Text('NEXT'),
                   ),
@@ -208,13 +202,6 @@ class MyAppState extends State<SignUp> {
                         'Sign in',
                       ),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            //pergi ke halaman Login page
-                            builder: (context) => LoginPage(),
-                          ),
-                        );
                         // pilih role screen
                       },
                       style: TextButton.styleFrom(primary: Color(0xff069a8e)),
