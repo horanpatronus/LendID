@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:homepage/views/edit_profile_perusahaan.dart';
+import 'package:homepage/views/profile_user.dart';
 
 import 'views/intro.dart';
 import 'views/landing_page.dart';
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
       title: 'Introduction screen',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const OnBoardingPage(),
+      home: const EditProfilePerusahaan(),
     );
   }
 }
