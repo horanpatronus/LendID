@@ -4,6 +4,9 @@ import 'package:homepage/viewmodels/investasi_investor_viewmodel.dart';
 import 'package:homepage/viewmodels/pinjaman_umkm_viewmodel.dart';
 
 import 'package:homepage/views/search.dart';
+import 'package:homepage/views/topup.dart';
+import 'package:homepage/views/topup_status.dart';
+import 'package:homepage/views/topup_withdraw.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:homepage/viewmodels/login_viewmodel.dart';
@@ -133,7 +136,7 @@ class LandingPage extends StatelessWidget {
                                     Container(
                                       margin: const EdgeInsets.symmetric(
                                           vertical: 5),
-                                      child: const Row(
+                                      child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
@@ -244,8 +247,7 @@ class LandingPage extends StatelessWidget {
                                             context,
                                             MaterialPageRoute(
                                               //ke halaman top up page
-                                              builder: (context) =>
-                                                  SearchButton(),
+                                              builder: (context) => TopUpPage(),
                                             ),
                                           );
                                         },
@@ -256,7 +258,7 @@ class LandingPage extends StatelessWidget {
                                             borderRadius:
                                                 BorderRadius.circular(5.0),
                                           ),
-                                          child: const Column(
+                                          child: Column(
                                             children: [
                                               Icon(
                                                 Icons.arrow_circle_up,
@@ -281,7 +283,7 @@ class LandingPage extends StatelessWidget {
                                             MaterialPageRoute(
                                               //pergi ke halaman withdraw
                                               builder: (context) =>
-                                                  SearchButton(),
+                                                  WithdrawPage(),
                                             ),
                                           );
                                         },
@@ -292,7 +294,7 @@ class LandingPage extends StatelessWidget {
                                             borderRadius:
                                                 BorderRadius.circular(5.0),
                                           ),
-                                          child: const Column(
+                                          child: Column(
                                             children: [
                                               Icon(
                                                 Icons.arrow_circle_down,
@@ -316,7 +318,7 @@ class LandingPage extends StatelessWidget {
                                             MaterialPageRoute(
                                               //pergi ke halaman riwayat
                                               builder: (context) =>
-                                                  SearchButton(),
+                                                  RiwayatPage(),
                                             ),
                                           );
                                         },
@@ -327,7 +329,7 @@ class LandingPage extends StatelessWidget {
                                             borderRadius:
                                                 BorderRadius.circular(5.0),
                                           ),
-                                          child: const Column(
+                                          child: Column(
                                             children: [
                                               Icon(
                                                 Icons.description,
