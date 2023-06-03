@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:homepage/views/edit_profile_perusahaan.dart';
 import 'package:homepage/views/profile_user.dart';
+import 'package:homepage/views/topup.dart';
+import 'package:homepage/views/topup_status.dart';
+import 'package:homepage/views/topup_withdraw.dart';
+import 'package:introduction_screen/introduction_screen.dart';
 
 import 'views/intro.dart';
 import 'views/landing_page.dart';
@@ -24,7 +28,7 @@ class MyApp extends StatelessWidget {
       title: 'Introduction screen',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const EditProfilePerusahaan(),
+      home: OnBoardingPage(),
     );
   }
 }
