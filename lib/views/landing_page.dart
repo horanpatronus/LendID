@@ -133,7 +133,7 @@ class LandingPage extends StatelessWidget {
                                     Container(
                                       margin: const EdgeInsets.symmetric(
                                           vertical: 5),
-                                      child: const Row(
+                                      child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
@@ -256,7 +256,7 @@ class LandingPage extends StatelessWidget {
                                             borderRadius:
                                                 BorderRadius.circular(5.0),
                                           ),
-                                          child: const Column(
+                                          child: Column(
                                             children: [
                                               Icon(
                                                 Icons.arrow_circle_up,
@@ -292,7 +292,7 @@ class LandingPage extends StatelessWidget {
                                             borderRadius:
                                                 BorderRadius.circular(5.0),
                                           ),
-                                          child: const Column(
+                                          child: Column(
                                             children: [
                                               Icon(
                                                 Icons.arrow_circle_down,
@@ -327,7 +327,7 @@ class LandingPage extends StatelessWidget {
                                             borderRadius:
                                                 BorderRadius.circular(5.0),
                                           ),
-                                          child: const Column(
+                                          child: Column(
                                             children: [
                                               Icon(
                                                 Icons.description,

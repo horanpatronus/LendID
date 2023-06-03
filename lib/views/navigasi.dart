@@ -28,7 +28,7 @@ class Navigasi extends StatelessWidget {
                   ),
                 );
               },
-              child: const Flexible(
+              child: Flexible(
                   flex: 1,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -59,7 +59,7 @@ class Navigasi extends StatelessWidget {
                 );
               },
               child: Container(
-                child: const Flexible(
+                child: Flexible(
                     flex: 1,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -100,7 +100,7 @@ class Navigasi extends StatelessWidget {
                 );
               },
               child: Container(
-                child: const Flexible(
+                child: Flexible(
                     flex: 1,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -132,7 +132,7 @@ class Navigasi extends StatelessWidget {
                 );
               },
               child: Container(
-                child: const Flexible(
+                child: Flexible(
                   flex: 1,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
