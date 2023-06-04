@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:homepage/views/search.dart';
+import 'package:homepage/views/usulan_peminjaman.dart';
 
-bool isMember = false;
+bool isMember = true;
 
 class NavigasiMid extends StatelessWidget {
   const NavigasiMid({super.key});
@@ -17,7 +18,7 @@ class NavigasiMid extends StatelessWidget {
               isMember
                   ? MaterialPageRoute(
                       //pergi ke halaman plus button
-                      builder: (context) => const SearchButton(),
+                      builder: (context) => const UsulanPeminjaman(),
                     )
                   : MaterialPageRoute(
                       //pergi ke halaman search button

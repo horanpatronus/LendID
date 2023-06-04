@@ -86,8 +86,8 @@ class _RegisterUserViewState extends State<RegisterUserView> {
   Widget build(BuildContext context) {
     // main
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
         title: 'Register Page',
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
             appBar: AppBar(
               backgroundColor: const Color(0xff005555),
