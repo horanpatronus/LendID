@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:homepage/views/search_detail.dart';
 import 'package:homepage/views/search.dart';
+import 'package:homepage/views/search_detail_confirm.dart';
 
 import 'views/intro.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       // title: 'Introduction screen',
       debugShowCheckedModeBanner: false,
       // theme: ThemeData(primarySwatch: Colors.blue),
-      home: const SearchButton(),
+      home: const SearchConfirm(),
     );
   }
 }

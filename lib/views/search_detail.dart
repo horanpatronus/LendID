@@ -4,6 +4,7 @@ import 'package:homepage/views/navigasi_mid.dart';
 
 import 'package:homepage/views/progress_bar.dart';
 import 'package:homepage/views/search.dart';
+import 'package:homepage/views/search_detail_confirm.dart';
 
 class SearchDetail extends StatelessWidget {
   const SearchDetail({super.key});
@@ -66,7 +67,11 @@ class SearchDetail extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Center(child: Text("UMKM Aku Laku")),
+                  child: Center(
+                      child: Text(
+                    "UMKM Aku Laku",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  )),
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 10),
@@ -88,7 +93,10 @@ class SearchDetail extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text("Deskripsi"),
+                      Text(
+                        "Deskripsi",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                       Text(
                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                         textAlign: TextAlign.center,
@@ -213,7 +221,7 @@ class SearchDetail extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               //pergi ke halaman akun
-                              builder: (context) => SearchButton(),
+                              builder: (context) => SearchConfirm(),
                             ),
                           );
                         },
