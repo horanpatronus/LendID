@@ -46,9 +46,11 @@ class PinjamanUmkmViewModel extends BaseViewModel<ChangeNotifier?> {
             waktuPeminjaman: document.get('waktu_peminjaman'),
           );
 
-          totalPeminjaman++;
-          jumlahPinjaman += pinjamanData?.jumlahPinjaman ?? 0;
-          jumlahDibayar += pinjamanData?.jumlahDibayar ?? 0;
+          if (pinjamanData?.status != 'Selesai') {
+            totalPeminjaman++;
+            jumlahPinjaman += pinjamanData?.jumlahPinjaman ?? 0;
+            jumlahDibayar += pinjamanData?.jumlahDibayar ?? 0;
+          }
         }
 
         sisaHutang = jumlahPinjaman - jumlahDibayar;
