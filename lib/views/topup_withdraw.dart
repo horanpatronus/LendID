@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:homepage/views/navigasi.dart';
 import 'package:homepage/views/navigasi_mid.dart';
-
-enum WithdrawMethod {
-  Dana,
-  Ovo,
-  Gopay,
-  BankAccount,
-}
 
 class WithdrawPage extends StatefulWidget {
   @override
@@ -16,65 +10,41 @@ class WithdrawPage extends StatefulWidget {
 
 class _WithdrawPageState extends State<WithdrawPage> {
   TextEditingController amountController = TextEditingController();
-  TextEditingController accountNumberController = TextEditingController();
-  WithdrawMethod selectedMethod = WithdrawMethod.Dana;
+  TextEditingController passwordController = TextEditingController();
+  bool termsChecked = false;
+
+  double saldo = 1000.0;
 
   void _performWithdraw() {
     String amount = amountController.text;
     double withdrawAmount = double.tryParse(amount) ?? 0.0;
 
-    if (withdrawAmount > 0) {
-      String accountNumber = accountNumberController.text;
-
-      if (selectedMethod == WithdrawMethod.BankAccount &&
-          accountNumber.isEmpty) {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('Invalid Account Number'),
-              content: Text('Please enter a valid account number'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text('OK'),
-                ),
-              ],
-            );
-          },
-        );
-      } else {
-        // Lakukan tindakan withdraw sesuai dengan kebutuhan aplikasi Anda
-        // Misalnya, mengirim permintaan ke server atau mengurangi saldo pengguna
-        // ...
-
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('Withdraw Success'),
-              content: Text('You have successfully withdrawn $amount'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text('OK'),
-                ),
-              ],
-            );
-          },
-        );
-      }
+    if (withdrawAmount > 0 && termsChecked) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Withdraw Success'),
+            content:
+                Text('Your balance has been successfully withdrawn: $amount'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
     } else {
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Invalid Amount'),
-            content: Text('Please enter a valid amount'),
+            title: Text('Withdraw Failed'),
+            content: Text('Please check the amount and terms and conditions.'),
             actions: [
               TextButton(
                 onPressed: () {
@@ -89,128 +59,147 @@ class _WithdrawPageState extends State<WithdrawPage> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Withdraw'),
-      ),
-      body: Stack(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  'Withdraw Amount',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: TextFormField(
-                  controller: amountController,
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
-                  decoration: InputDecoration(
-                    labelText: 'Amount',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: ElevatedButton(
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text('Select Withdraw Method'),
-                          content: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              ListTile(
-                                leading: Icon(Icons.account_balance_wallet),
-                                title: Text('Dana'),
-                                onTap: () {
-                                  setState(() {
-                                    selectedMethod = WithdrawMethod.Dana;
-                                  });
-                                  Navigator.pop(context);
-                                  _showAccountNumberInput();
-                                },
-                              ),
-                              ListTile(
-                                leading: Icon(Icons.account_balance_wallet),
-                                title: Text('OVO'),
-                                onTap: () {
-                                  setState(() {
-                                    selectedMethod = WithdrawMethod.Ovo;
-                                  });
-                                  Navigator.pop(context);
-                                  _showAccountNumberInput();
-                                },
-                              ),
-                              ListTile(
-                                leading: Icon(Icons.account_balance_wallet),
-                                title: Text('GoPay'),
-                                onTap: () {
-                                  setState(() {
-                                    selectedMethod = WithdrawMethod.Gopay;
-                                  });
-                                  Navigator.pop(context);
-                                  _showAccountNumberInput();
-                                },
-                              ),
-                              ListTile(
-                                leading: Icon(Icons.account_balance),
-                                title: Text('Bank Account'),
-                                onTap: () {
-                                  setState(() {
-                                    selectedMethod = WithdrawMethod.BankAccount;
-                                  });
-                                  Navigator.pop(context);
-                                  _showAccountNumberInput();
-                                },
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    );
-                  },
-                  child: Text('Withdraw'),
-                ),
-              ),
-            ],
+  Widget _buildBalanceWidget() {
+    final currencyFormat = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp');
+    final formattedSaldo = currencyFormat.format(saldo);
+
+    return Container(
+      padding: EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: Color.fromRGBO(128, 128, 128, 0.5),
+            width: 1.0,
           ),
-          const Navigasi(),
-          const NavigasiMid(),
+        ),
+      ),
+      child: Column(
+        children: [
+          Text(
+            'Saldo',
+            style: TextStyle(
+              fontSize: 14.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.grey[600],
+            ),
+          ),
+          SizedBox(height: 8.0),
+          Text(
+            formattedSaldo,
+            style: TextStyle(
+              fontSize: 24.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ],
       ),
     );
   }
 
-  void _showAccountNumberInput() {
+  Widget _buildWithdrawMethodsGrid() {
+    return GridView.count(
+      crossAxisCount: 2,
+      shrinkWrap: true,
+      padding: EdgeInsets.all(16.0),
+      childAspectRatio: 1.5,
+      crossAxisSpacing: 16.0,
+      mainAxisSpacing: 16.0,
+      children: [
+        _buildWithdrawMethodIcon(
+          'Dana',
+          Icons.account_balance_wallet,
+        ),
+        _buildWithdrawMethodIcon(
+          'Ovo',
+          Icons.account_balance_wallet,
+        ),
+        _buildWithdrawMethodIcon(
+          'Gopay',
+          Icons.account_balance_wallet,
+        ),
+        _buildWithdrawMethodIcon(
+          'Bank Account',
+          Icons.account_balance,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildWithdrawMethodIcon(String methodName, IconData iconData) {
+    return InkWell(
+      onTap: () {
+        _showWithdrawAmountInput(methodName);
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Color.fromRGBO(128, 128, 128, 0.5),
+            width: 1.0,
+          ),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(iconData),
+            SizedBox(height: 8.0),
+            Text(
+              methodName,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 12.0),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showWithdrawAmountInput(String methodName) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Enter Account Number'),
+          title: Text('Withdraw Amount'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextFormField(
-                controller: accountNumberController,
                 decoration: InputDecoration(
-                  labelText: 'Account Number',
+                  labelText: 'Virtual Account Number',
                   border: OutlineInputBorder(),
                 ),
+              ),
+              SizedBox(height: 16.0),
+              TextFormField(
+                controller: amountController,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                decoration: InputDecoration(
+                  labelText: 'Amount',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              SizedBox(height: 16.0),
+              TextFormField(
+                controller: passwordController,
+                obscureText: true,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              SizedBox(height: 16.0),
+              Row(
+                children: [
+                  Checkbox(
+                    value: termsChecked,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        termsChecked = value ?? false;
+                      });
+                    },
+                  ),
+                  Text('I agree to the terms and conditions.'),
+                ],
               ),
               SizedBox(height: 16.0),
               ElevatedButton(
@@ -224,6 +213,46 @@ class _WithdrawPageState extends State<WithdrawPage> {
           ),
         );
       },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Withdraw'),
+      ),
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _buildBalanceWidget(),
+                SizedBox(height: 16.0),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      'Select Withdraw Method',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: _buildWithdrawMethodsGrid(),
+                ),
+              ],
+            ),
+          ),
+          Navigasi(),
+          NavigasiMid(),
+        ],
+      ),
     );
   }
 }
