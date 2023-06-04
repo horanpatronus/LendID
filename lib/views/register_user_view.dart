@@ -86,6 +86,7 @@ class _RegisterUserViewState extends State<RegisterUserView> {
   Widget build(BuildContext context) {
     // main
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
         title: 'Register Page',
         home: Scaffold(
             appBar: AppBar(
