@@ -44,6 +44,7 @@ class PinjamanUmkmViewModel extends BaseViewModel<ChangeNotifier?> {
             status: document.get('status'),
             tenggatPelunasan: document.get('tenggat_pelunasan'),
             waktuPeminjaman: document.get('waktu_peminjaman'),
+            waktuPengajuan: document.get('waktu_pengajuan'),
           );
 
           if (pinjamanData?.status != 'Selesai') {

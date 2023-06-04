@@ -13,6 +13,7 @@ class PinjamanUmkmModel {
   final Timestamp? tenggatPelunasan;
   final String? userId;
   final Timestamp? waktuPeminjaman;
+  final Timestamp? waktuPengajuan;
 
   PinjamanUmkmModel({
     this.banyakCicilan,
@@ -27,5 +28,6 @@ class PinjamanUmkmModel {
     this.tenggatPelunasan,
     this.userId,
     this.waktuPeminjaman,
+    this.waktuPengajuan,
   });
 }
