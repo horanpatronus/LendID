@@ -149,7 +149,7 @@ class LoginPageState extends State<LoginPage> {
                         });
                       }
                     },
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(

@@ -58,7 +58,7 @@ class Carousel extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                 ),
                               )),
-                          const Row(
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text("Dana Proyek"),
@@ -67,7 +67,7 @@ class Carousel extends StatelessWidget {
                           ),
                           Container(
                             margin: const EdgeInsets.only(bottom: 20),
-                            child: const Row(
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [Text("Imbal"), Text("3%")],
                             ),
@@ -78,7 +78,7 @@ class Carousel extends StatelessWidget {
                               right: 10,
                               left: 10,
                             ),
-                            child: const Row(
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [Text("Dana Terkumpul"), Text("50%")],
                             ),

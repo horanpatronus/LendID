@@ -18,7 +18,7 @@ class SearchButton extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.only(top: 30, left: 20, right: 20),
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(

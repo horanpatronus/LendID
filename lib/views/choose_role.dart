@@ -92,7 +92,7 @@ class _ChooseRoleState extends State<ChooseRole> {
                     width: 180,
                     // color: Color(0xFF069A8E),
                     padding: const EdgeInsets.all(10),
-                    child: const Column(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
@@ -123,7 +123,7 @@ class _ChooseRoleState extends State<ChooseRole> {
                     width: 180,
                     // color: Color(0xFF069A8E),
                     padding: const EdgeInsets.all(10),
-                    child: const Column(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(

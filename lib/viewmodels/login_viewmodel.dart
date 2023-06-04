@@ -55,7 +55,12 @@ class LoginViewModel extends BaseViewModel<ChangeNotifier?> {
           nama: snapshot.get('nama'),
           password: snapshot.get('password'),
           role: snapshot.get('role'),
+          saldo: snapshot.get('saldo'),
         );
+      } else {
+        if (kDebugMode) {
+          print('gagal mendapatkan user');
+        }
       }
     }
   }
