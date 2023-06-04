@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "683569295410",
+    "project_id": "p2p-lending-app-e3b83",
+    "storage_bucket": "p2p-lending-app-e3b83.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683569295410:android:11630534c811c8657b8c2b",
+        "android_client_info": {
+          "package_name": "com.example.homepage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "683569295410-f8uhv6vnpld4ejqa406isrhceuv5npt8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAP9i3z-Hgj8rHeBH3F9dggz3fmlllVHhI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "683569295410-f8uhv6vnpld4ejqa406isrhceuv5npt8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
