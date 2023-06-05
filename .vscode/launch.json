@@ -5,6 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Dart debug",
+            "type": "dart",
+            "request": "launch",
+            "flutterMode": "debug",
+            "deviceId": "emulator-5554",
+            "program": "lib/main.dart",
+            "args": ["--verbose"]
+        },
+        {
             "name": "$R5VTX9P",
             "cwd": "$Recycle.Bin\\S-1-5-21-1512993285-4043241888-770437815-1001\\$R5VTX9P",
             "request": "launch",

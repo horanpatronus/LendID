@@ -86,7 +86,6 @@ class _RegisterUserViewState extends State<RegisterUserView> {
   Widget build(BuildContext context) {
     // main
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
         title: 'Register Page',
         debugShowCheckedModeBanner: false,
         home: Scaffold(
@@ -128,7 +127,7 @@ class _RegisterUserViewState extends State<RegisterUserView> {
                 Form(
                   autovalidateMode: AutovalidateMode.always,
                   child: Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextFormField(
                         controller: textEditControllerNamaLengkap,
                         decoration: const InputDecoration(

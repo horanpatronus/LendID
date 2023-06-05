@@ -47,21 +47,22 @@ class InvestasiInvestorViewModel extends BaseViewModel<ChangeNotifier?> {
           );
 
           QuerySnapshot umkmDocument = await pinjamanUmkmCollection
-              .where('objectId', isEqualTo: investasiData?.proyekId)
+              .where(FieldPath.documentId, isEqualTo: investasiData?.proyekId)
               .get();
 
           if (umkmDocument.docs.isNotEmpty) {
             pinjamanData = PinjamanUmkmModel(
-              banyakCicilan: umkmDocument.docs[0].get('banyaknya_cicilan'),
+              periodePembayaran: umkmDocument.docs[0].get('periode_pembayaran'),
               status: umkmDocument.docs[0].get('status'),
             );
 
             if (pinjamanData?.status == 'Selesai') {
               totalSelesai++;
+            } else {
+              totalInvestasi++;
             }
           }
 
-          totalInvestasi++;
           jumlahDanaDiberikan += investasiData?.danaDiberikan ?? 0;
           // estimasiHasil
         }

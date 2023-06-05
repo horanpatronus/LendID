@@ -97,7 +97,7 @@ class InvestItems extends StatelessWidget {
         mainAxisSpacing: 20,
         childAspectRatio: 9 / 19,
       ),
-      itemCount: 1000,
+      itemCount: 5,
       itemBuilder: (BuildContext context, int index) {
         // final product = products[index];
         return GestureDetector(
