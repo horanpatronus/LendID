@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PinjamanUmkmModel {
-  final int? banyakCicilan;
   final int? banyakCicilanLunas;
   final String? deskripsiProyek;
   final String? foto;
@@ -13,9 +12,9 @@ class PinjamanUmkmModel {
   final Timestamp? tenggatPelunasan;
   final String? userId;
   final Timestamp? waktuPeminjaman;
+  final Timestamp? waktuPengajuan;
 
   PinjamanUmkmModel({
-    this.banyakCicilan,
     this.banyakCicilanLunas,
     this.deskripsiProyek,
     this.foto,
@@ -27,5 +26,6 @@ class PinjamanUmkmModel {
     this.tenggatPelunasan,
     this.userId,
     this.waktuPeminjaman,
+    this.waktuPengajuan,
   });
 }

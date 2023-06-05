@@ -1,9 +1,19 @@
+import 'dart:convert';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:homepage/views/navigasi.dart';
 import 'package:homepage/views/navigasi_mid.dart';
+import 'package:homepage/viewmodels/pinjaman_umkm_viewmodel.dart';
+import 'package:intl/intl.dart';
+import 'package:crypto/crypto.dart';
 
 class KonfirmasiUsulanPeminjaman extends StatefulWidget {
-  const KonfirmasiUsulanPeminjaman({Key? key}) : super(key: key);
+  const KonfirmasiUsulanPeminjaman({Key? key, required this.pinjamanViewModel})
+      : super(key: key);
+
+  final PinjamanUmkmViewModel pinjamanViewModel;
+
   @override
   KonfirmasiUsulanPeminjamanState createState() {
     return KonfirmasiUsulanPeminjamanState();
@@ -14,6 +24,9 @@ class KonfirmasiUsulanPeminjamanState
     extends State<KonfirmasiUsulanPeminjaman> {
   bool isChecked1 = false;
   bool isChecked2 = false;
+  String? _errorMessage;
+  final textEditControllerPassword = TextEditingController();
+  final User? currentUser = FirebaseAuth.instance.currentUser;
 
   void tampilkanDialog(BuildContext context) {
     showDialog(
@@ -26,6 +39,8 @@ class KonfirmasiUsulanPeminjamanState
             TextButton(
               child: const Text('Kembali'),
               onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
                 Navigator.of(context).pop();
               },
             ),
@@ -107,7 +122,9 @@ class KonfirmasiUsulanPeminjamanState
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Proyek Proyekan',
+                                        widget.pinjamanViewModel.pinjamanData
+                                                ?.namaProyek ??
+                                            '',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: Color(0xff005555),
@@ -115,7 +132,9 @@ class KonfirmasiUsulanPeminjamanState
                                         textAlign: TextAlign.left,
                                       ),
                                       Text(
-                                        'Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.',
+                                        widget.pinjamanViewModel.pinjamanData
+                                                ?.deskripsiProyek ??
+                                            '',
                                         style: TextStyle(
                                           fontSize: 12,
                                           color: Color(0xff0055555),
@@ -139,7 +158,14 @@ class KonfirmasiUsulanPeminjamanState
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text('Jumlah Pinjaman'),
-                                    Text('Rp6.000.000',
+                                    Text(
+                                        ('Rp' +
+                                            NumberFormat('#,###', 'id_ID')
+                                                .format(widget
+                                                    .pinjamanViewModel
+                                                    .pinjamanData
+                                                    ?.jumlahPinjaman) +
+                                            ',-'),
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold)),
                                   ],
@@ -152,7 +178,12 @@ class KonfirmasiUsulanPeminjamanState
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text('Periode Pembayaran'),
-                                    Text('12 bulan',
+                                    Text(
+                                        ((widget.pinjamanViewModel.pinjamanData
+                                                    ?.periodePembayaran
+                                                    .toString() ??
+                                                '') +
+                                            ' bulan'),
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold)),
                                   ],
@@ -165,7 +196,12 @@ class KonfirmasiUsulanPeminjamanState
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text('Banyaknya Cicilan'),
-                                    Text('12 kali',
+                                    Text(
+                                        ((widget.pinjamanViewModel.pinjamanData
+                                                    ?.periodePembayaran
+                                                    .toString() ??
+                                                '') +
+                                            ' kali'),
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold)),
                                   ],
@@ -182,7 +218,12 @@ class KonfirmasiUsulanPeminjamanState
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text('Bunga yang Dikenai'),
-                                Text('12%',
+                                Text(
+                                    ((widget.pinjamanViewModel.pinjamanData
+                                                ?.periodePembayaran
+                                                .toString() ??
+                                            '') +
+                                        '%'),
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold)),
                               ],
@@ -194,7 +235,25 @@ class KonfirmasiUsulanPeminjamanState
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text('Besaran Cicilan per Bulan'),
-                                Text('Rp560.000,00',
+                                Text(
+                                    ('Rp' +
+                                        (NumberFormat('#,###', 'id_ID').format((((widget
+                                                        .pinjamanViewModel
+                                                        .pinjamanData
+                                                        ?.jumlahPinjaman ??
+                                                    0)) /
+                                                (widget
+                                                        .pinjamanViewModel
+                                                        .pinjamanData
+                                                        ?.periodePembayaran ??
+                                                    0)) *
+                                            (1 +
+                                                (widget
+                                                            .pinjamanViewModel
+                                                            .pinjamanData
+                                                            ?.periodePembayaran ??
+                                                        0) /
+                                                    100)))),
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold)),
                               ],
@@ -208,19 +267,33 @@ class KonfirmasiUsulanPeminjamanState
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Konfirmasi Password'),
+                                SizedBox(
+                                  width: 200,
+                                  child: Text('Konfirmasi Password'),
+                                ),
                                 Container(
                                   decoration:
                                       const BoxDecoration(color: Colors.amber),
-                                )
-                                // textformfield
-                                // Container(child: Form(
-                                //   child: TextFormField(
-                                //     decoration: InputDecoration(labelText: 'Password'),
-                                //     obscureText: true,
-                                //   ),
-                                //  ),),
+                                ),
+                                Expanded(
+                                  child: TextField(
+                                    obscureText: true,
+                                    enableSuggestions: false,
+                                    autocorrect: false,
+                                    controller: textEditControllerPassword,
+                                    decoration: const InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        hintText: 'Masukkan password anda'),
+                                  ),
+                                ),
                               ],
+                            ),
+                            Text(
+                              _errorMessage ?? '',
+                              style: const TextStyle(
+                                color: Colors.red,
+                                fontSize: 16.0,
+                              ),
                             ),
                             SizedBox(
                               height: 20,
@@ -275,9 +348,37 @@ class KonfirmasiUsulanPeminjamanState
                                     primary:
                                         Color(0xff069A8E), // Background color
                                   ),
-                                  onPressed: () {
+                                  onPressed: () async {
                                     if (isChecked1 && isChecked2) {
-                                      tampilkanDialog(context);
+                                      final currentUser = this.currentUser;
+
+                                      if (currentUser != null) {
+                                        // if password is correct then save data to database
+                                        final passwordBytes = utf8.encode(
+                                            textEditControllerPassword.text);
+                                        final hashedPassword = sha256
+                                            .convert(passwordBytes)
+                                            .toString();
+
+                                        final AuthCredential credential =
+                                            EmailAuthProvider.credential(
+                                                email: currentUser.email!,
+                                                password: hashedPassword);
+
+                                        try {
+                                          await currentUser
+                                              .reauthenticateWithCredential(
+                                                  credential);
+                                          // If password is correct, save data to database
+                                          widget.pinjamanViewModel
+                                              .newUsulanPeminjaman();
+                                          tampilkanDialog(context);
+                                        } catch (e) {
+                                          setState(() {
+                                            _errorMessage = 'Password salah!';
+                                          });
+                                        }
+                                      }
                                     }
                                   },
                                   child: Row(
