@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:homepage/models/pinjaman_umkm_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:homepage/views/usulan_peminjaman.dart';
 
 abstract class BaseViewModel<T extends ChangeNotifier?> extends ChangeNotifier {
   T? state;
@@ -25,6 +26,7 @@ class PinjamanUmkmViewModel extends BaseViewModel<ChangeNotifier?> {
 
   Future<void> getPinjamanUmkm() async {
     User? user = _auth.currentUser;
+
     if (user != null) {
       QuerySnapshot snapshot = await pinjamanUmkmCollection
           .where('user_id', isEqualTo: user.uid)
@@ -33,7 +35,6 @@ class PinjamanUmkmViewModel extends BaseViewModel<ChangeNotifier?> {
         for (var document in snapshot.docs) {
           // Retrieve and process each document here
           pinjamanData = PinjamanUmkmModel(
-            banyakCicilan: document.get('banyaknya_cicilan'),
             banyakCicilanLunas: document.get('cicilan_sudah_dibayar'),
             deskripsiProyek: document.get('deskripsi_proyek'),
             foto: document.get('foto'),
@@ -44,14 +45,48 @@ class PinjamanUmkmViewModel extends BaseViewModel<ChangeNotifier?> {
             status: document.get('status'),
             tenggatPelunasan: document.get('tenggat_pelunasan'),
             waktuPeminjaman: document.get('waktu_peminjaman'),
+            waktuPengajuan: document.get('waktu_pengajuan'),
           );
 
-          totalPeminjaman++;
-          jumlahPinjaman += pinjamanData?.jumlahPinjaman ?? 0;
-          jumlahDibayar += pinjamanData?.jumlahDibayar ?? 0;
+          if (pinjamanData?.status != 'Selesai') {
+            totalPeminjaman++;
+            jumlahPinjaman += pinjamanData?.jumlahPinjaman ?? 0;
+            jumlahDibayar += pinjamanData?.jumlahDibayar ?? 0;
+          }
         }
 
         sisaHutang = jumlahPinjaman - jumlahDibayar;
+      }
+    }
+  }
+
+  void handleUsulanPeminjamanData(PinjamanUmkmModel data) {
+    pinjamanData = data;
+  }
+
+  Future<void> newUsulanPeminjaman() async {
+    try {
+      User? user = _auth.currentUser;
+
+      await pinjamanUmkmCollection.doc().set({
+        'cicilan_sudah_dibayar': 0,
+        'deskripsi_proyek': pinjamanData?.deskripsiProyek,
+        'foto': '',
+        'jumlah_dibayar': 0,
+        'jumlah_pinjaman': pinjamanData?.jumlahPinjaman,
+        'nama_proyek': pinjamanData?.namaProyek,
+        'periode_pembayaran': pinjamanData?.periodePembayaran,
+        'status': pinjamanData?.status,
+        'tenggat_pelunasan':
+            pinjamanData?.waktuPengajuan?.toDate()?.add(Duration(days: 30)) ??
+                Timestamp.now(),
+        'user_id': user!.uid,
+        'waktu_pengajuan': pinjamanData?.waktuPengajuan,
+        'waktu_peminjaman': pinjamanData?.waktuPeminjaman,
+      });
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error: Gagal membuat usulan peminjaman, $e');
       }
     }
   }
