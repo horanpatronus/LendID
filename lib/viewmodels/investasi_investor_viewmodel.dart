@@ -52,7 +52,7 @@ class InvestasiInvestorViewModel extends BaseViewModel<ChangeNotifier?> {
 
           if (umkmDocument.docs.isNotEmpty) {
             pinjamanData = PinjamanUmkmModel(
-              banyakCicilan: umkmDocument.docs[0].get('banyaknya_cicilan'),
+              periodePembayaran: umkmDocument.docs[0].get('periode_pembayaran'),
               status: umkmDocument.docs[0].get('status'),
             );
 
