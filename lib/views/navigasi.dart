@@ -3,6 +3,9 @@ import 'package:homepage/views/landing_page.dart';
 import 'package:homepage/views/profile_user.dart';
 import 'package:homepage/views/search.dart';
 import 'package:homepage/views/settings.dart';
+import 'package:homepage/views/usulan_peminjaman.dart';
+
+bool isMember = true;
 
 class Navigasi extends StatelessWidget {
   const Navigasi({super.key});
@@ -52,10 +55,15 @@ class Navigasi extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    //pergi ke halaman Search
-                    builder: (context) => const SearchButton(),
-                  ),
+                  isMember
+                      ? MaterialPageRoute(
+                          //pergi ke halaman plus button
+                          builder: (context) => const UsulanPeminjaman(),
+                        )
+                      : MaterialPageRoute(
+                          //pergi ke halaman search button
+                          builder: (context) => const SearchButton(),
+                        ),
                 );
               },
               child: Container(
