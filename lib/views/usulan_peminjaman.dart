@@ -1,14 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:homepage/models/pinjaman_umkm_model.dart';
+import 'package:homepage/viewmodels/pinjaman_umkm_viewmodel.dart';
 import 'package:homepage/views/navigasi.dart';
 import 'package:homepage/views/navigasi_mid.dart';
 import 'package:intl/intl.dart';
 
 import 'konfirmasi_usulan_peminjaman.dart';
-
-// void main() {
-//   runApp(const UsulanPeminjaman());
-// }
 
 class CurrencyInputFormatter extends TextInputFormatter {
   final currencyFormatter = NumberFormat.currency(
@@ -38,13 +37,13 @@ class CurrencyInputFormatter extends TextInputFormatter {
 
 class UsulanPeminjaman extends StatefulWidget {
   const UsulanPeminjaman({Key? key}) : super(key: key);
+
   @override
-  UsulanPeminjamanState createState() {
-    return UsulanPeminjamanState();
-  }
+  UsulanPeminjamanState createState() => UsulanPeminjamanState();
 }
 
 class UsulanPeminjamanState extends State<UsulanPeminjaman> {
+  final PinjamanUmkmViewModel _pinjamanViewModel = PinjamanUmkmViewModel();
   final textEditControllerJumlahPinjaman = TextEditingController();
   final textEditControllerNamaProyek = TextEditingController();
   final textEditControllerDeskripsiProyek = TextEditingController();
@@ -80,6 +79,33 @@ class UsulanPeminjamanState extends State<UsulanPeminjaman> {
     textEditControllerNamaProyek.dispose();
     textEditControllerDeskripsiProyek.dispose();
     super.dispose();
+  }
+
+  void newUsulan() {
+    PinjamanUmkmModel pinjaman = PinjamanUmkmModel(
+      deskripsiProyek: textEditControllerDeskripsiProyek.text,
+      jumlahPinjaman: int.tryParse(textEditControllerJumlahPinjaman.text
+              .replaceAll(RegExp(r'[^0-9]'), '')) ??
+          0,
+      namaProyek: textEditControllerNamaProyek.text,
+      periodePembayaran: int.parse(dropdownValue.split(' ')[0]),
+      status: 'Menunggu Pendanaan',
+      userId: '',
+      waktuPengajuan: Timestamp.fromDate(DateTime.now()),
+      waktuPeminjaman:
+          Timestamp.fromDate(DateTime.now().add(const Duration(days: 7))),
+    );
+
+    _pinjamanViewModel.handleUsulanPeminjamanData(pinjaman);
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => KonfirmasiUsulanPeminjaman(
+          pinjamanViewModel: _pinjamanViewModel,
+        ),
+      ),
+    );
   }
 
   @override
@@ -305,29 +331,8 @@ class UsulanPeminjamanState extends State<UsulanPeminjaman> {
                       height: 50,
                       width: double.infinity,
                       child: ElevatedButton(
-                        // onPressed: (
-
-                        // ) {
-                        //   // setState(() {
-                        //   //   // plus konfirmasi screen
-                        //   //   hitungCicilan();
-                        //   //   _nominalPinjaman = _jumlahPinjaman;
-                        //   //   _periodePembayaran = dropdownValue;
-                        //   //   _cicilanPerbulan = _cicilan.toDouble();
-                        //   //   _namaProyek = textEditControllerNamaProyek.text;
-                        //   //   _deskripsiProyek =
-                        //   //       textEditControllerDeskripsiProyek.text;
-                        //   // });
-                        // },
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              //pergi ke halaman Landing Page
-                              builder: (context) =>
-                                  const KonfirmasiUsulanPeminjaman(),
-                            ),
-                          );
+                          newUsulan();
                         },
                         child: const Text(
                           'Lanjutkan',

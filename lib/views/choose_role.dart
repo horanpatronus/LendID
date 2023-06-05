@@ -22,7 +22,6 @@ class _ChooseRoleState extends State<ChooseRole> {
   // final textEditController = TextEditingController();
   String _chooseRole = "";
   String _role = "";
-  RegisterViewModel _registerViewModel = RegisterViewModel();
 
   @override
   void dispose() {
