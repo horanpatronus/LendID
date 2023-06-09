@@ -3,9 +3,10 @@ import 'package:homepage/views/landing_page.dart';
 import 'package:homepage/views/profile_user.dart';
 import 'package:homepage/views/search.dart';
 import 'package:homepage/views/settings.dart';
+import 'package:homepage/views/status_investor.dart';
 import 'package:homepage/views/usulan_peminjaman.dart';
 
-bool isMember = true;
+bool isMember = false;
 
 class Navigasi extends StatelessWidget {
   const Navigasi({super.key});
@@ -23,7 +24,7 @@ class Navigasi extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     //pergi ke halaman Landing Page
@@ -53,16 +54,16 @@ class Navigasi extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   isMember
                       ? MaterialPageRoute(
                           //pergi ke halaman plus button
-                          builder: (context) => const UsulanPeminjaman(),
+                          builder: (context) => const ProfilePage(),
                         )
                       : MaterialPageRoute(
                           //pergi ke halaman search button
-                          builder: (context) => const SearchButton(),
+                          builder: (context) => const StatusInvestor(),
                         ),
                 );
               },
@@ -99,7 +100,7 @@ class Navigasi extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     //pergi ke halaman Profile
@@ -131,7 +132,7 @@ class Navigasi extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     //pergi ke halaman top up
