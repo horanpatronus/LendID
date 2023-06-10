@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       title: 'Introduction screen',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: LandingPage(),
+      home: StatusInvestor(),
     );
   }
 }
