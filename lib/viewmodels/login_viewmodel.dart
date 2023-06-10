@@ -36,6 +36,8 @@ class LoginViewModel extends BaseViewModel<ChangeNotifier?> {
         password: hashedPassword,
       );
 
+      await FirebaseAuth.instance.setPersistence(Persistence.LOCAL);
+
       // Proceed to retrieve user data or navigate to the next screen
       return true;
     } catch (e) {

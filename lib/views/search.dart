@@ -4,6 +4,7 @@ import 'package:homepage/views/navigasi.dart';
 import 'package:homepage/views/navigasi_mid.dart';
 import 'package:homepage/views/profile_user.dart';
 import 'package:homepage/views/progress_bar.dart';
+import 'package:homepage/views/search_detail.dart';
 
 class SearchButton extends StatelessWidget {
   const SearchButton({super.key});
@@ -96,7 +97,7 @@ class InvestItems extends StatelessWidget {
         mainAxisSpacing: 20,
         childAspectRatio: 9 / 19,
       ),
-      itemCount: 1000,
+      itemCount: 5,
       itemBuilder: (BuildContext context, int index) {
         // final product = products[index];
         return GestureDetector(
@@ -105,7 +106,7 @@ class InvestItems extends StatelessWidget {
               context,
               MaterialPageRoute(
                 //pergi ke halaman akun
-                builder: (context) => ProfilePage(),
+                builder: (context) => SearchDetail(),
               ),
             );
           },
