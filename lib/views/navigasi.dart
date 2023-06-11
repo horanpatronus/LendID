@@ -3,7 +3,7 @@ import 'package:homepage/views/landing_page.dart';
 import 'package:homepage/views/profile_user.dart';
 import 'package:homepage/views/search.dart';
 import 'package:homepage/views/settings.dart';
-import 'package:homepage/views/status_umkm_accepted.dart';
+import 'package:homepage/views/status_peminjaman_umkm.dart';
 
 class Navigasi extends StatelessWidget {
   const Navigasi({super.key});
@@ -55,7 +55,7 @@ class Navigasi extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     //pergi ke halaman Search
-                    builder: (context) => const StatusUMKMAccepted(),
+                    builder: (context) => const StatusPeminjamanUMKM(),
                   ),
                 );
               },
