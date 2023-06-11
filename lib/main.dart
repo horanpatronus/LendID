@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:homepage/views/bottom_navigation.dart';
+import 'package:homepage/views/history_investor.dart';
 import 'package:homepage/views/landing_page.dart';
 import 'package:homepage/views/login_page.dart';
 import 'package:homepage/views/profile_user.dart';
@@ -29,7 +30,9 @@ class MyApp extends StatelessWidget {
       title: 'Introduction screen',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
+
       home: LoginPage(),
+
     );
   }
 }
