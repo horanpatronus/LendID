@@ -203,7 +203,7 @@ class _StatusInvestorState extends State<StatusInvestor>
                                           children: [
                                             Text("Tgl. mendapatkan hasil"),
                                             Text(
-                                              _danaDiberikan,
+                                              _tglHasil,
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold),
                                             ),
@@ -217,7 +217,7 @@ class _StatusInvestorState extends State<StatusInvestor>
                                       // endIndent: 10,
                                     ),
                                     Container(
-                                      margin: EdgeInsets.only(bottom: 10),
+                                      // margin: EdgeInsets.only(bottom: 10),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
@@ -543,7 +543,7 @@ class _StatusInvestorState extends State<StatusInvestor>
                                                   Text(
                                                       "Tgl. mendapatkan hasil"),
                                                   Text(
-                                                    _danaDiberikan,
+                                                    _tglHasil,
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold),
