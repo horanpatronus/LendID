@@ -18,7 +18,11 @@ class _StatusInvestorState extends State<StatusInvestor>
   String _danaDiberikan = "Rp2.000.000,-";
   String _estDidapatkan = "Rp100.000,-";
   String _tglHasil = "5 Maret 2023";
-  String _status = "Terkonfirmasi Admin";
+  String _statusDiproses = "Terkonfirmasi Admin";
+  String _statusDiterima = "Proses Pendanaan";
+  int _totalInvestBerjalan = 5;
+  String _totalDanaDiberikan = "Rp10.0000.000";
+  String _totalEstimasi = "Rp1.000.000";
 
   @override
   void initState() {
@@ -220,7 +224,7 @@ class _StatusInvestorState extends State<StatusInvestor>
                                         children: [
                                           Text("Status"),
                                           Text(
-                                            _status,
+                                            _statusDiproses,
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold),
                                           ),
@@ -234,7 +238,8 @@ class _StatusInvestorState extends State<StatusInvestor>
                                       // indent: 10,
                                       // endIndent: 10,
                                     ),
-                                    if (_status == "Terkonfirmasi Admin")
+                                    if (_statusDiproses ==
+                                        "Terkonfirmasi Admin")
                                       Container(
                                         padding: EdgeInsets.all(30),
                                         color: Colors.amber,
@@ -279,7 +284,147 @@ class _StatusInvestorState extends State<StatusInvestor>
                           //isi kedua / diterima
                           Column(
                             children: [
-                              Container(child: Text("Tes")),
+                              Container(
+                                height: 200,
+                                margin: EdgeInsets.only(bottom: 20),
+                                decoration: BoxDecoration(
+                                  color: Colors.greenAccent,
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.2),
+                                      spreadRadius: 2,
+                                      blurRadius: 3,
+                                      offset: Offset(0,
+                                          5), // Mengatur posisi bayangan (x, y)
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Center(
+                                      child: Text(
+                                        "Ringkasan Investasi yang Berjalan",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Divider(
+                                      // Garis horizontal
+                                      color: Colors.black,
+                                      thickness: 1,
+                                      // indent: 10,
+                                      // endIndent: 10,
+                                    ),
+                                    Container(
+                                      color: Colors.amber,
+                                      height: 50,
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: 5),
+                                            child: Icon(
+                                              Icons
+                                                  .assignment_turned_in_outlined,
+                                              size: 30,
+                                            ),
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                  "Total Investasi yang Sedang Berjalan"),
+                                              Text(
+                                                _totalInvestBerjalan.toString(),
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20,
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      color: Colors.amber,
+                                      height: 50,
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: 5),
+                                            child: Icon(
+                                              Icons.request_quote_outlined,
+                                              size: 30,
+                                            ),
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                  "Jumlah Dana yang Diberikan"),
+                                              Text(
+                                                _totalDanaDiberikan.toString(),
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20,
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      color: Colors.amber,
+                                      height: 50,
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: 5),
+                                            child: Icon(
+                                              Icons.stacked_line_chart,
+                                              size: 30,
+                                            ),
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text("Estimasi Hasil"),
+                                              Text(
+                                                _totalEstimasi.toString(),
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
                               Expanded(
                                 child: ListView.builder(
                                   shrinkWrap: true,
@@ -430,7 +575,7 @@ class _StatusInvestorState extends State<StatusInvestor>
                                                       bottom: 20),
                                                   child: Center(
                                                     child: Text(
-                                                      _status,
+                                                      _statusDiterima,
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold),
@@ -445,6 +590,9 @@ class _StatusInvestorState extends State<StatusInvestor>
                                     );
                                   },
                                 ),
+                              ),
+                              Container(
+                                height: 50,
                               ),
                             ],
                           )
