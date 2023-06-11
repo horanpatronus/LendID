@@ -9,49 +9,25 @@ class EditProfilePage extends StatefulWidget {
   const EditProfilePage({super.key});
 
   @override
-  _EditProfilePageState createState() => _EditProfilePageState();
+  EditProfilePageState createState() => EditProfilePageState();
 }
 
-class _EditProfilePageState extends State<EditProfilePage> {
+class EditProfilePageState extends State<EditProfilePage> {
   TextEditingController nameController = TextEditingController();
-  String name = 'John Doe';
-  File? profileImage;
-  File? ktpImage;
+  TextEditingController ktpController = TextEditingController();
+  String name = 'Aditya Pratama';
+  String ktp = '3273242307020002';
 
   @override
   void initState() {
     super.initState();
     nameController.text = name;
-  }
-
-  Future<void> selectProfileImage() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-
-    if (pickedFile != null) {
-      setState(() {
-        profileImage = File(pickedFile.path);
-      });
-    }
-  }
-
-  Future<void> selectKTPImage() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-
-    if (pickedFile != null) {
-      setState(() {
-        ktpImage = File(pickedFile.path);
-      });
-    }
+    ktpController.text = ktp;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Edit Profil'),
-      // ),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -59,19 +35,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  const SizedBox(height: 16),
                   const Text(
-                    'Judul Profil',
+                    'Edit Profil',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 16),
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 80,
-                    backgroundImage: profileImage != null
-                        ? FileImage(profileImage!)
-                        : const AssetImage('page2.png') as ImageProvider<Object>,
+                    backgroundImage: AssetImage('page3.png'),
                   ),
                   const SizedBox(height: 16),
                   Container(
@@ -79,20 +54,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            selectProfileImage();
-                          },
-                          child: const Text('Ubah Foto Profil'),
-                        ),
-                        const SizedBox(height: 8),
-                        ElevatedButton(
-                          onPressed: () {
-                            selectKTPImage();
-                          },
-                          child: const Text('Upload Foto KTP'),
-                        ),
-                        const SizedBox(height: 16),
                         const Text(
                           'Nama',
                           style: TextStyle(
@@ -112,7 +73,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         ),
                         const SizedBox(height: 16),
                         const Text(
-                          'Foto KTP',
+                          'No KTP',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
@@ -124,11 +85,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             border: Border.all(color: Colors.grey),
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: Text(
-                            ktpImage?.path ?? 'Belum diunggah',
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
+                          child: TextFormField(
+                            controller: ktpController,
                           ),
                         ),
                         const SizedBox(height: 16),
@@ -152,27 +110,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 16),
-                        const Text(
-                          'Password',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: const Text(
-                            '******',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   ),
@@ -186,7 +123,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ),
                   const SizedBox(height: 16),
                   Container(
-                    // color: Colors.black,
                     height: 100,
                   )
                 ],
