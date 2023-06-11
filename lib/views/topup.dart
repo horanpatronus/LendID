@@ -44,7 +44,7 @@ class TopUpPage extends StatelessWidget {
                 Align(
                   alignment: Alignment.center,
                   child: Text(
-                    'Scan this QR Code to top up your account...',
+                    'Scan this QR Code to top up your account',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

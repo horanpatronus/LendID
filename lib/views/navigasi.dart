@@ -147,11 +147,11 @@ class Navigasi extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
-                        Icons.settings,
+                        Icons.help,
                         color: Colors.white,
                       ),
                       Text(
-                        "Setelan",
+                        "Bantuan",
                         style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.bold,
