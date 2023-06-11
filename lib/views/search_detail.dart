@@ -192,7 +192,7 @@ class SearchDetail extends StatelessWidget {
                               height: 10,
                               value: 67.9 / 100,
                               backgroundColor: Colors.white,
-                              foregroundColor: Color(0xff005555))
+                              foregroundColor: Color(0xff069A8E))
                         ],
                       ),
                       Divider(

@@ -3,7 +3,10 @@ import 'package:homepage/views/landing_page.dart';
 import 'package:homepage/views/profile_user.dart';
 import 'package:homepage/views/search.dart';
 import 'package:homepage/views/settings.dart';
-import 'package:homepage/views/status_peminjaman_umkm.dart';
+import 'package:homepage/views/status_investor.dart';
+import 'package:homepage/views/usulan_peminjaman.dart';
+
+bool isMember = false;
 
 class Navigasi extends StatelessWidget {
   const Navigasi({super.key});
@@ -21,7 +24,7 @@ class Navigasi extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     //pergi ke halaman Landing Page
@@ -51,12 +54,17 @@ class Navigasi extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(
-                    //pergi ke halaman Search
-                    builder: (context) => const StatusPeminjamanUMKM(),
-                  ),
+                  isMember
+                      ? MaterialPageRoute(
+                          //pergi ke halaman plus button
+                          builder: (context) => const ProfilePage(),
+                        )
+                      : MaterialPageRoute(
+                          //pergi ke halaman search button
+                          builder: (context) => const StatusInvestor(),
+                        ),
                 );
               },
               child: Container(
@@ -92,7 +100,7 @@ class Navigasi extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     //pergi ke halaman Profile
@@ -124,7 +132,7 @@ class Navigasi extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     //pergi ke halaman top up
@@ -139,11 +147,11 @@ class Navigasi extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
-                        Icons.settings,
+                        Icons.help,
                         color: Colors.white,
                       ),
                       Text(
-                        "Setelan",
+                        "Bantuan",
                         style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.bold,

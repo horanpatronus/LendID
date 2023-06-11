@@ -13,11 +13,8 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage>
     with SingleTickerProviderStateMixin {
-  String name = 'John Doe';
-  String ktpImage = 'path_to_ktp_image';
-  String email = 'johndoe@example.com';
-  String password = '******';
-  String role = 'umkm'; // User's role ('investor' or 'umkm')
+  String name = 'Aditya Pratama';
+  String role = 'umkm';
 
   late TabController _tabController;
 
@@ -36,60 +33,58 @@ class _ProfilePageState extends State<ProfilePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Profile'),
+        bottom: role == 'umkm'
+            ? TabBar(
+                controller: _tabController,
+                tabs: const [
+                  Tab(text: 'User'),
+                  Tab(text: 'Perusahaan'),
+                ],
+              )
+            : null,
+      ),
       body: Stack(
         children: [
           DefaultTabController(
             length: role == 'umkm' ? 2 : 0,
-            child: Scaffold(
-              appBar: AppBar(
-                title: const Text('Profile'),
-                bottom: role == 'umkm'
-                    ? TabBar(
-                        controller: _tabController,
-                        tabs: const [
-                          Tab(text: 'User'),
-                          Tab(text: 'Perusahaan'),
+            child: NestedScrollView(
+              headerSliverBuilder: (context, innerBoxIsScrolled) {
+                return [
+                  SliverToBoxAdapter(
+                    child: Container(
+                      color: Colors.white,
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 16),
+                          const CircleAvatar(
+                            radius: 80,
+                            backgroundImage: AssetImage('page3.png'),
+                          ),
+                          const SizedBox(height: 16),
+                          Text(
+                            name,
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ],
-                      )
-                    : null,
-              ),
-              body: NestedScrollView(
-                headerSliverBuilder: (context, innerBoxIsScrolled) {
-                  return [
-                    SliverToBoxAdapter(
-                      child: Container(
-                        color: Colors.white,
-                        child: Column(
-                          children: [
-                            const SizedBox(height: 16),
-                            const CircleAvatar(
-                              radius: 80,
-                              backgroundImage: AssetImage('page3.png'),
-                            ),
-                            const SizedBox(height: 16),
-                            Text(
-                              name,
-                              style: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
                       ),
                     ),
-                  ];
-                },
-                body: role == 'investor'
-                    ? buildUserTab()
-                    : TabBarView(
-                        controller: _tabController,
-                        children: [
-                          buildUserTab(),
-                          buildCompanyTab(),
-                        ],
-                      ),
-              ),
+                  ),
+                ];
+              },
+              body: role == 'investor'
+                  ? buildUserTab()
+                  : TabBarView(
+                      controller: _tabController,
+                      children: [
+                        buildUserTab(),
+                        buildCompanyTab(),
+                      ],
+                    ),
             ),
           ),
           const Navigasi(),
@@ -121,14 +116,14 @@ class _ProfilePageState extends State<ProfilePage>
                     children: [
                       Container(
                         padding: const EdgeInsets.only(right: 8),
-                        child: Text(
+                        child: const Text(
                           'Nama:',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                      Text('John Doe'),
+                      const Text('Aditya Pratama'),
                     ],
                   ),
                 ),
@@ -144,14 +139,14 @@ class _ProfilePageState extends State<ProfilePage>
                     children: [
                       Container(
                         padding: const EdgeInsets.only(right: 8),
-                        child: Text(
-                          'Foto KTP:',
+                        child: const Text(
+                          'No KTP:',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                      Text('path_to_ktp_image'),
+                      const Text('3273242307020002'),
                     ],
                   ),
                 ),
@@ -167,40 +162,18 @@ class _ProfilePageState extends State<ProfilePage>
                     children: [
                       Container(
                         padding: const EdgeInsets.only(right: 8),
-                        child: Text(
+                        child: const Text(
                           'Email:',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                      Text('johndoe@example.com'),
+                      const Text('mdhstama@upi.edu'),
                     ],
                   ),
                 ),
                 const SizedBox(height: 8),
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.only(right: 8),
-                        child: Text(
-                          'Password:',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      Text('******'),
-                    ],
-                  ),
-                ),
               ],
             ),
           ),
@@ -213,12 +186,12 @@ class _ProfilePageState extends State<ProfilePage>
             },
             child: const Text('Edit Akun'),
           ),
-          const SizedBox(height: 16),
         ],
       ),
     );
   }
 
+  // widget tab untuk perusahaan
   Widget buildCompanyTab() {
     return SingleChildScrollView(
       child: Column(
@@ -241,14 +214,14 @@ class _ProfilePageState extends State<ProfilePage>
                     children: [
                       Container(
                         padding: const EdgeInsets.only(right: 8),
-                        child: Text(
+                        child: const Text(
                           'Nama Perusahaan:',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                      Text('Company XYZ'),
+                      const Text('Company XYZ'),
                     ],
                   ),
                 ),
@@ -264,14 +237,14 @@ class _ProfilePageState extends State<ProfilePage>
                     children: [
                       Container(
                         padding: const EdgeInsets.only(right: 8),
-                        child: Text(
+                        child: const Text(
                           'Alamat Perusahaan:',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                      Text('Jl. Raya ABC No. 123'),
+                      const Text('Jl. Raya ABC No. 123'),
                     ],
                   ),
                 ),
@@ -287,14 +260,14 @@ class _ProfilePageState extends State<ProfilePage>
                     children: [
                       Container(
                         padding: const EdgeInsets.only(right: 8),
-                        child: Text(
-                          'NPWP Perusahaan:',
+                        child: const Text(
+                          'No NPWP Perusahaan:',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                      Text('1234567890'),
+                      const Text('1234567890'),
                     ],
                   ),
                 ),
@@ -310,40 +283,18 @@ class _ProfilePageState extends State<ProfilePage>
                     children: [
                       Container(
                         padding: const EdgeInsets.only(right: 8),
-                        child: Text(
+                        child: const Text(
                           'Penghasilan:',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                      Text('\$1,000,000'),
+                      const Text('\< 100 Juta'),
                     ],
                   ),
                 ),
                 const SizedBox(height: 8),
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.only(right: 8),
-                        child: Text(
-                          'Dokumen NPWP:',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      Text('file.pdf'),
-                    ],
-                  ),
-                ),
               ],
             ),
           ),
@@ -357,7 +308,6 @@ class _ProfilePageState extends State<ProfilePage>
             },
             child: const Text('Edit Profil Perusahaan'),
           ),
-          const SizedBox(height: 16),
         ],
       ),
     );

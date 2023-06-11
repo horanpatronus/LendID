@@ -174,7 +174,7 @@ class LandingPage extends StatelessWidget {
                                           vertical: 5),
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 5),
-                                      color: const Color(0xff069A8E),
+                                      color: const Color(0xff005555),
                                       child: FractionallySizedBox(
                                         widthFactor: 1,
                                         child: Material(
@@ -254,7 +254,9 @@ class LandingPage extends StatelessWidget {
                                         child: Container(
                                           padding: const EdgeInsets.all(10),
                                           decoration: BoxDecoration(
-                                            color: Colors.white,
+                                            // border: Border.all(
+                                            //     width: 2, color: Colors.white),
+                                            color: Color(0xff005555),
                                             borderRadius:
                                                 BorderRadius.circular(5.0),
                                           ),
@@ -263,11 +265,14 @@ class LandingPage extends StatelessWidget {
                                               Icon(
                                                 Icons.arrow_circle_up,
                                                 size: 15,
-                                                color: Colors.black,
+                                                color: Colors.white,
                                               ),
                                               Text(
                                                 "Top Up",
-                                                style: TextStyle(fontSize: 10),
+                                                style: TextStyle(
+                                                  fontSize: 10,
+                                                  color: Colors.white,
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -290,7 +295,11 @@ class LandingPage extends StatelessWidget {
                                         child: Container(
                                           padding: const EdgeInsets.all(10),
                                           decoration: BoxDecoration(
-                                            color: Colors.white,
+                                            // border: Border.all(
+                                            //   width: 2,
+                                            //   color: Colors.white,
+                                            // ),
+                                            color: Color(0xff005555),
                                             borderRadius:
                                                 BorderRadius.circular(5.0),
                                           ),
@@ -299,11 +308,13 @@ class LandingPage extends StatelessWidget {
                                               Icon(
                                                 Icons.arrow_circle_down,
                                                 size: 15,
-                                                color: Colors.black,
+                                                color: Colors.white,
                                               ),
                                               Text("Withdraw",
-                                                  style:
-                                                      TextStyle(fontSize: 10)),
+                                                  style: TextStyle(
+                                                    fontSize: 10,
+                                                    color: Colors.white,
+                                                  )),
                                             ],
                                           ),
                                         ),
@@ -325,7 +336,7 @@ class LandingPage extends StatelessWidget {
                                         child: Container(
                                           padding: const EdgeInsets.all(10),
                                           decoration: BoxDecoration(
-                                            color: Colors.white,
+                                            color: Color(0xff005555),
                                             borderRadius:
                                                 BorderRadius.circular(5.0),
                                           ),
@@ -334,11 +345,13 @@ class LandingPage extends StatelessWidget {
                                               Icon(
                                                 Icons.description,
                                                 size: 15,
-                                                color: Colors.black,
+                                                color: Colors.white,
                                               ),
                                               Text("Riwayat",
-                                                  style:
-                                                      TextStyle(fontSize: 10)),
+                                                  style: TextStyle(
+                                                    fontSize: 10,
+                                                    color: Colors.white,
+                                                  )),
                                             ],
                                           ),
                                         ),
