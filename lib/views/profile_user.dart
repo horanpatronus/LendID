@@ -14,7 +14,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage>
     with SingleTickerProviderStateMixin {
   String name = 'Aditya Pratama';
-  String role = 'umkm';
+  String role = 'investor';
 
   late TabController _tabController;
 
