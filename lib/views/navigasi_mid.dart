@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:homepage/views/search.dart';
 import 'package:homepage/views/usulan_peminjaman.dart';
 
-bool isMember = false;
+bool isMember = true;
 
 class NavigasiMid extends StatelessWidget {
   const NavigasiMid({super.key});

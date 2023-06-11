@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:homepage/views/login_page.dart';
 import 'package:homepage/views/navigasi.dart';
 import 'package:homepage/views/navigasi_mid.dart';
 
@@ -21,6 +22,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Bantuan'),
+        backgroundColor: Color(0xFF005555),
       ),
       body: Stack(
         children: [
@@ -51,6 +53,19 @@ class _SettingsPageState extends State<SettingsPage> {
                     );
                   },
                 ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const LoginPage()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.red, // Set the background color to red
+                  ),
+                  child: const Text('Logout'),
+                ),
+                const SizedBox(height: 16),
                 Container(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -58,8 +73,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     children: [
                       Image.asset(
                         'page2.png', // Ganti dengan path gambar Anda
-                        width: 275,
-                        height: 275,
+                        width: 235,
+                        height: 235,
                         fit: BoxFit.contain, // Atur properti fit
                       ),
                       const SizedBox(height: 16.0),

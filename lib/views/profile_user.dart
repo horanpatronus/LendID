@@ -35,6 +35,7 @@ class _ProfilePageState extends State<ProfilePage>
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
+        backgroundColor: Color(0xFF005555),
         bottom: role == 'umkm'
             ? TabBar(
                 controller: _tabController,

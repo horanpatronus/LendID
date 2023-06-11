@@ -18,32 +18,30 @@ class _RiwayatPageState extends State<RiwayatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Riwayat'),
+        title: Text('Riwayat Transaksi'),
+        backgroundColor: Color(0xFF005555),
       ),
       body: Stack(
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  'Riwayat Transaksi',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
               Expanded(
                 child: ListView.builder(
                   itemCount: transactions.length,
                   itemBuilder: (context, index) {
                     Transaction transaction = transactions[index];
-                    return ListTile(
-                      title: Text(transaction.type),
-                      subtitle: Text(transaction.date),
-                      trailing: Text(transaction.amount),
+                    return Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(color: Colors.grey),
+                        ),
+                      ),
+                      child: ListTile(
+                        title: Text(transaction.type),
+                        subtitle: Text(transaction.date),
+                        trailing: Text(transaction.amount),
+                      ),
                     );
                   },
                 ),
