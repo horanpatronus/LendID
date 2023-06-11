@@ -8,7 +8,6 @@ import 'package:homepage/views/usulan_peminjaman.dart';
 
 bool isMember = false;
 
-
 class Navigasi extends StatelessWidget {
   const Navigasi({super.key});
 
@@ -66,7 +65,6 @@ class Navigasi extends StatelessWidget {
                           //pergi ke halaman search button
                           builder: (context) => const StatusInvestor(),
                         ),
-
                 );
               },
               child: Container(
