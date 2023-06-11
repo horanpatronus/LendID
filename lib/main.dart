@@ -4,7 +4,8 @@ import 'package:homepage/views/bottom_navigation.dart';
 import 'package:homepage/views/history_investor.dart';
 import 'package:homepage/views/landing_page.dart';
 import 'package:homepage/views/login_page.dart';
-import 'package:homepage/views/status_investor.dart';
+import 'package:homepage/views/profile_user.dart';
+import 'package:homepage/views/settings.dart';
 
 import 'views/intro.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -29,7 +30,9 @@ class MyApp extends StatelessWidget {
       title: 'Introduction screen',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: StatusInvestor(),
+
+      home: LoginPage(),
+
     );
   }
 }
