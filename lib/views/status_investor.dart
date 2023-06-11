@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:homepage/views/history_investor.dart';
 import 'package:homepage/views/navigasi.dart';
 import 'package:homepage/views/navigasi_mid.dart';
 
@@ -36,6 +37,158 @@ class _StatusInvestorState extends State<StatusInvestor>
     super.dispose();
   }
 
+  void _confirmInvest() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Container(
+            height: 250,
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.all(10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Icon(
+                  Icons.check_circle,
+                  color: Color(0xff005555),
+                  size: 150,
+                ),
+                Text(
+                  "Investasi Terkonfirmasi",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
+                Text(
+                  "Terima kasih sudah investasi!",
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'OK',
+                style: TextStyle(color: Color(0xff005555)),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _cancelInvest() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Container(
+            height: 250,
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.all(10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Icon(
+                  Icons.warning,
+                  color: Colors.red,
+                  size: 150,
+                ),
+                Text(
+                  "Batalkan Investasi?",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
+                Text(
+                  "Anda yakin ingin membatalkan investasi?",
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                // Menampilkan dialog konfirmasi pembatalan investasi
+                _showCancelConfirmationDialog();
+              },
+              child: Text(
+                'Ya',
+                style: TextStyle(color: Colors.red),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'Tidak',
+                style: TextStyle(color: Color(0xff005555)),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showCancelConfirmationDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Container(
+            height: 250,
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.all(10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Icon(
+                  Icons.check_circle,
+                  color: Color(0xff005555),
+                  size: 150,
+                ),
+                Text(
+                  "Investasi Dibatalkan",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
+                Text(
+                  "Investasi berhasil dibatalkan!",
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'OK',
+                style: TextStyle(color: Color(0xff005555)),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -61,9 +214,20 @@ class _StatusInvestorState extends State<StatusInvestor>
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Icon(
-                            Icons.history,
-                            // color: Colors.white,
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  //pergi ke halaman akun
+                                  builder: (context) => HistoryInvestor(),
+                                ),
+                              );
+                            },
+                            child: Icon(
+                              Icons.history,
+                              // color: Colors.white,
+                            ),
                           ),
                         ],
                       ),
@@ -72,17 +236,17 @@ class _StatusInvestorState extends State<StatusInvestor>
                       height: 30,
                       margin: EdgeInsets.only(bottom: 20),
                       decoration: BoxDecoration(
-                          color: Colors.redAccent,
+                          color: Color(0xff069A8E),
                           borderRadius: BorderRadius.circular(300)),
                       child: Padding(
                         padding: const EdgeInsets.all(3),
                         child: TabBar(
-                          unselectedLabelColor: Colors.grey,
+                          unselectedLabelColor: Colors.white,
                           labelColor: Colors.black,
                           // indicatorColor: Colors.amber,
                           // indicatorWeight: 2,
                           indicator: BoxDecoration(
-                            color: Colors.amber,
+                            color: Color(0xffF7FF93),
                             borderRadius: BorderRadius.circular(300),
                             // border: Border.
                           ),
@@ -105,7 +269,7 @@ class _StatusInvestorState extends State<StatusInvestor>
                               return Container(
                                 margin: EdgeInsets.symmetric(vertical: 10),
                                 decoration: BoxDecoration(
-                                  color: Colors.blueAccent,
+                                  color: Color(0xffA1E3D8),
                                   borderRadius: BorderRadius.circular(10),
                                   boxShadow: [
                                     BoxShadow(
@@ -242,7 +406,7 @@ class _StatusInvestorState extends State<StatusInvestor>
                                         "Terkonfirmasi Admin")
                                       Container(
                                         padding: EdgeInsets.all(30),
-                                        color: Colors.amber,
+                                        // color: Colors.amber,
                                         child: Column(
                                           children: [
                                             Center(
@@ -258,19 +422,27 @@ class _StatusInvestorState extends State<StatusInvestor>
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                Icon(
-                                                  Icons.check_circle,
-                                                  size:
-                                                      40, // Atur ukuran ikon menjadi lebih besar (misalnya 40)
+                                                GestureDetector(
+                                                  onTap: _confirmInvest,
+                                                  child: Icon(
+                                                    Icons.check_circle,
+                                                    color: Color(0xff005555),
+                                                    size:
+                                                        40, // Atur ukuran ikon menjadi lebih besar (misalnya 40)
+                                                  ),
                                                 ),
                                                 Container(
                                                   width: 40,
                                                 ),
-                                                Icon(
-                                                  Icons.cancel_rounded,
-                                                  size:
-                                                      40, // Atur ukuran ikon menjadi lebih besar (misalnya 30)
-                                                ),
+                                                GestureDetector(
+                                                  onTap: _cancelInvest,
+                                                  child: Icon(
+                                                    Icons.cancel_rounded,
+                                                    color: Color(0xff005555),
+                                                    size:
+                                                        40, // Atur ukuran ikon menjadi lebih besar (misalnya 30)
+                                                  ),
+                                                )
                                               ],
                                             ),
                                           ],
@@ -288,7 +460,7 @@ class _StatusInvestorState extends State<StatusInvestor>
                                 height: 200,
                                 margin: EdgeInsets.only(bottom: 20),
                                 decoration: BoxDecoration(
-                                  color: Colors.greenAccent,
+                                  color: Color(0xff069A8E),
                                   borderRadius: BorderRadius.circular(10),
                                   boxShadow: [
                                     BoxShadow(
@@ -307,7 +479,9 @@ class _StatusInvestorState extends State<StatusInvestor>
                                       child: Text(
                                         "Ringkasan Investasi yang Berjalan",
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold),
+                                          fontWeight: FontWeight.bold,
+                                          // color: Colors.white,
+                                        ),
                                       ),
                                     ),
                                     Divider(
@@ -318,7 +492,7 @@ class _StatusInvestorState extends State<StatusInvestor>
                                       // endIndent: 10,
                                     ),
                                     Container(
-                                      color: Colors.amber,
+                                      // color: Colors.amber,
                                       height: 50,
                                       child: Row(
                                         crossAxisAlignment:
@@ -354,7 +528,7 @@ class _StatusInvestorState extends State<StatusInvestor>
                                       ),
                                     ),
                                     Container(
-                                      color: Colors.amber,
+                                      // color: Colors.amber,
                                       height: 50,
                                       child: Row(
                                         crossAxisAlignment:
@@ -389,7 +563,7 @@ class _StatusInvestorState extends State<StatusInvestor>
                                       ),
                                     ),
                                     Container(
-                                      color: Colors.amber,
+                                      // color: Colors.amber,
                                       height: 50,
                                       child: Row(
                                         crossAxisAlignment:
@@ -434,7 +608,7 @@ class _StatusInvestorState extends State<StatusInvestor>
                                       margin:
                                           EdgeInsets.symmetric(vertical: 10),
                                       decoration: BoxDecoration(
-                                        color: Colors.blueAccent,
+                                        color: Color(0xffA1E3D8),
                                         borderRadius: BorderRadius.circular(10),
                                         boxShadow: [
                                           BoxShadow(
@@ -553,7 +727,7 @@ class _StatusInvestorState extends State<StatusInvestor>
                                           Container(
                                             margin: EdgeInsets.only(bottom: 10),
                                             decoration: BoxDecoration(
-                                              color: Colors.amber,
+                                              color: Color(0xff069A8E),
                                               borderRadius:
                                                   BorderRadius.circular(5),
                                             ),

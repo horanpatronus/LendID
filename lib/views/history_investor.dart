@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:homepage/views/navigasi.dart';
 import 'package:homepage/views/navigasi_mid.dart';
+import 'package:homepage/views/status_investor.dart';
 
 class HistoryInvestor extends StatelessWidget {
   const HistoryInvestor({super.key});
@@ -22,7 +23,7 @@ class HistoryInvestor extends StatelessWidget {
         body: Stack(
           children: [
             Container(
-              color: Colors.greenAccent,
+              // color: Colors.greenAccent,
               margin: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
               child: Column(
                 children: [
@@ -32,7 +33,17 @@ class HistoryInvestor extends StatelessWidget {
                     ),
                     child: Row(
                       children: [
-                        Icon(Icons.arrow_back),
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.pop(
+                                context,
+                                MaterialPageRoute(
+                                  //pergi ke halaman akun
+                                  builder: (context) => StatusInvestor(),
+                                ),
+                              );
+                            },
+                            child: Icon(Icons.arrow_back)),
                         Container(
                           width: 10,
                         ),
@@ -51,7 +62,7 @@ class HistoryInvestor extends StatelessWidget {
                         return Container(
                           margin: EdgeInsets.symmetric(vertical: 10),
                           decoration: BoxDecoration(
-                            color: Colors.blueAccent,
+                            color: Color(0xffA1E3D8),
                             borderRadius: BorderRadius.circular(10),
                             boxShadow: [
                               BoxShadow(
@@ -156,7 +167,7 @@ class HistoryInvestor extends StatelessWidget {
                               Container(
                                 margin: EdgeInsets.only(bottom: 10),
                                 decoration: BoxDecoration(
-                                  color: Colors.amber,
+                                  color: Color(0xff069A8E),
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 child: Column(

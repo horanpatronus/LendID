@@ -174,7 +174,7 @@ class LandingPage extends StatelessWidget {
                                           vertical: 5),
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 5),
-                                      color: const Color(0xff069A8E),
+                                      color: const Color(0xff005555),
                                       child: FractionallySizedBox(
                                         widthFactor: 1,
                                         child: Material(
@@ -256,7 +256,7 @@ class LandingPage extends StatelessWidget {
                                           decoration: BoxDecoration(
                                             // border: Border.all(
                                             //     width: 2, color: Colors.white),
-                                            color: Color(0xff069A8E),
+                                            color: Color(0xff005555),
                                             borderRadius:
                                                 BorderRadius.circular(5.0),
                                           ),
@@ -299,7 +299,7 @@ class LandingPage extends StatelessWidget {
                                             //   width: 2,
                                             //   color: Colors.white,
                                             // ),
-                                            color: Color(0xff069A8E),
+                                            color: Color(0xff005555),
                                             borderRadius:
                                                 BorderRadius.circular(5.0),
                                           ),
@@ -336,7 +336,7 @@ class LandingPage extends StatelessWidget {
                                         child: Container(
                                           padding: const EdgeInsets.all(10),
                                           decoration: BoxDecoration(
-                                            color: Color(0xff069A8E),
+                                            color: Color(0xff005555),
                                             borderRadius:
                                                 BorderRadius.circular(5.0),
                                           ),
