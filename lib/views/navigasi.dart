@@ -4,6 +4,7 @@ import 'package:homepage/views/profile_user.dart';
 import 'package:homepage/views/search.dart';
 import 'package:homepage/views/settings.dart';
 import 'package:homepage/views/status_investor.dart';
+import 'package:homepage/views/status_peminjaman_umkm.dart';
 import 'package:homepage/views/usulan_peminjaman.dart';
 
 bool isMember = false;
@@ -59,7 +60,7 @@ class Navigasi extends StatelessWidget {
                   isMember
                       ? MaterialPageRoute(
                           //pergi ke halaman plus button
-                          builder: (context) => const ProfilePage(),
+                          builder: (context) => const StatusPeminjamanUMKM(),
                         )
                       : MaterialPageRoute(
                           //pergi ke halaman search button
