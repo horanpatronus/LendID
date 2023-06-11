@@ -18,9 +18,8 @@ class _EditProfilePerusahaanState extends State<EditProfilePerusahaan> {
   TextEditingController npwpController = TextEditingController();
   String companyName = 'Company XYZ';
   String companyAddress = 'Jl. Raya ABC No. 123';
-  String npwp = '';
+  String npwp = '31231312311321232123';
   int selectedIncome = 1;
-  File? npwpDocument;
 
   @override
   void initState() {
@@ -30,27 +29,9 @@ class _EditProfilePerusahaanState extends State<EditProfilePerusahaan> {
     npwpController.text = npwp;
   }
 
-  Future<void> selectNPWPDocument() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: [
-        'pdf'
-      ], // Ganti dengan ekstensi yang diizinkan untuk file NPWP
-    );
-
-    if (result != null) {
-      setState(() {
-        npwpDocument = File(result.files.single.path!);
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Edit Profil Perusahaan'),
-      ),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -58,12 +39,18 @@ class _EditProfilePerusahaanState extends State<EditProfilePerusahaan> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  const SizedBox(height: 8),
                   const Text(
-                    'Judul Profil Perusahaan',
+                    'Edit Profil Perusahaan',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
+                  ),
+                  const SizedBox(height: 16),
+                  const CircleAvatar(
+                    radius: 80,
+                    backgroundImage: AssetImage('page3.png'),
                   ),
                   const SizedBox(height: 16),
                   Container(
@@ -145,7 +132,7 @@ class _EditProfilePerusahaanState extends State<EditProfilePerusahaan> {
                                 selectedIncome = value!;
                               });
                             },
-                            items: [
+                            items: const [
                               DropdownMenuItem<int>(
                                 value: 1,
                                 child: const Text('< 100 Juta'),
@@ -162,42 +149,6 @@ class _EditProfilePerusahaanState extends State<EditProfilePerusahaan> {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        const Text(
-                          'Dokumen NPWP',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Column(
-                            children: [
-                              Text(
-                                npwpDocument != null
-                                    ? 'File terpilih: ${npwpDocument!.path}'
-                                    : 'Belum diunggah',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              ElevatedButton(
-                                onPressed: null, // Nonaktifkan fungsi onPressed
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors
-                                      .grey, // Ubah warna tombol menjadi abu-abu
-                                  onPrimary: Colors
-                                      .black, // Ubah warna teks tombol menjadi hitam
-                                ),
-                                child: const Text('Unggah Dokumen NPWP'),
-                              ),
-                            ],
-                          ),
-                        ),
                       ],
                     ),
                   ),

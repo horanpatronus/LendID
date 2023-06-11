@@ -12,7 +12,6 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   final List<String> listViewItems = [
     'FAQ',
-    'Bantuan',
     'Ketentuan Layanan',
     'Kebijakan Privasi',
   ];
@@ -21,7 +20,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pengaturan'),
+        title: const Text('Bantuan'),
       ),
       body: Stack(
         children: [
@@ -59,8 +58,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     children: [
                       Image.asset(
                         'page2.png', // Ganti dengan path gambar Anda
-                        width: 150,
-                        height: 150,
+                        width: 275,
+                        height: 275,
                         fit: BoxFit.contain, // Atur properti fit
                       ),
                       const SizedBox(height: 16.0),
@@ -88,9 +87,6 @@ class _SettingsPageState extends State<SettingsPage> {
       case 'FAQ':
         contentWidget = _buildFAQContent();
         break;
-      case 'Bantuan':
-        contentWidget = _buildHelpContent();
-        break;
       case 'Ketentuan Layanan':
         contentWidget = _buildTermsContent();
         break;
@@ -98,8 +94,7 @@ class _SettingsPageState extends State<SettingsPage> {
         contentWidget = _buildPrivacyContent();
         break;
       default:
-        contentWidget =
-            Container(); // Set a default value in case no match is found
+        contentWidget = Container();
     }
 
     showDialog(
@@ -107,7 +102,9 @@ class _SettingsPageState extends State<SettingsPage> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(title),
-          content: contentWidget,
+          content: SingleChildScrollView(
+            child: contentWidget,
+          ),
           actions: <Widget>[
             TextButton(
               child: const Text('Tutup'),
@@ -122,39 +119,163 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget _buildFAQContent() {
-    return RichText(
-      text: TextSpan(
-        style: DefaultTextStyle.of(context).style,
-        children: const <TextSpan>[
-          TextSpan(
-            text: 'Pertanyaan yang Sering Ditanyakan\n\n',
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: const [
+        SizedBox(height: 10),
+        Text(
+          '1. Apa itu Bantuan Khusus?',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          'Bantuan Khusus adalah sebuah fitur yang dirancang untuk membantu pengguna dalam menemukan solusi atas pertanyaan umum dan permasalahan yang sering muncul dalam aplikasi kami.',
+          style: TextStyle(fontSize: 14),
+        ),
+        SizedBox(height: 10),
+        Text(
+          '2. Mengapa aplikasi saya tidak bisa memuat halaman?',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          'Ada beberapa kemungkinan penyebab mengapa aplikasi Anda tidak bisa memuat halaman. Beberapa langkah yang bisa Anda coba adalah:',
+          style: TextStyle(fontSize: 14),
+        ),
+        Text(
+          '- Periksa koneksi internet Anda dan pastikan Anda terhubung dengan jaringan yang stabil.',
+          style: TextStyle(fontSize: 14),
+        ),
+        Text(
+          '- Coba restart aplikasi Anda dan cek apakah masalahnya teratasi.',
+          style: TextStyle(fontSize: 14),
+        ),
+        Text(
+          '- Jika masalah masih berlanjut, coba hapus data cache aplikasi dan coba lagi.',
+          style: TextStyle(fontSize: 14),
+        ),
+        SizedBox(height: 10),
+      ],
+    );
+  }
+
+  Widget _buildTermsContent() {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const [
+          SizedBox(height: 10),
+          Text(
+            '1. Penggunaan Layanan',
             style: TextStyle(
-              fontWeight: FontWeight.bold,
               fontSize: 16,
-              color: Colors.blue,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          TextSpan(
-            text: 'Ini adalah konten FAQ yang khusus',
+          Text(
+            'Dengan menggunakan layanan kami, Anda setuju untuk mematuhi ketentuan dan kondisi yang ditetapkan.',
+            style: TextStyle(fontSize: 14),
+          ),
+          SizedBox(height: 10),
+          Text(
+            '2. Kewajiban Pengguna',
             style: TextStyle(
-              fontStyle: FontStyle.italic,
-              color: Colors.red,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
             ),
+          ),
+          Text(
+            'Pengguna bertanggung jawab untuk menjaga kerahasiaan informasi login dan tidak mengungkapkannya kepada pihak ketiga.',
+            style: TextStyle(fontSize: 14),
+          ),
+          SizedBox(height: 10),
+          Text(
+            '3. Batasan Tanggung Jawab',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            'Kami tidak bertanggung jawab atas kerugian atau kerusakan yang disebabkan oleh penggunaan layanan kami.',
+            style: TextStyle(fontSize: 14),
+          ),
+          SizedBox(height: 10),
+          Text(
+            '4. Perubahan Ketentuan',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            'Kami berhak untuk mengubah ketentuan layanan ini setiap saat tanpa pemberitahuan sebelumnya.',
+            style: TextStyle(fontSize: 14),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildHelpContent() {
-    return const Text('Ini adalah konten Bantuan yang khusus');
-  }
-
-  Widget _buildTermsContent() {
-    return const Text('Ini adalah konten Ketentuan Layanan yang khusus');
-  }
-
   Widget _buildPrivacyContent() {
-    return const Text('Ini adalah konten Kebijakan Privasi yang khusus');
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const [
+          SizedBox(height: 10),
+          Text(
+            '1. Informasi yang Kami Kumpulkan',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            'Kami dapat mengumpulkan informasi pribadi yang Anda berikan saat menggunakan layanan kami, seperti nama, alamat email, dan informasi kontak lainnya.',
+            style: TextStyle(fontSize: 14),
+          ),
+          SizedBox(height: 10),
+          Text(
+            '2. Penggunaan Informasi',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            'Informasi yang kami kumpulkan dapat digunakan untuk tujuan seperti memberikan layanan, mengelola akun pengguna, dan meningkatkan pengalaman pengguna.',
+            style: TextStyle(fontSize: 14),
+          ),
+          SizedBox(height: 10),
+          Text(
+            '3. Pengungkapan Informasi kepada Pihak Ketiga',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            'Kami tidak akan mengungkapkan informasi pribadi Anda kepada pihak ketiga tanpa persetujuan Anda, kecuali dalam keadaan tertentu yang diizinkan oleh undang-undang.',
+            style: TextStyle(fontSize: 14),
+          ),
+          SizedBox(height: 10),
+          Text(
+            '4. Keamanan Informasi',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            'Kami mengambil langkah-langkah yang wajar untuk melindungi informasi pribadi Anda dari akses, penggunaan, atau pengungkapan yang tidak sah.',
+            style: TextStyle(fontSize: 14),
+          ),
+        ],
+      ),
+    );
   }
 }
