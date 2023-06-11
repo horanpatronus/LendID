@@ -8,6 +8,7 @@ class TopUpPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Top Up'),
+        backgroundColor: Color(0xFF005555),
       ),
       body: Stack(
         children: [
@@ -15,7 +16,18 @@ class TopUpPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(height: 16),
+                const SizedBox(height: 32),
+                const Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Scan this QR Code to top up your account',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 32),
                 Center(
                   child: Container(
                     width: 400,
@@ -40,18 +52,7 @@ class TopUpPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 32),
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Scan this QR Code to top up your account',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 32),
+                const SizedBox(height: 32),
               ],
             ),
           ),
