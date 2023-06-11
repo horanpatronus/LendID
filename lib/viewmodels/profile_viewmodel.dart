@@ -27,17 +27,54 @@ class ProfileViewModel extends BaseViewModel<ChangeNotifier?> {
     if (user != null) {
       DocumentSnapshot snapshot = await usersCollection.doc(user.uid).get();
       if (snapshot.exists) {
+        Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
         currentUser = UserModel(
-          email: snapshot.get('email'),
-          nama: snapshot.get('nama'),
-          password: snapshot.get('password'),
-          role: snapshot.get('role'),
+          email: data['email'],
+          nama: data['nama'],
+          password: data['password'],
+          role: data['role'],
+          ktp: data['ktp'] as String?,
+          perusahaan: data.containsKey('perusahaan')
+              ? data['perusahaan'] as Map<String, dynamic>?
+              : null,
         );
       } else {
         if (kDebugMode) {
           print('gagal mendapatkan user');
         }
       }
+    }
+  }
+
+  Future<void> updateProfile(String name, String ktp) async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      await usersCollection.doc(user.uid).update({
+        'nama': name,
+        'ktp': ktp,
+      });
+      currentUser?.nama = name;
+      currentUser?.ktp = ktp;
+      notifyListeners();
+    }
+  }
+
+  Future<void> updateCompanyProfile(
+      String nama, String alamat, String npwp, int penghasilan) async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      await usersCollection.doc(user.uid).update({
+        'perusahaan.nama': nama,
+        'perusahaan.alamat': alamat,
+        'perusahaan.npwp': npwp,
+        'perusahaan.penghasilan': penghasilan,
+      });
+      currentUser?.perusahaan?['nama'] = nama;
+      currentUser?.perusahaan?['alamat'] = alamat;
+      currentUser?.perusahaan?['npwp'] = npwp;
+      currentUser?.perusahaan?['penghasilan'] = penghasilan;
+
+      notifyListeners();
     }
   }
 }
