@@ -115,240 +115,254 @@ class UsulanPeminjamanState extends State<UsulanPeminjaman> {
         debugShowCheckedModeBanner: false,
         title: 'Usulan Peminjaman Page',
         home: Scaffold(
+            appBar: AppBar(
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  Navigator.pop(
+                      context); // Fungsi ini akan mempop halaman saat tombol kembali ditekan
+                },
+              ),
+              title: Text('Usulan Peminjaman'),
+            ),
             body: Stack(
-          children: [
-            SingleChildScrollView(
-              child: Column(mainAxisSize: MainAxisSize.min, children: [
-                Container(
-                  padding: const EdgeInsets.all(20),
-                  child: Container(
-                    padding: const EdgeInsets.all(30),
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                        color: Color(0xffA1E3D8)),
-                    alignment: Alignment.center,
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          const Padding(
-                            padding: EdgeInsets.all(20),
-                            child: Text(
-                              'Usulan Peminjaman',
-                              style: TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
+              children: [
+                SingleChildScrollView(
+                  child: Column(mainAxisSize: MainAxisSize.min, children: [
+                    Container(
+                      padding: const EdgeInsets.all(20),
+                      child: Container(
+                        padding: const EdgeInsets.all(30),
+                        decoration: const BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(5.0)),
+                            color: Color(0xffA1E3D8)),
+                        alignment: Alignment.center,
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              const Padding(
+                                padding: EdgeInsets.all(20),
+                                child: Text(
+                                  'Usulan Peminjaman',
+                                  style: TextStyle(
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(
-                                left: 5, right: 5, bottom: 10, top: 5),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text('Nominal Pinjaman'),
-                                ),
-                                Form(
-                                  autovalidateMode: AutovalidateMode.always,
-                                  child: TextFormField(
-                                    controller:
-                                        textEditControllerJumlahPinjaman,
-                                    keyboardType: TextInputType.number,
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.digitsOnly,
-                                      CurrencyInputFormatter(),
-                                    ],
-                                    decoration: const InputDecoration(
-                                        border: OutlineInputBorder(),
-                                        fillColor: Colors.white,
-                                        hintText:
-                                            'Jumlah Pinjaman (masukkan hanya angka)'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(
-                                left: 5, right: 5, top: 5, bottom: 10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text('Periode Pembayaran'),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Colors.white,
-                                  ),
-                                  child: DropdownButtonHideUnderline(
-                                    child: ButtonTheme(
-                                      alignedDropdown: true,
-                                      child: DropdownButton(
-                                          isExpanded: true,
-                                          value: dropdownValue,
-                                          icon: const Icon(
-                                              Icons.keyboard_arrow_down),
-                                          items: <String>[
-                                            '3 bulan',
-                                            '6 bulan',
-                                            '9 bulan',
-                                            '12 bulan'
-                                          ].map<DropdownMenuItem<String>>(
-                                              (String value) {
-                                            return DropdownMenuItem<String>(
-                                              value: value,
-                                              child: Text(value),
-                                            );
-                                          }).toList(),
-                                          onChanged: (String? newValue) {
-                                            setState(() {
-                                              dropdownValue = newValue!;
-                                              hitungCicilan();
-                                            });
-                                          }),
+                              Container(
+                                padding: const EdgeInsets.only(
+                                    left: 5, right: 5, bottom: 10, top: 5),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text('Nominal Pinjaman'),
                                     ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(
-                                top: 5, bottom: 10, left: 5, right: 5),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text('Cicilan Perbulan'),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.all(15),
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Colors.white,
-                                  ),
-                                  child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(
-                                      _cicilanRp,
-                                      style: const TextStyle(fontSize: 15),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ]),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(20),
-                  child: Container(
-                    padding: const EdgeInsets.all(30),
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                        color: Color(0xffA1E3D8)),
-                    alignment: Alignment.center,
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          const Padding(
-                            padding: EdgeInsets.all(20),
-                            child: Text(
-                              'Deskripsi Perusahaan',
-                              style: TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(
-                                left: 5, right: 5, top: 5, bottom: 10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text('Nama Proyek'),
-                                ),
-                                Form(
-                                  autovalidateMode: AutovalidateMode.always,
-                                  child: Container(
-                                    padding: const EdgeInsets.all(5),
-                                    child: TextFormField(
-                                      controller: textEditControllerNamaProyek,
-                                      decoration: const InputDecoration(
-                                          border: OutlineInputBorder(),
-                                          hintText: 'Nama Proyek'),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(
-                                left: 5, right: 5, top: 5, bottom: 10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text('Deskripsi Proyek'),
-                                ),
-                                Form(
-                                  autovalidateMode: AutovalidateMode.always,
-                                  child: Container(
-                                    padding: const EdgeInsets.all(5),
-                                    child: TextFormField(
-                                      controller:
-                                          textEditControllerDeskripsiProyek,
-                                      decoration: const InputDecoration(
-                                        border: OutlineInputBorder(),
-                                        hintText: 'Deskripsi Proyek',
+                                    Form(
+                                      autovalidateMode: AutovalidateMode.always,
+                                      child: TextFormField(
+                                        controller:
+                                            textEditControllerJumlahPinjaman,
+                                        keyboardType: TextInputType.number,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter
+                                              .digitsOnly,
+                                          CurrencyInputFormatter(),
+                                        ],
+                                        decoration: const InputDecoration(
+                                            border: OutlineInputBorder(),
+                                            fillColor: Colors.white,
+                                            hintText:
+                                                'Jumlah Pinjaman (masukkan hanya angka)'),
                                       ),
                                     ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.only(
+                                    left: 5, right: 5, top: 5, bottom: 10),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text('Periode Pembayaran'),
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: Colors.white,
+                                      ),
+                                      child: DropdownButtonHideUnderline(
+                                        child: ButtonTheme(
+                                          alignedDropdown: true,
+                                          child: DropdownButton(
+                                              isExpanded: true,
+                                              value: dropdownValue,
+                                              icon: const Icon(
+                                                  Icons.keyboard_arrow_down),
+                                              items: <String>[
+                                                '3 bulan',
+                                                '6 bulan',
+                                                '9 bulan',
+                                                '12 bulan'
+                                              ].map<DropdownMenuItem<String>>(
+                                                  (String value) {
+                                                return DropdownMenuItem<String>(
+                                                  value: value,
+                                                  child: Text(value),
+                                                );
+                                              }).toList(),
+                                              onChanged: (String? newValue) {
+                                                setState(() {
+                                                  dropdownValue = newValue!;
+                                                  hitungCicilan();
+                                                });
+                                              }),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.only(
+                                    top: 5, bottom: 10, left: 5, right: 5),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text('Cicilan Perbulan'),
+                                    ),
+                                    Container(
+                                      padding: const EdgeInsets.all(15),
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: Colors.white,
+                                      ),
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          _cicilanRp,
+                                          style: const TextStyle(fontSize: 15),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ]),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(20),
+                      child: Container(
+                        padding: const EdgeInsets.all(30),
+                        decoration: const BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(5.0)),
+                            color: Color(0xffA1E3D8)),
+                        alignment: Alignment.center,
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              const Padding(
+                                padding: EdgeInsets.all(20),
+                                child: Text(
+                                  'Deskripsi Perusahaan',
+                                  style: TextStyle(
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                              ],
+                              ),
+                              Container(
+                                padding: const EdgeInsets.only(
+                                    left: 5, right: 5, top: 5, bottom: 10),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text('Nama Proyek'),
+                                    ),
+                                    Form(
+                                      autovalidateMode: AutovalidateMode.always,
+                                      child: Container(
+                                        padding: const EdgeInsets.all(5),
+                                        child: TextFormField(
+                                          controller:
+                                              textEditControllerNamaProyek,
+                                          decoration: const InputDecoration(
+                                              border: OutlineInputBorder(),
+                                              hintText: 'Nama Proyek'),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.only(
+                                    left: 5, right: 5, top: 5, bottom: 10),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text('Deskripsi Proyek'),
+                                    ),
+                                    Form(
+                                      autovalidateMode: AutovalidateMode.always,
+                                      child: Container(
+                                        padding: const EdgeInsets.all(5),
+                                        child: TextFormField(
+                                          controller:
+                                              textEditControllerDeskripsiProyek,
+                                          decoration: const InputDecoration(
+                                            border: OutlineInputBorder(),
+                                            hintText: 'Deskripsi Proyek',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ]),
+                      ),
+                    ),
+                    Container(
+                        padding:
+                            const EdgeInsets.only(left: 20, right: 20, top: 10),
+                        child: SizedBox(
+                          height: 50,
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              newUsulan();
+                            },
+                            child: const Text(
+                              'Lanjutkan',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                           ),
-                        ]),
-                  ),
+                        )),
+                    Container(
+                      height: 100,
+                    ),
+                  ]),
                 ),
-                Container(
-                    padding:
-                        const EdgeInsets.only(left: 20, right: 20, top: 10),
-                    child: SizedBox(
-                      height: 50,
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          newUsulan();
-                        },
-                        child: const Text(
-                          'Lanjutkan',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    )),
-                Container(
-                  height: 100,
-                ),
-              ]),
-            ),
-            Navigasi(),
-            NavigasiMid(),
-          ],
-        )));
+                Navigasi(),
+                NavigasiMid(),
+              ],
+            )));
   }
 }

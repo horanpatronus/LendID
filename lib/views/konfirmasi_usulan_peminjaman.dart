@@ -61,6 +61,16 @@ class KonfirmasiUsulanPeminjamanState
         debugShowCheckedModeBanner: false,
         title: 'Konfirmasi Usulan Peminjaman Page',
         home: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pop(
+                    context); // Fungsi ini akan mempop halaman saat tombol kembali ditekan
+              },
+            ),
+            title: Text('Usulan Peminjaman'),
+          ),
           backgroundColor: Color(0xfff5f5f5),
           body: Stack(
             children: [
