@@ -46,6 +46,8 @@ class RegisterViewModel {
         'password': hashedPassword,
         'role': selectedRole,
         'saldo': 0,
+        'ktp': '',
+        'perusahaan': {},
       });
 
       // Update the user profile in Firebase Authentication

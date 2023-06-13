@@ -26,7 +26,7 @@ class _WithdrawPageState extends State<WithdrawPage> {
           return AlertDialog(
             title: Text('Withdraw Success'),
             content:
-                Text('Your balance has been successfully withdrawn: $amount'),
+                Text('Your balance has been successfully withdrawn : $amount'),
             actions: [
               TextButton(
                 onPressed: () {
@@ -106,19 +106,19 @@ class _WithdrawPageState extends State<WithdrawPage> {
       mainAxisSpacing: 16.0,
       children: [
         _buildWithdrawMethodIcon(
-          'Dana',
+          'Bank Account 1',
           Icons.account_balance_wallet,
         ),
         _buildWithdrawMethodIcon(
-          'Ovo',
+          'Bank Account 2',
           Icons.account_balance_wallet,
         ),
         _buildWithdrawMethodIcon(
-          'Gopay',
+          'Bank Account 3',
           Icons.account_balance_wallet,
         ),
         _buildWithdrawMethodIcon(
-          'Bank Account',
+          'Bank Account 4',
           Icons.account_balance,
         ),
       ],
@@ -179,15 +179,6 @@ class _WithdrawPageState extends State<WithdrawPage> {
                 ),
               ),
               SizedBox(height: 16.0),
-              TextFormField(
-                controller: passwordController,
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              SizedBox(height: 16.0),
               Row(
                 children: [
                   Checkbox(
@@ -198,7 +189,7 @@ class _WithdrawPageState extends State<WithdrawPage> {
                       });
                     },
                   ),
-                  Text('I agree to the terms and conditions.'),
+                  Text('Saya menyetujui syarat dan ketentuan.'),
                 ],
               ),
               SizedBox(height: 16.0),
@@ -221,6 +212,7 @@ class _WithdrawPageState extends State<WithdrawPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Withdraw'),
+        backgroundColor: Color(0xFF005555),
       ),
       body: Stack(
         children: [
@@ -230,7 +222,7 @@ class _WithdrawPageState extends State<WithdrawPage> {
               children: [
                 _buildBalanceWidget(),
                 SizedBox(height: 16.0),
-                Center(
+                const Center(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Text(

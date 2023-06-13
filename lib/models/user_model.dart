@@ -1,12 +1,12 @@
 class UserModel {
   final String email;
-  final String? foto;
-  final String? ktp;
-  final String nama;
-  final String password;
+  String? foto;
+  String? ktp;
+  String nama;
+  String password;
   final String role;
-  final int? saldo;
-  final Map<String, dynamic>? perusahaan;
+  int? saldo;
+  Map<String, dynamic>? perusahaan;
 
   UserModel({
     required this.email,
