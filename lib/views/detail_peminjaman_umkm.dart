@@ -24,13 +24,6 @@ class DetailPeminjamanUMKMState extends State<DetailPeminjamanUMKM> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pop(
-                  context); // Fungsi ini akan mempop halaman saat tombol kembali ditekan
-            },
-          ),
           title: Text('Detail Peminjaman'),
         ),
         backgroundColor: Color(0xfff5f5f5),
@@ -357,9 +350,14 @@ class DetailPeminjamanUMKMState extends State<DetailPeminjamanUMKM> {
                       )
                     ]),
                   ),
+                  Container(
+                    height: 100,
+                  )
                 ],
               ),
             ),
+            const Navigasi(),
+            NavigasiMid(),
           ],
         ),
       ),
