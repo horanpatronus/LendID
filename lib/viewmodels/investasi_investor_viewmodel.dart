@@ -32,7 +32,6 @@ class InvestasiInvestorViewModel extends BaseViewModel<ChangeNotifier?> {
     if (user != null) {
       QuerySnapshot snapshot = await investasiInvestorCollection
           .where('user_id', isEqualTo: user.uid)
-          .where('status', isEqualTo: 'Terkonfirmasi Admin')
           .get();
 
       if (snapshot.docs.isNotEmpty) {
@@ -41,8 +40,6 @@ class InvestasiInvestorViewModel extends BaseViewModel<ChangeNotifier?> {
           investasiData = InvestasiInvestorModel(
             danaDiberikan: document.get('dana_diberikan'),
             proyekId: document.get('proyek_id'),
-            status: document.get('status'),
-            tanggalMulai: document.get('tanggal_mulai'),
             userId: document.get('user_id'),
           );
 
@@ -54,6 +51,7 @@ class InvestasiInvestorViewModel extends BaseViewModel<ChangeNotifier?> {
             pinjamanData = PinjamanUmkmModel(
               periodePembayaran: umkmDocument.docs[0].get('periode_pembayaran'),
               status: umkmDocument.docs[0].get('status'),
+              tenggatPelunasan: umkmDocument.docs[0].get('tenggat_pelunasan'),
             );
 
             if (pinjamanData?.status == 'Selesai') {
@@ -61,10 +59,18 @@ class InvestasiInvestorViewModel extends BaseViewModel<ChangeNotifier?> {
             } else {
               totalInvestasi++;
             }
+          } else {
+            if (kDebugMode) {
+              print('gagal mendapatkan data umkm');
+            }
           }
 
           jumlahDanaDiberikan += investasiData?.danaDiberikan ?? 0;
           // estimasiHasil
+        }
+      } else {
+        if (kDebugMode) {
+          print('gagal mendapatkan data investor');
         }
       }
     }
