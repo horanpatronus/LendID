@@ -3,30 +3,47 @@ import 'package:intl/intl.dart';
 import 'package:homepage/views/navigasi.dart';
 import 'package:homepage/views/navigasi_mid.dart';
 
-class WithdrawPage extends StatefulWidget {
+import 'package:provider/provider.dart';
+import 'package:homepage/viewmodels/topup_viewmodel.dart';
+
+class WithdrawPage extends StatelessWidget {
   @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (_) => TopUpViewModel(),
+      child: const MaterialApp(
+        home: WithdrawPage2(),
+      ),
+    );
+  }
+}
+
+class WithdrawPage2 extends StatefulWidget {
+  const WithdrawPage2({Key? key}) : super(key: key);
+
+  @override
+  // ignore: library_private_types_in_public_api
   _WithdrawPageState createState() => _WithdrawPageState();
 }
 
-class _WithdrawPageState extends State<WithdrawPage> {
+class _WithdrawPageState extends State<WithdrawPage2>
+    with SingleTickerProviderStateMixin {
   TextEditingController amountController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool termsChecked = false;
-
-  double saldo = 1000.0;
 
   void _performWithdraw() {
     String amount = amountController.text;
     double withdrawAmount = double.tryParse(amount) ?? 0.0;
 
-    if (withdrawAmount > 0 && termsChecked) {
+    if (withdrawAmount > 0) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Withdraw Success'),
+            title: const Text('Withdraw Success'),
             content:
-                Text('Your balance has been successfully withdrawn : $amount'),
+                Text('Your balance has been successfully withdrawn: $amount'),
             actions: [
               TextButton(
                 onPressed: () {
@@ -38,19 +55,25 @@ class _WithdrawPageState extends State<WithdrawPage> {
           );
         },
       );
+
+      // Update the balance in the ViewModel
+      final topUpViewModel =
+          Provider.of<TopUpViewModel>(context, listen: false);
+      topUpViewModel.updateSaldo(withdrawAmount as int);
     } else {
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Withdraw Failed'),
-            content: Text('Please check the amount and terms and conditions.'),
+            title: const Text('Withdraw Failed'),
+            content:
+                const Text('Please check the amount and terms and conditions.'),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text('OK'),
+                child: const Text('OK'),
               ),
             ],
           );
@@ -60,39 +83,46 @@ class _WithdrawPageState extends State<WithdrawPage> {
   }
 
   Widget _buildBalanceWidget() {
-    final currencyFormat = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp');
-    final formattedSaldo = currencyFormat.format(saldo);
+    return Consumer<TopUpViewModel>(
+      builder: (context, topupViewModel, _) {
+        int? saldo = topupViewModel.currentUser?.saldo;
 
-    return Container(
-      padding: EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: Color.fromRGBO(128, 128, 128, 0.5),
-            width: 1.0,
-          ),
-        ),
-      ),
-      child: Column(
-        children: [
-          Text(
-            'Saldo',
-            style: TextStyle(
-              fontSize: 14.0,
-              fontWeight: FontWeight.bold,
-              color: Colors.grey[600],
+        final currencyFormat =
+            NumberFormat.currency(locale: 'id_ID', symbol: 'Rp');
+        final formattedSaldo = currencyFormat.format(saldo ?? 0);
+
+        return Container(
+          padding: const EdgeInsets.all(16.0),
+          decoration: const BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: Color.fromRGBO(128, 128, 128, 0.5),
+                width: 1.0,
+              ),
             ),
           ),
-          SizedBox(height: 8.0),
-          Text(
-            formattedSaldo,
-            style: TextStyle(
-              fontSize: 24.0,
-              fontWeight: FontWeight.bold,
-            ),
+          child: Column(
+            children: [
+              Text(
+                'Saldo',
+                style: TextStyle(
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey[600],
+                ),
+              ),
+              const SizedBox(height: 8.0),
+              Text(
+                formattedSaldo,
+                style: const TextStyle(
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
@@ -133,7 +163,7 @@ class _WithdrawPageState extends State<WithdrawPage> {
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(
-            color: Color.fromRGBO(128, 128, 128, 0.5),
+            color: const Color.fromRGBO(128, 128, 128, 0.5),
             width: 1.0,
           ),
           borderRadius: BorderRadius.circular(8.0),
@@ -142,11 +172,11 @@ class _WithdrawPageState extends State<WithdrawPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(iconData),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
             Text(
               methodName,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 12.0),
+              style: const TextStyle(fontSize: 12.0),
             ),
           ],
         ),
@@ -159,26 +189,27 @@ class _WithdrawPageState extends State<WithdrawPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Withdraw Amount'),
+          title: const Text('Withdraw Amount'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Virtual Account Number',
                   border: OutlineInputBorder(),
                 ),
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               TextFormField(
                 controller: amountController,
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
-                decoration: InputDecoration(
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
+                decoration: const InputDecoration(
                   labelText: 'Amount',
                   border: OutlineInputBorder(),
                 ),
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               Row(
                 children: [
                   Checkbox(
@@ -192,7 +223,7 @@ class _WithdrawPageState extends State<WithdrawPage> {
                   Text('Saya menyetujui syarat dan ketentuan.'),
                 ],
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -209,41 +240,66 @@ class _WithdrawPageState extends State<WithdrawPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Withdraw'),
-        backgroundColor: Color(0xFF005555),
-      ),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                _buildBalanceWidget(),
-                SizedBox(height: 16.0),
-                const Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      'Select Withdraw Method',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+    return ChangeNotifierProvider<TopUpViewModel>(
+      create: (_) => TopUpViewModel(),
+      child: Builder(
+        builder: (context) {
+          final topupViewModel = Provider.of<TopUpViewModel>(context);
+
+          return FutureBuilder(
+            future: Future.wait([topupViewModel.getCurrentUser()]),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Container(
+                  alignment: Alignment.center,
+                  child: const CircularProgressIndicator(),
+                );
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              } else {
+                final currentUser = topupViewModel.currentUser;
+
+                return Scaffold(
+                  appBar: AppBar(
+                    title: const Text('Withdraw'),
+                    backgroundColor: Color(0xFF005555),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: _buildWithdrawMethodsGrid(),
-                ),
-              ],
-            ),
-          ),
-          Navigasi(),
-          NavigasiMid(),
-        ],
+                  body: Stack(
+                    children: [
+                      SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            _buildBalanceWidget(),
+                            const SizedBox(height: 16.0),
+                            const Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Text(
+                                  'Select Withdraw Method',
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: _buildWithdrawMethodsGrid(),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Navigasi(),
+                      const NavigasiMid(),
+                    ],
+                  ),
+                );
+              }
+            },
+          );
+        },
       ),
     );
   }
