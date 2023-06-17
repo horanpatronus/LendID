@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:homepage/views/landing_page.dart';
 import 'package:intl/intl.dart';
 import 'package:homepage/views/navigasi.dart';
 import 'package:homepage/views/navigasi_mid.dart';
@@ -71,7 +72,10 @@ class _WithdrawPageState extends State<WithdrawPage2>
             actions: [
               TextButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  // Navigator.pop(context);
+                  Navigator.of(context).pop(
+                    MaterialPageRoute(builder: (_) => const LandingPage()),
+                  );
                 },
                 child: const Text('OK'),
               ),

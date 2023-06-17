@@ -19,6 +19,8 @@ class TopUpViewModel extends BaseViewModel<ChangeNotifier?> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final CollectionReference usersCollection =
       FirebaseFirestore.instance.collection('users');
+  CollectionReference riwayatTopupCollection =
+      FirebaseFirestore.instance.collection('riwayat_topup');
 
   UserModel? currentUser;
 
@@ -61,6 +63,14 @@ class TopUpViewModel extends BaseViewModel<ChangeNotifier?> {
 
           await userDocument.update({
             'saldo': newSaldo,
+          });
+
+          //add data to riwayat topup collection
+          await riwayatTopupCollection.add({
+            'uid': user.uid,
+            'jenis': 'Withdraw',
+            'amount': withdrawAmount,
+            'date': FieldValue.serverTimestamp(),
           });
 
           currentUser?.saldo = newSaldo;
