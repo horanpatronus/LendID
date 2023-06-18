@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:homepage/models/investasi_investor_model.dart';
 import 'package:homepage/views/history_investor.dart';
 import 'package:homepage/views/navigasi.dart';
 import 'package:homepage/views/navigasi_mid.dart';
@@ -16,17 +15,9 @@ class StatusInvestor extends StatefulWidget {
 
 class _StatusInvestorState extends State<StatusInvestor>
     with SingleTickerProviderStateMixin {
-  String _namaProyek = "Nama Proyek";
-  String _deskripsiProyek =
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-  String _danaDiberikan = "Rp2.000.000,-";
-  String _estDidapatkan = "Rp100.000,-";
-  String _tglHasil = "5 Maret 2023";
-  String _statusDiproses = "Menunggu Konfirmasi";
-  String _statusDiterima = "Proses Pendanaan";
-  int _totalInvestBerjalan = 5;
-  String _totalDanaDiberikan = "Rp10.0000.000";
-  String _totalEstimasi = "Rp1.000.000";
+  String _estDidapatkan = "null";
+  String _totalDanaDiberikan = "null";
+  String _totalEstimasi = "null";
 
   @override
   Widget build(BuildContext context) {
@@ -48,12 +39,9 @@ class _StatusInvestorState extends State<StatusInvestor>
                 } else if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
                 } else {
-                  //ambil datanya
-                  int? danaDiberikan =
-                      investasiViewModel.investasiData?.danaDiberikan;
-                  String? status = investasiViewModel.pinjamanData?.status;
-                  // String? estimasi = investasiViewModel
-                  //     .pinjamanData?.tenggatPelunasan as String?;
+                  List<dynamic> mergedList = investasiViewModel.mergedList;
+
+                  int count = mergedList.length;
 
                   return MaterialApp(
                     debugShowCheckedModeBanner: false,
@@ -166,8 +154,7 @@ class _StatusInvestorState extends State<StatusInvestor>
                                                       Text(
                                                           "Total Investasi yang Sedang Berjalan"),
                                                       Text(
-                                                        _totalInvestBerjalan
-                                                            .toString(),
+                                                        '$count',
                                                         style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -207,7 +194,8 @@ class _StatusInvestorState extends State<StatusInvestor>
                                                       Text(
                                                           "Jumlah Dana yang Diberikan"),
                                                       Text(
-                                                        _totalDanaDiberikan
+                                                        investasiViewModel
+                                                            .jumlahDanaDiberikan
                                                             .toString(),
                                                         style: TextStyle(
                                                           fontWeight:
@@ -265,8 +253,11 @@ class _StatusInvestorState extends State<StatusInvestor>
                                       Expanded(
                                         child: ListView.builder(
                                           shrinkWrap: true,
-                                          itemCount: 1,
+                                          itemCount: mergedList.length,
                                           itemBuilder: (context, index) {
+                                            Map<String, dynamic> data =
+                                                mergedList[index];
+
                                             return Container(
                                               margin: EdgeInsets.symmetric(
                                                   vertical: 10),
@@ -320,14 +311,14 @@ class _StatusInvestorState extends State<StatusInvestor>
                                                                     .spaceBetween,
                                                             children: [
                                                               Text(
-                                                                _namaProyek,
+                                                                '${data['nama_pinjaman']}',
                                                                 style: TextStyle(
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold),
                                                               ),
                                                               Text(
-                                                                _deskripsiProyek,
+                                                                '${data['deskripsi_proyek']}',
                                                                 // style: TextStyle(fontSize: 10),
                                                                 maxLines: 2,
                                                                 overflow:
@@ -353,7 +344,7 @@ class _StatusInvestorState extends State<StatusInvestor>
                                                       Text(
                                                           "Dana yang diberikan"),
                                                       Text(
-                                                        '$danaDiberikan',
+                                                        'Rp${data['dana_diberikan']},-',
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight
@@ -389,7 +380,7 @@ class _StatusInvestorState extends State<StatusInvestor>
                                                           Text(
                                                               "Tgl. mendapatkan hasil"),
                                                           Text(
-                                                            _tglHasil,
+                                                            '${data['estimasi_tanggal']}',
                                                             style: TextStyle(
                                                                 fontWeight:
                                                                     FontWeight
@@ -428,7 +419,7 @@ class _StatusInvestorState extends State<StatusInvestor>
                                                                   bottom: 20),
                                                           child: Center(
                                                             child: Text(
-                                                              '$status',
+                                                              '${data['status']}',
                                                               style: TextStyle(
                                                                   fontWeight:
                                                                       FontWeight

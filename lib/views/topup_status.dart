@@ -25,51 +25,54 @@ class RiwayatPage2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Riwayat Transaksi'),
-        backgroundColor: Color(0xFF005555),
-      ),
-      body: Stack(
-        children: [
-          Consumer<RiwayatTopUpViewModel>(
-            builder: (context, viewModel, _) {
-              // Access the viewmodel and call the getRiwayatTopUp method
-              viewModel.getRiwayatTopUp();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Riwayat Transaksi'),
+          backgroundColor: Color(0xFF005555),
+        ),
+        body: Stack(
+          children: [
+            Consumer<RiwayatTopUpViewModel>(
+              builder: (context, viewModel, _) {
+                // Access the viewmodel and call the getRiwayatTopUp method
+                viewModel.getRiwayatTopUp();
 
-              // Use the data from the viewmodel to display the transactions
-              List<Transaction> transactions = viewModel.transactions;
+                // Use the data from the viewmodel to display the transactions
+                List<Transaction> transactions = viewModel.transactions;
 
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: transactions.length,
-                      itemBuilder: (context, index) {
-                        Transaction transaction = transactions[index];
-                        return Container(
-                          decoration: const BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(color: Colors.grey),
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: transactions.length,
+                        itemBuilder: (context, index) {
+                          Transaction transaction = transactions[index];
+                          return Container(
+                            decoration: const BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(color: Colors.grey),
+                              ),
                             ),
-                          ),
-                          child: ListTile(
-                            title: Text(transaction.jenis),
-                            subtitle: Text(transaction.date),
-                            trailing: Text(transaction.amount),
-                          ),
-                        );
-                      },
+                            child: ListTile(
+                              title: Text(transaction.jenis),
+                              subtitle: Text(transaction.date),
+                              trailing: Text(transaction.amount),
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
-              );
-            },
-          ),
-          const Navigasi(),
-          const NavigasiMid(),
-        ],
+                  ],
+                );
+              },
+            ),
+            const Navigasi(),
+            const NavigasiMid(),
+          ],
+        ),
       ),
     );
   }
