@@ -2,13 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PinjamanUmkmModel {
   final String? id;
-  final int? banyakCicilanLunas;
+  int? banyakCicilanLunas;
   final String? deskripsiProyek;
-  final int? jumlahDibayar;
+  int? jumlahDibayar;
   final int? jumlahPinjaman;
   final String? namaProyek;
   final int? periodePembayaran;
-  final String? status;
+  String? status;
   final Timestamp? tenggatPelunasan;
   final String? userId;
   final Timestamp? waktuPeminjaman;

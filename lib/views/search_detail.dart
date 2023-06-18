@@ -241,6 +241,7 @@ class SearchDetail extends StatelessWidget {
                               builder: (context) => SearchConfirm(
                                 idProyek: pinjaman.id!,
                                 model: pinjaman,
+                                totalDanaTerkumpul: totalDanaTerkumpul,
                               ),
                             ),
                           );
