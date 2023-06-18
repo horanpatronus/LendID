@@ -34,7 +34,7 @@ class KonfirmasiUsulanPeminjamanState
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Pembayaran Berhasil!'),
+          title: Text('Usulan Peminjaman Berhasil!'),
           content: Text('Terima kasih telah melakukan peminjaman!'),
           actions: <Widget>[
             TextButton(
@@ -64,6 +64,7 @@ class KonfirmasiUsulanPeminjamanState
         title: 'Konfirmasi Usulan Peminjaman Page',
         home: Scaffold(
           appBar: AppBar(
+            backgroundColor: Color(0xff005555),
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () {
@@ -435,6 +436,10 @@ class KonfirmasiUsulanPeminjamanState
                     //     )
                     //   ),
                     // ),
+
+                    Container(
+                      height: 50,
+                    ),
                   ],
                 ),
               ),

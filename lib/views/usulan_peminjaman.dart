@@ -124,6 +124,7 @@ class UsulanPeminjamanState extends State<UsulanPeminjaman> {
                 },
               ),
               title: Text('Usulan Peminjaman'),
+              backgroundColor: Color(0xff005555),
             ),
             body: Stack(
               children: [

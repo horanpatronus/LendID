@@ -120,94 +120,94 @@ class LandingPage extends StatelessWidget {
                                 ),
                               ),
                               //end content 1
-                              //content 2
-                              Container(
-                                color: const Color(0xFFA1E3D8),
-                                padding: const EdgeInsets.all(20),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    const Text(
-                                      "Progress Profile",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 11),
-                                    ),
-                                    Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          vertical: 5),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Flexible(
-                                            flex: 5,
-                                            child: CustomProgressBar(
-                                              width: 300,
-                                              height: 10,
-                                              value: 0.6,
-                                              backgroundColor: Colors.white,
-                                              foregroundColor:
-                                                  Color(0xff069A8E),
-                                            ),
-                                          ),
-                                          Flexible(
-                                            flex: 1,
-                                            child: Text("8/10"),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          vertical: 5),
-                                      child: const Text(
-                                        "Lorem Ipsum ntuk merubah ukuran teks di Flutter, Anda dapat menggunakan properti",
-                                        style: TextStyle(fontSize: 11),
-                                        overflow: TextOverflow.clip,
-                                        maxLines: 2,
-                                        softWrap: true,
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          vertical: 5),
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 5),
-                                      color: const Color(0xff005555),
-                                      child: FractionallySizedBox(
-                                        widthFactor: 1,
-                                        child: Material(
-                                          color: Colors.transparent,
-                                          child: InkWell(
-                                            onTap: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  //pergi ke halaman akun
-                                                  builder: (context) =>
-                                                      ProfilePage(),
-                                                ),
-                                              );
-                                            },
-                                            child: const Text(
-                                              "Lengkapi Profilmu",
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize: 11,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.white),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              //end content 2
+                              // //content 2
+                              // Container(
+                              //   color: const Color(0xFFA1E3D8),
+                              //   padding: const EdgeInsets.all(20),
+                              //   child: Column(
+                              //     crossAxisAlignment: CrossAxisAlignment.start,
+                              //     mainAxisAlignment:
+                              //         MainAxisAlignment.spaceEvenly,
+                              //     children: [
+                              //       const Text(
+                              //         "Progress Profile",
+                              //         style: TextStyle(
+                              //             fontWeight: FontWeight.bold,
+                              //             fontSize: 11),
+                              //       ),
+                              //       Container(
+                              //         margin: const EdgeInsets.symmetric(
+                              //             vertical: 5),
+                              //         child: Row(
+                              //           mainAxisAlignment:
+                              //               MainAxisAlignment.spaceBetween,
+                              //           children: [
+                              //             Flexible(
+                              //               flex: 5,
+                              //               child: CustomProgressBar(
+                              //                 width: 300,
+                              //                 height: 10,
+                              //                 value: 0.6,
+                              //                 backgroundColor: Colors.white,
+                              //                 foregroundColor:
+                              //                     Color(0xff069A8E),
+                              //               ),
+                              //             ),
+                              //             Flexible(
+                              //               flex: 1,
+                              //               child: Text("8/10"),
+                              //             ),
+                              //           ],
+                              //         ),
+                              //       ),
+                              //       Container(
+                              //         margin: const EdgeInsets.symmetric(
+                              //             vertical: 5),
+                              //         child: const Text(
+                              //           "Lorem Ipsum ntuk merubah ukuran teks di Flutter, Anda dapat menggunakan properti",
+                              //           style: TextStyle(fontSize: 11),
+                              //           overflow: TextOverflow.clip,
+                              //           maxLines: 2,
+                              //           softWrap: true,
+                              //         ),
+                              //       ),
+                              //       Container(
+                              //         margin: const EdgeInsets.symmetric(
+                              //             vertical: 5),
+                              //         padding: const EdgeInsets.symmetric(
+                              //             vertical: 5),
+                              //         color: const Color(0xff005555),
+                              //         child: FractionallySizedBox(
+                              //           widthFactor: 1,
+                              //           child: Material(
+                              //             color: Colors.transparent,
+                              //             child: InkWell(
+                              //               onTap: () {
+                              //                 Navigator.push(
+                              //                   context,
+                              //                   MaterialPageRoute(
+                              //                     //pergi ke halaman akun
+                              //                     builder: (context) =>
+                              //                         ProfilePage(),
+                              //                   ),
+                              //                 );
+                              //               },
+                              //               child: const Text(
+                              //                 "Lengkapi Profilmu",
+                              //                 textAlign: TextAlign.center,
+                              //                 style: TextStyle(
+                              //                     fontSize: 11,
+                              //                     fontWeight: FontWeight.bold,
+                              //                     color: Colors.white),
+                              //               ),
+                              //             ),
+                              //           ),
+                              //         ),
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
+                              // //end content 2
                               //content 3
                               Container(
                                 margin:
@@ -662,7 +662,7 @@ class LandingPage extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          Carousel(),
+                                          // Carousel(),
                                         ],
                                       ),
                                     ),

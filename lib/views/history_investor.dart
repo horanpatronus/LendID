@@ -174,7 +174,7 @@ class HistoryInvestor extends StatelessWidget {
                                               children: [
                                                 Text("Dana yang diberikan"),
                                                 Text(
-                                                  'Rp${data['dana_diberikan']},-',
+                                                  '${data['dana_diberikan']}',
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold),
@@ -190,7 +190,7 @@ class HistoryInvestor extends StatelessWidget {
                                                 Text(
                                                     "Est. hasil yang didapatkan"),
                                                 Text(
-                                                  'null',
+                                                  '${data['estimasi_hasil']}',
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold),
@@ -208,7 +208,7 @@ class HistoryInvestor extends StatelessWidget {
                                                     Text(
                                                         "Tgl. mendapatkan hasil"),
                                                     Text(
-                                                      'null',
+                                                      '${data['estimasi_tanggal']}',
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold),

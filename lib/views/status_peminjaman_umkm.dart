@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:homepage/models/pinjaman_umkm_model.dart';
 import 'package:homepage/viewmodels/pinjaman_umkm_viewmodel.dart';
 import 'package:homepage/views/detail_peminjaman_umkm.dart';
+import 'package:homepage/views/history_umkm.dart';
+
+import 'package:homepage/views/history_umkm.dart';
+
 import 'package:homepage/views/navigasi.dart';
 import 'package:homepage/views/navigasi_mid.dart';
 import 'package:intl/intl.dart';
@@ -74,12 +78,21 @@ class StatusPeminjamanUMKMState extends State<StatusPeminjamanUMKM> {
                     length: 2,
                     child: Scaffold(
                       appBar: AppBar(
+                        backgroundColor: Color(0xff005555),
                         title: Text('Status Peminjaman'),
                         actions: [
                           IconButton(
                             icon: Icon(Icons.history),
                             onPressed: () {
-                              // Aksi yang ingin Anda lakukan saat tombol ditekan
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+
+                                  //pergi ke halaman
+                                  builder: (context) => const HistoryUMKM(),
+
+                                ),
+                              );
                             },
                           ),
                           Container(

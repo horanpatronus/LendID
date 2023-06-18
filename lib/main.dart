@@ -9,6 +9,7 @@ import 'package:homepage/views/login_page.dart';
 import 'package:homepage/views/profile_user.dart';
 import 'package:homepage/views/search.dart';
 import 'package:homepage/views/settings.dart';
+
 import 'package:homepage/views/status_investor.dart';
 import 'package:homepage/views/topup_status.dart';
 import 'package:homepage/views/topup_withdraw.dart';

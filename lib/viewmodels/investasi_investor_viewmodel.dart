@@ -3,7 +3,7 @@ import 'package:homepage/models/investasi_investor_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:homepage/models/pinjaman_umkm_model.dart';
-import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 abstract class BaseViewModel<T extends ChangeNotifier?> extends ChangeNotifier {
   T? state;
@@ -28,7 +28,7 @@ class InvestasiInvestorViewModel extends BaseViewModel<ChangeNotifier?> {
   int totalInvestasi = 0;
   int totalSelesai = 0;
   int jumlahDanaDiberikan = 0;
-  int estimasiHasil = 0;
+  double estimasiHasil = 0;
 
   List<dynamic> mergedList = [];
   List<dynamic> mergedListSelesai = [];
@@ -49,6 +49,7 @@ class InvestasiInvestorViewModel extends BaseViewModel<ChangeNotifier?> {
               document.data() as Map<String, dynamic>;
 
           String danaDiberikan = riwayatData['dana_diberikan'].toString();
+          double? danaDiberikanHitung = riwayatData['dana_diberikan'];
           String proyekId = riwayatData['proyek_id'];
           String userId = riwayatData['user_id'];
 
@@ -62,6 +63,18 @@ class InvestasiInvestorViewModel extends BaseViewModel<ChangeNotifier?> {
             String namaProyek = pinjamanData['nama_proyek'];
             String deskripsiProyek = pinjamanData['deskripsi_proyek'];
             String statusPendanaan = pinjamanData['status'];
+            String estimasiTanggal = pinjamanData['tenggat_pelunasan']
+                .toDate()
+                .toLocal()
+                .toString()
+                .split(' ')[0];
+
+            // hitung estimasi
+            double? bunga = pinjamanData['periode_pembayaran'];
+            double? bungaInvestor = (bunga! / 100.0) / 2;
+            double? estimasi =
+                (danaDiberikanHitung! * bungaInvestor) + danaDiberikanHitung;
+            String? estimasiHasilHitung = estimasi.toString();
 
             if (statusPendanaan == 'Selesai') {
               totalSelesai++;
@@ -69,7 +82,9 @@ class InvestasiInvestorViewModel extends BaseViewModel<ChangeNotifier?> {
                 'nama_pinjaman': namaProyek,
                 'deskripsi_proyek': deskripsiProyek,
                 'dana_diberikan': danaDiberikan,
+                'estimasi_tanggal': estimasiTanggal,
                 'status': statusPendanaan,
+                'estimasi_hasil': estimasiHasilHitung,
                 'proyek_id': proyekId,
                 'user_id': userId,
               });
@@ -79,6 +94,8 @@ class InvestasiInvestorViewModel extends BaseViewModel<ChangeNotifier?> {
                 'nama_pinjaman': namaProyek,
                 'deskripsi_proyek': deskripsiProyek,
                 'dana_diberikan': danaDiberikan,
+                'estimasi_tanggal': estimasiTanggal,
+                'estimasi_hasil': estimasiHasilHitung,
                 'status': statusPendanaan,
                 'proyek_id': proyekId,
                 'user_id': userId,
@@ -86,10 +103,7 @@ class InvestasiInvestorViewModel extends BaseViewModel<ChangeNotifier?> {
             }
 
             jumlahDanaDiberikan += int.parse(danaDiberikan);
-          } else {
-            if (kDebugMode) {
-              print('gagal mendapatkan data proyek');
-            }
+            estimasiHasil += int.parse(estimasiHasilHitung);
           }
         }
       }
