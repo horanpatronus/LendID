@@ -259,7 +259,26 @@ class _WithdrawPageState extends State<WithdrawPage2>
                   debugShowCheckedModeBanner: false,
                   home: Scaffold(
                     appBar: AppBar(
-                      title: const Text('Withdraw'),
+                      title: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  //pergi ke halaman akun
+                                  builder: (context) => LandingPage(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              margin: EdgeInsets.only(right: 5),
+                              child: Icon(Icons.arrow_back),
+                            ),
+                          ),
+                          Text("Withdraw"),
+                        ],
+                      ),
                       backgroundColor: Color(0xFF005555),
                     ),
                     body: Stack(
