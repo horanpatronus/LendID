@@ -47,10 +47,19 @@ class StatusPeminjamanUMKMState extends State<StatusPeminjamanUMKM> {
               } else if (snapshot.hasError) {
                 return Text('Error: ${snapshot.error}');
               } else {
+                List<PinjamanUmkmModel> pinjamanMenungguList = pinjamanViewModel
+                    .pinjamanList
+                    .where((model) => model.status == 'Menunggu Konfirmasi')
+                    .toList();
+
+                pinjamanViewModel.pinjamanList = pinjamanViewModel.pinjamanList
+                    .where((model) => model.status != 'Menunggu Konfirmasi')
+                    .toList();
+
                 int totalPeminjamanTotal = pinjamanViewModel.totalPeminjaman;
-                int jumlahDanaTotal = pinjamanViewModel.jumlahPinjaman;
+                int jumlahDanaTotal = pinjamanViewModel.jumlahPinjaman.toInt();
                 int jumlahUtangTotal = pinjamanViewModel.jumlahDibayar;
-                int sisaUtangTotal = pinjamanViewModel.sisaHutang;
+                int sisaUtangTotal = pinjamanViewModel.sisaHutang.toInt();
 
                 String formatTimestamp(Timestamp timestamp) {
                   DateTime dateTime = timestamp.toDate();
@@ -581,7 +590,7 @@ class StatusPeminjamanUMKMState extends State<StatusPeminjamanUMKM> {
                                                                         MaterialPageRoute(
                                                                           //pergi ke halaman
                                                                           builder: (context) =>
-                                                                              const DetailPeminjamanUMKM(),
+                                                                              DetailPeminjamanUMKM(model: model),
                                                                         ),
                                                                       );
                                                                     },
@@ -614,7 +623,17 @@ class StatusPeminjamanUMKMState extends State<StatusPeminjamanUMKM> {
                                                                   child:
                                                                       ElevatedButton(
                                                                     onPressed:
-                                                                        () {},
+                                                                        () {
+                                                                      Navigator
+                                                                          .push(
+                                                                        context,
+                                                                        MaterialPageRoute(
+                                                                          //pergi ke halaman
+                                                                          builder: (context) =>
+                                                                              DetailPeminjamanUMKM(model: model),
+                                                                        ),
+                                                                      );
+                                                                    },
                                                                     style: ElevatedButton
                                                                         .styleFrom(
                                                                       primary:
@@ -649,478 +668,239 @@ class StatusPeminjamanUMKMState extends State<StatusPeminjamanUMKM> {
                               ),
                             ),
 
-
-
-
-                            
-
                             // bar peminjaman diproses
-                            SingleChildScrollView(
-                              child: Center(
-                                child: Center(
-                                  child: Column(
-                                    children: [
-                                      // --- ini harusnya pake listview builder --- //
-                                      Container(
-                                          padding: const EdgeInsets.all(20),
-                                          decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.grey
-                                                    .withOpacity(0.1),
-                                                spreadRadius: 0.5,
-                                                blurRadius: 10,
-                                                offset: Offset(0,
-                                                    3), // changes position of shadow
-                                              ),
-                                            ],
-                                          ),
-                                          child: Container(
-                                            padding: const EdgeInsets.all(30),
-                                            decoration: const BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(5.0)),
-                                              color: Color(0xffffffff),
-                                            ),
-                                            child: Column(
-                                              children: <Widget>[
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Container(
-                                                      height: 50,
-                                                      width: 50,
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                        color: Color(0xff00000),
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    Expanded(
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            'Proyek Proyekan',
-                                                            style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              color: Color(
-                                                                  0xff005555),
-                                                            ),
-                                                            textAlign:
-                                                                TextAlign.left,
-                                                          ),
-                                                          Text(
-                                                            'Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.',
-                                                            style: TextStyle(
-                                                              fontSize: 12,
-                                                              color: Color(
-                                                                  0xff0055555),
-                                                            ),
-                                                            textAlign: TextAlign
-                                                                .justify,
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .clip,
-                                                            maxLines: 3,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Column(
-                                                  children: [
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text(
-                                                            'Dana yang Pinjaman'),
-                                                        Text('Rp3.000.000,00',
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text(
-                                                            'Bunga yang Dikenai'),
-                                                        Text(
-                                                            'Rp180.000,00 (6%)',
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text('Total Utang'),
-                                                        Text('Rp3.180.000,00',
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text('Biaya Cicilan'),
-                                                        Text('Rp680.000,00',
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text(
-                                                            'Banyaknya Cicilan'),
-                                                        Text('3 kali',
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text(
-                                                            'Tanggal Peminjaman'),
-                                                        Text('5 Juni 2023',
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 10,
-                                                      child: Divider(
-                                                        color: Colors.black,
-                                                      ),
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text('Status'),
-                                                        Text(
-                                                            'Menunggu Konfirmasi',
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 15,
-                                                    ),
-                                                  ],
+                            ListView.builder(
+                              itemCount: pinjamanMenungguList.length,
+                              itemBuilder: (context, index) {
+                                PinjamanUmkmModel modelPinjamanMenunggu =
+                                    pinjamanMenungguList[index];
+
+                                return Center(
+                                  child: Center(
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                            padding: const EdgeInsets.all(20),
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.1),
+                                                  spreadRadius: 0.5,
+                                                  blurRadius: 10,
+                                                  offset: Offset(0,
+                                                      3), // changes position of shadow
                                                 ),
                                               ],
                                             ),
-                                          )),
-
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 20, right: 20),
-                                        child: SizedBox(
-                                          height: 10,
-                                          child: Divider(
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                      ),
-
-                                      Container(
-                                          padding: const EdgeInsets.all(20),
-                                          decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.grey
-                                                    .withOpacity(0.1),
-                                                spreadRadius: 0.5,
-                                                blurRadius: 10,
-                                                offset: Offset(0,
-                                                    3), // changes position of shadow
+                                            child: Container(
+                                              padding: const EdgeInsets.all(30),
+                                              decoration: const BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(5.0)),
+                                                color: Color(0xffffffff),
                                               ),
-                                            ],
-                                          ),
-                                          child: Container(
-                                            padding: const EdgeInsets.all(30),
-                                            decoration: const BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(5.0)),
-                                              color: Color(0xffffffff),
-                                            ),
-                                            child: Column(
-                                              children: <Widget>[
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Container(
-                                                      height: 50,
-                                                      width: 50,
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                        color: Color(0xff00000),
+                                              child: Column(
+                                                children: <Widget>[
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Container(
+                                                        height: 50,
+                                                        width: 50,
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                          color:
+                                                              Color(0xff00000),
+                                                        ),
                                                       ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    Expanded(
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
+                                                      SizedBox(
+                                                        width: 5,
+                                                      ),
+                                                      Expanded(
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              '${modelPinjamanMenunggu.namaProyek}',
+                                                              style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                color: Color(
+                                                                    0xff005555),
+                                                              ),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .left,
+                                                            ),
+                                                            Text(
+                                                              '${modelPinjamanMenunggu.deskripsiProyek}',
+                                                              style: TextStyle(
+                                                                fontSize: 12,
+                                                                color: Color(
+                                                                    0xff0055555),
+                                                              ),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .justify,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .clip,
+                                                              maxLines: 3,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Column(
+                                                    children: [
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
                                                         children: [
                                                           Text(
-                                                            'Proyek Proyekan',
-                                                            style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              color: Color(
-                                                                  0xff005555),
-                                                            ),
-                                                            textAlign:
-                                                                TextAlign.left,
-                                                          ),
+                                                              'Dana yang Dipinjaman'),
                                                           Text(
-                                                            'Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.',
-                                                            style: TextStyle(
-                                                              fontSize: 12,
-                                                              color: Color(
-                                                                  0xff0055555),
-                                                            ),
-                                                            textAlign: TextAlign
-                                                                .justify,
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .clip,
-                                                            maxLines: 3,
-                                                          ),
+                                                              'Rp${NumberFormat("#,###", "id_ID").format(modelPinjamanMenunggu.jumlahPinjaman)},-',
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold)),
                                                         ],
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Column(
-                                                  children: [
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text(
-                                                            'Dana yang Pinjaman'),
-                                                        Text('Rp3.000.000,00',
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text(
-                                                            'Bunga yang Dikenai'),
-                                                        Text(
-                                                            'Rp180.000,00 (6%)',
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text('Total Utang'),
-                                                        Text('Rp3.180.000,00',
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text('Biaya Cicilan'),
-                                                        Text('Rp680.000,00',
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text(
-                                                            'Banyaknya Cicilan'),
-                                                        Text('3 kali',
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text(
-                                                            'Tanggal Peminjaman'),
-                                                        Text('5 Juni 2023',
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 10,
-                                                      child: Divider(
-                                                        color: Colors.black,
+                                                      SizedBox(
+                                                        height: 5,
                                                       ),
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text('Status'),
-                                                        Text('Proses Pendanaan',
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text('Dana Terkumpul'),
-                                                        Text('Rp1.000.000,00',
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text('Batas Pendanaan'),
-                                                        Text('30 Juli 2023',
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 15,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          )),
-                                      Container(height: 100)
-                                    ],
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text(
+                                                              'Bunga yang Dikenai'),
+                                                          Text(
+                                                              'Rp${NumberFormat("#,###", "id_ID").format(modelPinjamanMenunggu.jumlahPinjaman! * (modelPinjamanMenunggu.periodePembayaran! / 100))},- (${modelPinjamanMenunggu.periodePembayaran}%)',
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold)),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text('Total Utang'),
+                                                          Text(
+                                                              'Rp${NumberFormat("#,###", "id_ID").format((modelPinjamanMenunggu.jumlahPinjaman! * (1 + (modelPinjamanMenunggu.periodePembayaran! / 100))))},-',
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold)),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text('Biaya Cicilan'),
+                                                          Text(
+                                                              'Rp${NumberFormat("#,###", "id_ID").format((modelPinjamanMenunggu.jumlahPinjaman! * (1 + (modelPinjamanMenunggu.periodePembayaran! / 100))) / modelPinjamanMenunggu.periodePembayaran!)},-',
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold)),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text(
+                                                              'Banyaknya Cicilan'),
+                                                          Text(
+                                                              '${modelPinjamanMenunggu.periodePembayaran} kali',
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold)),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text(
+                                                              'Tanggal Peminjaman'),
+                                                          Text(
+                                                              formatTimestamp(
+                                                                  modelPinjamanMenunggu
+                                                                      .waktuPeminjaman!),
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold)),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10,
+                                                        child: Divider(
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text('Status'),
+                                                          Text(
+                                                              '${modelPinjamanMenunggu.status}',
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold)),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 15,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            )),
+                                        Container(height: 100)
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ),
+                                );
+                              },
                             ),
                           ]),
                           const Navigasi(),

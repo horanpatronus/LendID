@@ -89,7 +89,7 @@ class UsulanPeminjamanState extends State<UsulanPeminjaman> {
           0,
       namaProyek: textEditControllerNamaProyek.text,
       periodePembayaran: int.parse(dropdownValue.split(' ')[0]),
-      status: 'Menunggu Pendanaan',
+      status: 'Menunggu Konfirmasi',
       userId: '',
       waktuPengajuan: Timestamp.fromDate(DateTime.now()),
       waktuPeminjaman:

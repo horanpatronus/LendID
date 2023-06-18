@@ -42,6 +42,8 @@ class _SearchConfirmState extends State<SearchConfirm> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final CollectionReference usersCollection =
       FirebaseFirestore.instance.collection('users');
+  final CollectionReference topupCollection =
+      FirebaseFirestore.instance.collection('riwayat_topup');
   UserModel? currentUser;
 
   final textEditControllerPassword = TextEditingController();
@@ -583,6 +585,13 @@ class _SearchConfirmState extends State<SearchConfirm> {
                                                     textEditControllerJumlah
                                                         .text)
                                             : null,
+                                      });
+
+                                      topupCollection.add({
+                                        'amount': int.parse(textEditControllerJumlah.text),
+                                        'date': Timestamp.now(),
+                                        'jenis': 'Investment',
+                                        'uid': user.uid,
                                       });
                                     } catch (e) {
                                       setState(() {

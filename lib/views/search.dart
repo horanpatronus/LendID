@@ -90,7 +90,6 @@ class InvestItems extends StatelessWidget {
         stream: FirebaseFirestore.instance
             .collection('pinjaman_umkm')
             .where('waktu_peminjaman', isGreaterThanOrEqualTo: Timestamp.now())
-            .where('')
             .orderBy('waktu_peminjaman', descending: false)
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -103,7 +102,12 @@ class InvestItems extends StatelessWidget {
           }
 
           if (snapshot.hasData) {
-            final pinjamanList = snapshot.data!.docs;
+            var pinjamanList = snapshot.data!.docs;
+
+            pinjamanList = pinjamanList.where((doc) {
+              String status = doc.get('status');
+              return status != 'Menunggu Konfirmasi';
+            }).toList();
 
             return GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

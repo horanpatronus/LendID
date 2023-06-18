@@ -21,9 +21,9 @@ class PinjamanUmkmViewModel extends BaseViewModel<ChangeNotifier?> {
   PinjamanUmkmModel? pinjamanData;
   List<PinjamanUmkmModel> pinjamanList = [];
   int totalPeminjaman = 0;
-  int jumlahPinjaman = 0;
+  double jumlahPinjaman = 0;
   int jumlahDibayar = 0;
-  int sisaHutang = 0;
+  double sisaHutang = 0;
 
   Future<void> getPinjamanUmkm() async {
     User? user = _auth.currentUser;
@@ -36,6 +36,7 @@ class PinjamanUmkmViewModel extends BaseViewModel<ChangeNotifier?> {
         for (var document in snapshot.docs) {
           // Retrieve and process each document here
           pinjamanData = PinjamanUmkmModel(
+            id: document.id,
             banyakCicilanLunas: document.get('cicilan_sudah_dibayar'),
             deskripsiProyek: document.get('deskripsi_proyek'),
             jumlahDibayar: document.get('jumlah_dibayar'),
@@ -48,9 +49,11 @@ class PinjamanUmkmViewModel extends BaseViewModel<ChangeNotifier?> {
             waktuPengajuan: document.get('waktu_pengajuan'),
           );
 
-          if (pinjamanData?.status != 'Selesai') {
+          if (pinjamanData?.status != 'Selesai' &&
+              pinjamanData?.status != 'Menunggu Konfirmasi') {
             totalPeminjaman++;
-            jumlahPinjaman += pinjamanData?.jumlahPinjaman ?? 0;
+            jumlahPinjaman += (pinjamanData?.jumlahPinjaman ?? 0) *
+                (1 + ((pinjamanData?.periodePembayaran ?? 0) / 100));
             jumlahDibayar += pinjamanData?.jumlahDibayar ?? 0;
 
             if (pinjamanData != null) {
@@ -91,6 +94,19 @@ class PinjamanUmkmViewModel extends BaseViewModel<ChangeNotifier?> {
     } catch (e) {
       if (kDebugMode) {
         print('Error: Gagal membuat usulan peminjaman, $e');
+      }
+    }
+  }
+
+  Future<void> updatePinjaman(PinjamanUmkmModel data) async {
+    try {
+      await pinjamanUmkmCollection.doc(data.id).update({
+        'cicilan_sudah_dibayar': data.banyakCicilanLunas! + 1,
+        'jumlah_dibayar': data.jumlahDibayar,
+      });
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error: Gagal mengupdate peminjaman, $e');
       }
     }
   }
