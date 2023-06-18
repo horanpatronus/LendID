@@ -37,7 +37,7 @@ class _WithdrawPageState extends State<WithdrawPage2>
     String amount = amountController.text;
     double withdrawAmount = double.tryParse(amount) ?? 0.0;
 
-    if (withdrawAmount > 0) {
+    if (withdrawAmount > 0 && termsChecked) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -147,14 +147,6 @@ class _WithdrawPageState extends State<WithdrawPage2>
           'Bank Account 2',
           Icons.account_balance_wallet,
         ),
-        _buildWithdrawMethodIcon(
-          'Bank Account 3',
-          Icons.account_balance_wallet,
-        ),
-        _buildWithdrawMethodIcon(
-          'Bank Account 4',
-          Icons.account_balance,
-        ),
       ],
     );
   }
@@ -263,41 +255,44 @@ class _WithdrawPageState extends State<WithdrawPage2>
               } else {
                 final currentUser = topupViewModel.currentUser;
 
-                return Scaffold(
-                  appBar: AppBar(
-                    title: const Text('Withdraw'),
-                    backgroundColor: Color(0xFF005555),
-                  ),
-                  body: Stack(
-                    children: [
-                      SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            _buildBalanceWidget(),
-                            const SizedBox(height: 16.0),
-                            const Center(
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Text(
-                                  'Select Withdraw Method',
-                                  style: TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
+                return MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  home: Scaffold(
+                    appBar: AppBar(
+                      title: const Text('Withdraw'),
+                      backgroundColor: Color(0xFF005555),
+                    ),
+                    body: Stack(
+                      children: [
+                        SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              _buildBalanceWidget(),
+                              const SizedBox(height: 16.0),
+                              const Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Text(
+                                    'Select Withdraw Method',
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: _buildWithdrawMethodsGrid(),
-                            ),
-                          ],
+                              Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: _buildWithdrawMethodsGrid(),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      const Navigasi(),
-                      const NavigasiMid(),
-                    ],
+                        const Navigasi(),
+                        const NavigasiMid(),
+                      ],
+                    ),
                   ),
                 );
               }

@@ -19,78 +19,81 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Bantuan'),
-        backgroundColor: Color(0xFF005555),
-      ),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: listViewItems.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final item = listViewItems[index];
-                    return Column(
-                      children: <Widget>[
-                        ListTile(
-                          title: Text(item),
-                          onTap: () {
-                            _showModal(context, item);
-                          },
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Bantuan'),
+          backgroundColor: Color(0xFF005555),
+        ),
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: listViewItems.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final item = listViewItems[index];
+                      return Column(
+                        children: <Widget>[
+                          ListTile(
+                            title: Text(item),
+                            onTap: () {
+                              _showModal(context, item);
+                            },
+                          ),
+                          const Divider(
+                            height: 1,
+                            color: Colors.grey,
+                            indent: 16,
+                            endIndent: 16,
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) => const LoginPage()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.red, // Set the background color to red
+                    ),
+                    child: const Text('Logout'),
+                  ),
+                  const SizedBox(height: 16),
+                  Container(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'page2.png', // Ganti dengan path gambar Anda
+                          width: 235,
+                          height: 235,
+                          fit: BoxFit.contain, // Atur properti fit
                         ),
-                        const Divider(
-                          height: 1,
-                          color: Colors.grey,
-                          indent: 16,
-                          endIndent: 16,
+                        const SizedBox(height: 16.0),
+                        const Text(
+                          'LENDID - V1.0',
+                          style: TextStyle(fontSize: 16),
                         ),
                       ],
-                    );
-                  },
-                ),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (_) => const LoginPage()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.red, // Set the background color to red
+                    ),
                   ),
-                  child: const Text('Logout'),
-                ),
-                const SizedBox(height: 16),
-                Container(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'page2.png', // Ganti dengan path gambar Anda
-                        width: 235,
-                        height: 235,
-                        fit: BoxFit.contain, // Atur properti fit
-                      ),
-                      const SizedBox(height: 16.0),
-                      const Text(
-                        'LENDID - V1.0',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          const Navigasi(),
-          const NavigasiMid(),
-        ],
+            const Navigasi(),
+            const NavigasiMid(),
+          ],
+        ),
       ),
     );
   }

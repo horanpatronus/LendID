@@ -99,6 +99,7 @@ class SearchButtonState extends State<SearchButton> {
                 top: 260,
                 right: 20,
                 left: 20,
+                bottom: 90,
               ),
               child: InvestItems(
                 selectedImbal: selectedImbal,
@@ -205,8 +206,9 @@ class InvestItems extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               //pergi ke halaman akun
-                              builder: (context) =>
-                                  SearchDetail(pinjaman: model, totalDanaTerkumpul: totalDanaTerkumpul),
+                              builder: (context) => SearchDetail(
+                                  pinjaman: model,
+                                  totalDanaTerkumpul: totalDanaTerkumpul),
                             ),
                           );
                         },
@@ -370,8 +372,10 @@ class InvestItems extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               //pergi ke halaman akun
-                              builder: (context) =>
-                                  SearchDetail(pinjaman: model, totalDanaTerkumpul: totalDanaTerkumpul,),
+                              builder: (context) => SearchDetail(
+                                pinjaman: model,
+                                totalDanaTerkumpul: totalDanaTerkumpul,
+                              ),
                             ),
                           );
                         },
