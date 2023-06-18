@@ -3,6 +3,7 @@ import 'package:homepage/models/investasi_investor_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:homepage/models/pinjaman_umkm_model.dart';
+import 'package:flutter/material.dart';
 
 abstract class BaseViewModel<T extends ChangeNotifier?> extends ChangeNotifier {
   T? state;
@@ -19,6 +20,8 @@ class InvestasiInvestorViewModel extends BaseViewModel<ChangeNotifier?> {
       FirebaseFirestore.instance.collection('investasi_investor');
   final CollectionReference pinjamanUmkmCollection =
       FirebaseFirestore.instance.collection('pinjaman_umkm');
+  final CollectionReference usersCollection =
+      FirebaseFirestore.instance.collection('users');
 
   InvestasiInvestorModel? investasiData;
   PinjamanUmkmModel? pinjamanData;
@@ -27,45 +30,72 @@ class InvestasiInvestorViewModel extends BaseViewModel<ChangeNotifier?> {
   int jumlahDanaDiberikan = 0;
   int estimasiHasil = 0;
 
+  List<dynamic> mergedList = [];
+  List<dynamic> mergedListSelesai = [];
+
   Future<void> getInvestasiInvestor() async {
     User? user = _auth.currentUser;
     if (user != null) {
       QuerySnapshot snapshot = await investasiInvestorCollection
           .where('user_id', isEqualTo: user.uid)
-          .where('status', isEqualTo: 'Terkonfirmasi Admin')
           .get();
 
       if (snapshot.docs.isNotEmpty) {
-        for (var document in snapshot.docs) {
-          // Retrieve and process each document here
-          investasiData = InvestasiInvestorModel(
-            danaDiberikan: document.get('dana_diberikan'),
-            proyekId: document.get('proyek_id'),
-            status: document.get('status'),
-            tanggalMulai: document.get('tanggal_mulai'),
-            userId: document.get('user_id'),
-          );
+        List<DocumentSnapshot> riwayatInvestasi = snapshot.docs;
+        mergedList = [];
 
-          QuerySnapshot umkmDocument = await pinjamanUmkmCollection
-              .where(FieldPath.documentId, isEqualTo: investasiData?.proyekId)
-              .get();
+        for (var document in riwayatInvestasi) {
+          Map<String, dynamic> riwayatData =
+              document.data() as Map<String, dynamic>;
 
-          if (umkmDocument.docs.isNotEmpty) {
-            pinjamanData = PinjamanUmkmModel(
-              periodePembayaran: umkmDocument.docs[0].get('periode_pembayaran'),
-              status: umkmDocument.docs[0].get('status'),
-            );
+          String danaDiberikan = riwayatData['dana_diberikan'].toString();
+          String proyekId = riwayatData['proyek_id'];
+          String userId = riwayatData['user_id'];
 
-            if (pinjamanData?.status == 'Selesai') {
+          DocumentSnapshot pinjamanDocument =
+              await pinjamanUmkmCollection.doc(proyekId).get();
+
+          if (pinjamanDocument.exists) {
+            Map<String, dynamic> pinjamanData =
+                pinjamanDocument.data() as Map<String, dynamic>;
+
+            String namaProyek = pinjamanData['nama_proyek'];
+            String deskripsiProyek = pinjamanData['deskripsi_proyek'];
+            String statusPendanaan = pinjamanData['status'];
+
+            if (statusPendanaan == 'Selesai') {
               totalSelesai++;
+              mergedListSelesai.add({
+                'nama_pinjaman': namaProyek,
+                'deskripsi_proyek': deskripsiProyek,
+                'dana_diberikan': danaDiberikan,
+                'status': statusPendanaan,
+                'proyek_id': proyekId,
+                'user_id': userId,
+              });
             } else {
               totalInvestasi++;
+              mergedList.add({
+                'nama_pinjaman': namaProyek,
+                'deskripsi_proyek': deskripsiProyek,
+                'dana_diberikan': danaDiberikan,
+                'status': statusPendanaan,
+                'proyek_id': proyekId,
+                'user_id': userId,
+              });
+            }
+
+            jumlahDanaDiberikan += int.parse(danaDiberikan);
+          } else {
+            if (kDebugMode) {
+              print('gagal mendapatkan data proyek');
             }
           }
-
-          jumlahDanaDiberikan += investasiData?.danaDiberikan ?? 0;
-          // estimasiHasil
         }
+      }
+    } else {
+      if (kDebugMode) {
+        print('gagal mendapatkan data investor');
       }
     }
   }

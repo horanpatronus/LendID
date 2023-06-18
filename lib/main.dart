@@ -9,6 +9,7 @@ import 'package:homepage/views/login_page.dart';
 import 'package:homepage/views/profile_user.dart';
 import 'package:homepage/views/settings.dart';
 import 'package:homepage/views/status_investor.dart';
+import 'package:homepage/views/topup_status.dart';
 import 'package:homepage/views/topup_withdraw.dart';
 
 import 'views/intro.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
       title: 'Introduction screen',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: StatusInvestor(),
+      home: LandingPage(),
     );
   }
 }

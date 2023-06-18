@@ -14,4 +14,17 @@ class InvestasiInvestorModel {
     this.tanggalMulai,
     this.userId,
   });
+
+  factory InvestasiInvestorModel.fromDocumentSnapshot(
+      DocumentSnapshot snapshot) {
+    final data = snapshot.data() as Map<String, dynamic>;
+
+    return InvestasiInvestorModel(
+      danaDiberikan: data['dana_diberikan'],
+      proyekId: data['proyek_id'],
+      status: data['status'],
+      tanggalMulai: data['tanggal_mulai'],
+      userId: data['user_id'],
+    );
+  }
 }

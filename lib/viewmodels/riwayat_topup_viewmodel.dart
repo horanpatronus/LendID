@@ -1,12 +1,6 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
-
-import 'package:homepage/models/user_model.dart';
-
-import '../models/topup_model.dart';
 
 abstract class BaseViewModel<T extends ChangeNotifier?> extends ChangeNotifier {
   T? state;
@@ -17,57 +11,65 @@ abstract class BaseViewModel<T extends ChangeNotifier?> extends ChangeNotifier {
   }
 }
 
+class Transaction {
+  final String jenis;
+  final String date;
+  final String amount;
+
+  Transaction(this.jenis, this.date, this.amount);
+}
+
 class RiwayatTopUpViewModel extends BaseViewModel<ChangeNotifier?> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final CollectionReference usersCollection =
       FirebaseFirestore.instance.collection('users');
+  CollectionReference riwayatTopupCollection =
+      FirebaseFirestore.instance.collection('riwayat_topup');
 
-  UserModel? currentUser;
+  List<Transaction> transactions = [];
 
-  Future<void> getCurrentUser() async {
+  Future<void> getRiwayatTopUp() async {
     User? user = _auth.currentUser;
     if (user != null) {
       DocumentSnapshot snapshot = await usersCollection.doc(user.uid).get();
       if (snapshot.exists) {
-        Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
-        currentUser = UserModel(
-          email: data['email'],
-          nama: data['nama'],
-          password: data['password'],
-          role: data['role'],
-          ktp: data['ktp'] as String?,
-          saldo: data['saldo'],
-        );
+        String userId = user.uid;
+        QuerySnapshot riwayatSnapshot =
+            await riwayatTopupCollection.where('uid', isEqualTo: userId).get();
+
+        print(userId);
+        print(
+            'Query executed successfully. Results: ${riwayatSnapshot.docs.length} documents');
+
+        if (riwayatSnapshot.docs.isNotEmpty) {
+          List<DocumentSnapshot> riwayatDocuments = riwayatSnapshot.docs;
+          transactions = [];
+
+          for (var riwayatDoc in riwayatDocuments) {
+            Map<String, dynamic> riwayatData =
+                riwayatDoc.data() as Map<String, dynamic>;
+
+            String jenis = riwayatData['jenis'];
+            String date = riwayatData['date'].toDate().toString();
+            String amount = riwayatData['amount'].toString();
+            transactions.add(Transaction(jenis, date, amount));
+          }
+
+          notifyListeners();
+        } else {
+          if (kDebugMode) {
+            print('No riwayat_topup data found for the user');
+          }
+        }
       } else {
         if (kDebugMode) {
-          print('gagal mendapatkan user');
+          print('User document does not exist');
         }
       }
-    }
-  }
-
-  List<TopUpModel> riwayatTopUp = [];
-
-  Future<void> getRiwayatTopUp() async {
-    await getCurrentUser();
-
-    if (currentUser != null) {
-      QuerySnapshot snapshot = await usersCollection
-          .doc(currentUser!.email)
-          .collection('riwayat_topup')
-          .get();
-
-      riwayatTopUp = snapshot.docs.map((DocumentSnapshot document) {
-        Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-
-        return TopUpModel(
-          jenis: data['jenis'],
-          amount: data['amount'],
-          date: data['date'],
-        );
-      }).toList();
-
-      notifyListeners();
+    } else {
+      if (kDebugMode) {
+        print('Failed to get user');
+      }
     }
   }
 }

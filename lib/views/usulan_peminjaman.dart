@@ -93,7 +93,7 @@ class UsulanPeminjamanState extends State<UsulanPeminjaman> {
       userId: '',
       waktuPengajuan: Timestamp.fromDate(DateTime.now()),
       waktuPeminjaman:
-          Timestamp.fromDate(DateTime.now().add(const Duration(days: 7))),
+          Timestamp.fromDate(DateTime.now().add(const Duration(days: 90))),
     );
 
     _pinjamanViewModel.handleUsulanPeminjamanData(pinjaman);
