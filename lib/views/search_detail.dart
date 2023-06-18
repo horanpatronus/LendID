@@ -207,7 +207,7 @@ class SearchDetail extends StatelessWidget {
                           CustomProgressBar(
                               width: 300,
                               height: 10,
-                              value: persentaseJumlahPinjaman,
+                              value: totalDanaTerkumpul / jumlahPinjaman,
                               backgroundColor: Colors.white,
                               foregroundColor: Color(0xff069A8E))
                         ],
