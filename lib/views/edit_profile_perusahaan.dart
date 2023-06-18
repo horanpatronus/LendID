@@ -65,154 +65,158 @@ class _EditProfilePerusahaanState extends State<EditProfilePerusahaan> {
                     nama, alamat, npwp, penghasilanPerusahaan);
               }
 
-              return Scaffold(
-                body: Stack(
-                  children: [
-                    SingleChildScrollView(
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const SizedBox(height: 8),
-                            const Text(
-                              'Edit Profil Perusahaan',
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
+              return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                home: Scaffold(
+                  body: Stack(
+                    children: [
+                      SingleChildScrollView(
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const SizedBox(height: 8),
+                              const Text(
+                                'Edit Profil Perusahaan',
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 16),
-                            const CircleAvatar(
-                              radius: 80,
-                              backgroundImage: AssetImage('page3.png'),
-                            ),
-                            const SizedBox(height: 16),
-                            Container(
-                              margin: const EdgeInsets.all(16),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  const Text(
-                                    'Nama Perusahaan',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Container(
-                                    padding: const EdgeInsets.all(8),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.grey),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    child: TextFormField(
-                                      controller: companyNameController,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 16),
-                                  const Text(
-                                    'Alamat Perusahaan',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Container(
-                                    padding: const EdgeInsets.all(8),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.grey),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    child: TextFormField(
-                                      controller: companyAddressController,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 16),
-                                  const Text(
-                                    'NPWP Perusahaan',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Container(
-                                    padding: const EdgeInsets.all(8),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.grey),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    child: TextFormField(
-                                      controller: npwpController,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 16),
-                                  const Text(
-                                    'Penghasilan Perbulan',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Container(
-                                    padding: const EdgeInsets.all(8),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.grey),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    child: DropdownButton<int>(
-                                      value: penghasilanPerusahaan,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          penghasilanPerusahaan = value!;
-                                        });
-                                      },
-                                      items: const [
-                                        DropdownMenuItem<int>(
-                                          value: 0,
-                                          child:
-                                              Text('-- tidak/belum di set --'),
-                                        ),
-                                        DropdownMenuItem<int>(
-                                          value: 1,
-                                          child: Text('< 100 Juta'),
-                                        ),
-                                        DropdownMenuItem<int>(
-                                          value: 2,
-                                          child: Text('100 - 500 Juta'),
-                                        ),
-                                        DropdownMenuItem<int>(
-                                          value: 3,
-                                          child: Text('> 500 Juta'),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(height: 16),
-                                ],
+                              const SizedBox(height: 16),
+                              const CircleAvatar(
+                                radius: 80,
+                                backgroundImage: AssetImage('page3.png'),
                               ),
-                            ),
-                            const SizedBox(height: 16),
-                            ElevatedButton(
-                              onPressed: () {
-                                onSaveButtonClicked();
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                      builder: (_) => ProfilePage()),
-                                );
-                              },
-                              child: const Text('Simpan'),
-                            ),
-                            const SizedBox(height: 16),
-                            Container(
-                              height: 100,
-                            ),
-                          ],
+                              const SizedBox(height: 16),
+                              Container(
+                                margin: const EdgeInsets.all(16),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    const Text(
+                                      'Nama Perusahaan',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Container(
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.grey),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: TextFormField(
+                                        controller: companyNameController,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 16),
+                                    const Text(
+                                      'Alamat Perusahaan',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Container(
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.grey),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: TextFormField(
+                                        controller: companyAddressController,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 16),
+                                    const Text(
+                                      'NPWP Perusahaan',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Container(
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.grey),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: TextFormField(
+                                        controller: npwpController,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 16),
+                                    const Text(
+                                      'Penghasilan Perbulan',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Container(
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.grey),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: DropdownButton<int>(
+                                        value: penghasilanPerusahaan,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            penghasilanPerusahaan = value!;
+                                          });
+                                        },
+                                        items: const [
+                                          DropdownMenuItem<int>(
+                                            value: 0,
+                                            child: Text(
+                                                '-- tidak/belum di set --'),
+                                          ),
+                                          DropdownMenuItem<int>(
+                                            value: 1,
+                                            child: Text('< 100 Juta'),
+                                          ),
+                                          DropdownMenuItem<int>(
+                                            value: 2,
+                                            child: Text('100 - 500 Juta'),
+                                          ),
+                                          DropdownMenuItem<int>(
+                                            value: 3,
+                                            child: Text('> 500 Juta'),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(height: 16),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              ElevatedButton(
+                                onPressed: () {
+                                  onSaveButtonClicked();
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (_) => ProfilePage()),
+                                  );
+                                },
+                                child: const Text('Simpan'),
+                              ),
+                              const SizedBox(height: 16),
+                              Container(
+                                height: 100,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    const Navigasi(),
-                    const NavigasiMid(),
-                  ],
+                      const Navigasi(),
+                      const NavigasiMid(),
+                    ],
+                  ),
                 ),
               );
             }

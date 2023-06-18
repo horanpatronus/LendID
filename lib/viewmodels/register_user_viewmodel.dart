@@ -45,7 +45,7 @@ class RegisterViewModel {
         'nama': userData?.nama,
         'password': hashedPassword,
         'role': selectedRole,
-        'saldo': 0,
+        'saldo': 1000000,
         'ktp': '',
         'perusahaan': {},
       });
