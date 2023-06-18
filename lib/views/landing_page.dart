@@ -662,7 +662,7 @@ class LandingPage extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          Carousel(),
+                                          // Carousel(),
                                         ],
                                       ),
                                     ),

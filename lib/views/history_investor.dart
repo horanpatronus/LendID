@@ -190,7 +190,7 @@ class HistoryInvestor extends StatelessWidget {
                                                 Text(
                                                     "Est. hasil yang didapatkan"),
                                                 Text(
-                                                  'null',
+                                                  '${data['estimasi_hasil']}',
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold),
