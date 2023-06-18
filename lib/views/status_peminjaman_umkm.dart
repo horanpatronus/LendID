@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:homepage/views/detail_peminjaman_umkm.dart';
 import 'package:homepage/views/history_umkm.dart';
+
+import 'package:homepage/views/history_umkm.dart';
+
 import 'package:homepage/views/navigasi.dart';
 import 'package:homepage/views/navigasi_mid.dart';
 
@@ -27,6 +30,7 @@ class StatusPeminjamanUMKMState extends State<StatusPeminjamanUMKM> {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
+            backgroundColor: Color(0xff005555),
             title: Text('Status Peminjaman'),
             actions: [
               IconButton(
@@ -35,8 +39,10 @@ class StatusPeminjamanUMKMState extends State<StatusPeminjamanUMKM> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
+
                       //pergi ke halaman
                       builder: (context) => const HistoryUMKM(),
+
                     ),
                   );
                 },
