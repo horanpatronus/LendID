@@ -87,10 +87,8 @@ class StatusPeminjamanUMKMState extends State<StatusPeminjamanUMKM> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-
                                   //pergi ke halaman
                                   builder: (context) => const HistoryUMKM(),
-
                                 ),
                               );
                             },

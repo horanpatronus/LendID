@@ -98,7 +98,6 @@ class PinjamanUmkmViewModel extends BaseViewModel<ChangeNotifier?> {
 
           bungaDidapat = int.parse(totalPembayaran) - int.parse(jumlahDana2);
         }
-        print('$mergedListSelesai');
 
         for (var document in snapshot.docs) {
           // Retrieve and process each document here
@@ -116,15 +115,15 @@ class PinjamanUmkmViewModel extends BaseViewModel<ChangeNotifier?> {
             waktuPengajuan: document.get('waktu_pengajuan'),
           );
 
-          if (pinjamanData?.status != 'Selesai' &&
-              pinjamanData?.status != 'Menunggu Konfirmasi') {
-            totalPeminjaman++;
-            jumlahPinjaman += (pinjamanData?.jumlahPinjaman ?? 0) *
-                (1 + ((pinjamanData?.periodePembayaran ?? 0) / 100));
-            jumlahDibayar += pinjamanData?.jumlahDibayar ?? 0;
-
+          if (pinjamanData?.status != 'Selesai') {
+            if (pinjamanData?.status != 'Menunggu Konfirmasi') {
+              totalPeminjaman++;
+              jumlahPinjaman += (pinjamanData?.jumlahPinjaman ?? 0) *
+                  (1 + ((pinjamanData?.periodePembayaran ?? 0) / 100));
+              jumlahDibayar += pinjamanData?.jumlahDibayar ?? 0;
+            }
             if (pinjamanData != null) {
-              pinjamanList?.add(pinjamanData!);
+              pinjamanList.add(pinjamanData!);
             }
           }
         }
