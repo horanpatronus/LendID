@@ -28,7 +28,7 @@ class InvestasiInvestorViewModel extends BaseViewModel<ChangeNotifier?> {
   int totalInvestasi = 0;
   int totalSelesai = 0;
   int jumlahDanaDiberikan = 0;
-  int estimasiHasil = 0;
+  double estimasiHasil = 0;
 
   List<dynamic> mergedList = [];
   List<dynamic> mergedListSelesai = [];
@@ -49,6 +49,7 @@ class InvestasiInvestorViewModel extends BaseViewModel<ChangeNotifier?> {
               document.data() as Map<String, dynamic>;
 
           String danaDiberikan = riwayatData['dana_diberikan'].toString();
+          double? danaDiberikanHitung = riwayatData['dana_diberikan'];
           String proyekId = riwayatData['proyek_id'];
           String userId = riwayatData['user_id'];
 
@@ -68,6 +69,13 @@ class InvestasiInvestorViewModel extends BaseViewModel<ChangeNotifier?> {
                 .toString()
                 .split(' ')[0];
 
+            // hitung estimasi
+            double? bunga = pinjamanData['periode_pembayaran'];
+            double? bungaInvestor = (bunga! / 100.0) / 2;
+            double? estimasi =
+                (danaDiberikanHitung! * bungaInvestor) + danaDiberikanHitung;
+            String? estimasiHasilHitung = estimasi.toString();
+
             if (statusPendanaan == 'Selesai') {
               totalSelesai++;
               mergedListSelesai.add({
@@ -76,6 +84,7 @@ class InvestasiInvestorViewModel extends BaseViewModel<ChangeNotifier?> {
                 'dana_diberikan': danaDiberikan,
                 'estimasi_tanggal': estimasiTanggal,
                 'status': statusPendanaan,
+                'estimasi_hasil': estimasiHasilHitung,
                 'proyek_id': proyekId,
                 'user_id': userId,
               });
@@ -86,6 +95,7 @@ class InvestasiInvestorViewModel extends BaseViewModel<ChangeNotifier?> {
                 'deskripsi_proyek': deskripsiProyek,
                 'dana_diberikan': danaDiberikan,
                 'estimasi_tanggal': estimasiTanggal,
+                'estimasi_hasil': estimasiHasilHitung,
                 'status': statusPendanaan,
                 'proyek_id': proyekId,
                 'user_id': userId,
@@ -93,6 +103,7 @@ class InvestasiInvestorViewModel extends BaseViewModel<ChangeNotifier?> {
             }
 
             jumlahDanaDiberikan += int.parse(danaDiberikan);
+            estimasiHasil += int.parse(estimasiHasilHitung);
           }
         }
       }

@@ -234,7 +234,8 @@ class _StatusInvestorState extends State<StatusInvestor>
                                                     children: [
                                                       Text("Estimasi Hasil"),
                                                       Text(
-                                                        _totalEstimasi
+                                                        investasiViewModel
+                                                            .estimasiHasil
                                                             .toString(),
                                                         style: TextStyle(
                                                           fontWeight:
@@ -361,7 +362,7 @@ class _StatusInvestorState extends State<StatusInvestor>
                                                       Text(
                                                           "Est. hasil yang didapatkan"),
                                                       Text(
-                                                        _estDidapatkan,
+                                                        '${data['estimasi_hasil']}',
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight
