@@ -20,8 +20,13 @@ import 'package:crypto/crypto.dart';
 class SearchConfirm extends StatefulWidget {
   final String idProyek;
   final PinjamanUmkmModel model;
+  final int totalDanaTerkumpul;
 
-  const SearchConfirm({Key? key, required this.idProyek, required this.model})
+  const SearchConfirm(
+      {Key? key,
+      required this.idProyek,
+      required this.model,
+      required this.totalDanaTerkumpul})
       : super(key: key);
 
   @override
@@ -31,11 +36,14 @@ class SearchConfirm extends StatefulWidget {
 class _SearchConfirmState extends State<SearchConfirm> {
   late String idProyek;
   late PinjamanUmkmModel model;
+  late int totalDanaTerkumpul;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final CollectionReference usersCollection =
       FirebaseFirestore.instance.collection('users');
+  final CollectionReference topupCollection =
+      FirebaseFirestore.instance.collection('riwayat_topup');
   UserModel? currentUser;
 
   final textEditControllerPassword = TextEditingController();
@@ -51,6 +59,7 @@ class _SearchConfirmState extends State<SearchConfirm> {
     super.initState();
     idProyek = widget.idProyek;
     model = widget.model;
+    totalDanaTerkumpul = widget.totalDanaTerkumpul;
 
     getCurrentUser();
   }
@@ -307,7 +316,7 @@ class _SearchConfirmState extends State<SearchConfirm> {
                                     Text(
                                         "Investasi maksimal yang dapat diajukan"),
                                     Text(
-                                      "Rp${NumberFormat('#,###', 'id_ID').format(20000 ?? 0)},-",
+                                      "Rp${NumberFormat('#,###', 'id_ID').format((model.jumlahPinjaman ?? 0) - totalDanaTerkumpul)},-",
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold),
                                     )
@@ -386,7 +395,14 @@ class _SearchConfirmState extends State<SearchConfirm> {
                                                   fontSize: 12,
                                                 ),
                                                 errorText: _validateAmount
-                                                    ? 'Saldo tidak cukup!'
+                                                    ? (int.parse(
+                                                                textEditControllerJumlah
+                                                                    .text) >
+                                                            (currentUser
+                                                                    ?.saldo ??
+                                                                0)
+                                                        ? 'Saldo tidak cukup!'
+                                                        : 'Jumlah investasi melebihi batas maksimum!')
                                                     : null,
                                                 errorStyle: TextStyle(
                                                   fontSize: 12,
@@ -399,11 +415,13 @@ class _SearchConfirmState extends State<SearchConfirm> {
                                                   int inputValue =
                                                       int.parse(value);
                                                   setState(() {
-                                                    _validateAmount =
-                                                        inputValue >
+                                                    _validateAmount = inputValue >
                                                             (currentUser
                                                                     ?.saldo ??
-                                                                0);
+                                                                0) ||
+                                                        inputValue >
+                                                            (model.jumlahPinjaman! -
+                                                                totalDanaTerkumpul);
                                                   });
                                                 }
                                               },
@@ -532,51 +550,63 @@ class _SearchConfirmState extends State<SearchConfirm> {
                               ),
                               GestureDetector(
                                 onTap: () async {
-                                  final passwordBytes = utf8
-                                      .encode(textEditControllerPassword.text);
-                                  final hashedPassword =
-                                      sha256.convert(passwordBytes).toString();
+                                  if (!_validateAmount &&
+                                      (_isChecked1 && _isChecked2)) {
+                                    final passwordBytes = utf8.encode(
+                                        textEditControllerPassword.text);
+                                    final hashedPassword = sha256
+                                        .convert(passwordBytes)
+                                        .toString();
 
-                                  final AuthCredential credential =
-                                      EmailAuthProvider.credential(
-                                          email: currentUser!.email,
-                                          password: hashedPassword);
+                                    final AuthCredential credential =
+                                        EmailAuthProvider.credential(
+                                            email: currentUser!.email,
+                                            password: hashedPassword);
 
-                                  try {
-                                    User? user = _auth.currentUser;
-                                    await user!.reauthenticateWithCredential(
-                                        credential);
-                                    // If password is correct, save data to database
-                                    FirebaseFirestore.instance
-                                        .collection('investasi_investor')
-                                        .add({
-                                      'dana_diberikan': int.parse(
-                                          textEditControllerJumlah.text),
-                                      'proyek_id': model.id,
-                                      'tanggal_mulai': model.waktuPeminjaman,
-                                      'user_id': user.uid,
-                                    });
+                                    try {
+                                      User? user = _auth.currentUser;
+                                      await user!.reauthenticateWithCredential(
+                                          credential);
+                                      // If password is correct, save data to database
+                                      FirebaseFirestore.instance
+                                          .collection('investasi_investor')
+                                          .add({
+                                        'dana_diberikan': int.parse(
+                                            textEditControllerJumlah.text),
+                                        'proyek_id': model.id,
+                                        'tanggal_mulai': model.waktuPeminjaman,
+                                        'user_id': user.uid,
+                                      });
 
-                                    usersCollection.doc(user.uid).update({
-                                      'saldo': currentUser?.saldo != null
-                                          ? currentUser!.saldo! -
-                                              int.parse(
-                                                  textEditControllerJumlah.text)
-                                          : null,
-                                    });
-                                  } catch (e) {
-                                    setState(() {
-                                      _errorMessage = 'Password salah!';
-                                    });
+                                      usersCollection.doc(user.uid).update({
+                                        'saldo': currentUser?.saldo != null
+                                            ? currentUser!.saldo! -
+                                                int.parse(
+                                                    textEditControllerJumlah
+                                                        .text)
+                                            : null,
+                                      });
+
+                                      topupCollection.add({
+                                        'amount': int.parse(textEditControllerJumlah.text),
+                                        'date': Timestamp.now(),
+                                        'jenis': 'Investment',
+                                        'uid': user.uid,
+                                      });
+                                    } catch (e) {
+                                      setState(() {
+                                        _errorMessage = 'Password salah!';
+                                      });
+                                    }
+
+                                    _submitForm;
+
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SearchButton()),
+                                    );
                                   }
-
-                                  _submitForm;
-
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SearchButton()),
-                                  );
                                 },
                                 child: Container(
                                   margin: EdgeInsets.symmetric(

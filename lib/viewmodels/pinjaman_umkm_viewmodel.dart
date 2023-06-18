@@ -19,10 +19,11 @@ class PinjamanUmkmViewModel extends BaseViewModel<ChangeNotifier?> {
       FirebaseFirestore.instance.collection('pinjaman_umkm');
 
   PinjamanUmkmModel? pinjamanData;
+  List<PinjamanUmkmModel> pinjamanList = [];
   int totalPeminjaman = 0;
-  int jumlahPinjaman = 0;
+  double jumlahPinjaman = 0;
   int jumlahDibayar = 0;
-  int sisaHutang = 0;
+  double sisaHutang = 0;
   int totalSelesai = 0;
   int totalPinjaman = 0;
   int bungaDidapat = 0;
@@ -97,11 +98,11 @@ class PinjamanUmkmViewModel extends BaseViewModel<ChangeNotifier?> {
 
           bungaDidapat = int.parse(totalPembayaran) - int.parse(jumlahDana2);
         }
-        print('$mergedListSelesai');
 
         for (var document in snapshot.docs) {
           // Retrieve and process each document here
           pinjamanData = PinjamanUmkmModel(
+            id: document.id,
             banyakCicilanLunas: document.get('cicilan_sudah_dibayar'),
             deskripsiProyek: document.get('deskripsi_proyek'),
             jumlahDibayar: document.get('jumlah_dibayar'),
@@ -115,9 +116,15 @@ class PinjamanUmkmViewModel extends BaseViewModel<ChangeNotifier?> {
           );
 
           if (pinjamanData?.status != 'Selesai') {
-            totalPeminjaman++;
-            jumlahPinjaman += pinjamanData?.jumlahPinjaman ?? 0;
-            jumlahDibayar += pinjamanData?.jumlahDibayar ?? 0;
+            if (pinjamanData?.status != 'Menunggu Konfirmasi') {
+              totalPeminjaman++;
+              jumlahPinjaman += (pinjamanData?.jumlahPinjaman ?? 0) *
+                  (1 + ((pinjamanData?.periodePembayaran ?? 0) / 100));
+              jumlahDibayar += pinjamanData?.jumlahDibayar ?? 0;
+            }
+            if (pinjamanData != null) {
+              pinjamanList.add(pinjamanData!);
+            }
           }
         }
 
@@ -153,6 +160,19 @@ class PinjamanUmkmViewModel extends BaseViewModel<ChangeNotifier?> {
     } catch (e) {
       if (kDebugMode) {
         print('Error: Gagal membuat usulan peminjaman, $e');
+      }
+    }
+  }
+
+  Future<void> updatePinjaman(PinjamanUmkmModel data) async {
+    try {
+      await pinjamanUmkmCollection.doc(data.id).update({
+        'cicilan_sudah_dibayar': data.banyakCicilanLunas! + 1,
+        'jumlah_dibayar': data.jumlahDibayar,
+      });
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error: Gagal mengupdate peminjaman, $e');
       }
     }
   }
