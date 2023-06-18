@@ -304,6 +304,22 @@ class _SearchConfirmState extends State<SearchConfirm> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
+                                    Text(
+                                        "Investasi maksimal yang dapat diajukan"),
+                                    Text(
+                                      "Rp${NumberFormat('#,###', 'id_ID').format(20000 ?? 0)},-",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.symmetric(horizontal: 10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
                                     Text("Saldo Anda"),
                                     FutureBuilder<UserModel?>(
                                       future: getCurrentUser(),
