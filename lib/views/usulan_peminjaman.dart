@@ -66,7 +66,7 @@ class UsulanPeminjamanState extends State<UsulanPeminjaman> {
   void hitungCicilan() {
     String numericJumlahPinjaman =
         textEditControllerJumlahPinjaman.text.replaceAll(RegExp(r'[^0-9]'), '');
-    _jumlahPinjaman = double.tryParse(numericJumlahPinjaman) ?? 0.0;
+    _jumlahPinjaman = (double.tryParse(numericJumlahPinjaman) ?? 0.0);
     double periodePembayaran = double.parse(dropdownValue.split(' ')[0]);
     double cicilan = _jumlahPinjaman / periodePembayaran;
     _cicilan = cicilan.toInt();

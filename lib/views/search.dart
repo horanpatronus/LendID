@@ -136,6 +136,7 @@ class InvestItems extends StatelessWidget {
         stream: FirebaseFirestore.instance
             .collection('pinjaman_umkm')
             .where('waktu_peminjaman', isGreaterThanOrEqualTo: Timestamp.now())
+            .where('')
             .orderBy('waktu_peminjaman', descending: false)
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -205,8 +206,9 @@ class InvestItems extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               //pergi ke halaman akun
-                              builder: (context) =>
-                                  SearchDetail(pinjaman: model, totalDanaTerkumpul: totalDanaTerkumpul),
+                              builder: (context) => SearchDetail(
+                                  pinjaman: model,
+                                  totalDanaTerkumpul: totalDanaTerkumpul),
                             ),
                           );
                         },
@@ -370,8 +372,10 @@ class InvestItems extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               //pergi ke halaman akun
-                              builder: (context) =>
-                                  SearchDetail(pinjaman: model, totalDanaTerkumpul: totalDanaTerkumpul,),
+                              builder: (context) => SearchDetail(
+                                pinjaman: model,
+                                totalDanaTerkumpul: totalDanaTerkumpul,
+                              ),
                             ),
                           );
                         },

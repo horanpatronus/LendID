@@ -19,6 +19,7 @@ class PinjamanUmkmViewModel extends BaseViewModel<ChangeNotifier?> {
       FirebaseFirestore.instance.collection('pinjaman_umkm');
 
   PinjamanUmkmModel? pinjamanData;
+  List<PinjamanUmkmModel>? pinjamanList;
   int totalPeminjaman = 0;
   int jumlahPinjaman = 0;
   int jumlahDibayar = 0;
@@ -51,6 +52,10 @@ class PinjamanUmkmViewModel extends BaseViewModel<ChangeNotifier?> {
             totalPeminjaman++;
             jumlahPinjaman += pinjamanData?.jumlahPinjaman ?? 0;
             jumlahDibayar += pinjamanData?.jumlahDibayar ?? 0;
+          }
+
+          if (pinjamanData != null) {
+            pinjamanList?.add(pinjamanData!);
           }
         }
 
