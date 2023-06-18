@@ -51,11 +51,16 @@ class InvestasiInvestorViewModel extends BaseViewModel<ChangeNotifier?> {
           if (umkmDocument.docs.isNotEmpty) {
             pinjamanData = PinjamanUmkmModel(
               periodePembayaran: umkmDocument.docs[0].get('periode_pembayaran'),
+              tenggatPelunasan: umkmDocument.docs[0].get('tenggat_pelunasan'),
             );
           }
 
           jumlahDanaDiberikan += investasiData?.danaDiberikan ?? 0;
           // estimasiHasil
+        }
+      } else {
+        if (kDebugMode) {
+          print('gagal mendapatkan data investor');
         }
       }
     }

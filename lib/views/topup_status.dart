@@ -2,51 +2,70 @@ import 'package:flutter/material.dart';
 import 'package:homepage/views/navigasi.dart';
 import 'package:homepage/views/navigasi_mid.dart';
 
-class RiwayatPage extends StatefulWidget {
+import 'package:provider/provider.dart';
+import 'package:homepage/viewmodels/riwayat_topup_viewmodel.dart';
+
+class RiwayatPage extends StatelessWidget {
+  const RiwayatPage({Key? key}) : super(key: key);
+
   @override
-  _RiwayatPageState createState() => _RiwayatPageState();
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider<RiwayatTopUpViewModel>(
+      create: (_) => RiwayatTopUpViewModel(),
+      child: const MaterialApp(
+        title: 'Riwayat',
+        home: RiwayatPage2(),
+      ),
+    );
+  }
 }
 
-class _RiwayatPageState extends State<RiwayatPage> {
-  List<Transaction> transactions = [
-    Transaction('Top Up', '2023-06-01', 'Rp 500,000'),
-    Transaction('Withdraw', '2023-05-28', 'Rp 300,000'),
-    Transaction('Top Up', '2023-05-25', 'Rp 200,000'),
-  ];
+class RiwayatPage2 extends StatelessWidget {
+  const RiwayatPage2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Riwayat Transaksi'),
+        title: const Text('Riwayat Transaksi'),
         backgroundColor: Color(0xFF005555),
       ),
       body: Stack(
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: ListView.builder(
-                  itemCount: transactions.length,
-                  itemBuilder: (context, index) {
-                    Transaction transaction = transactions[index];
-                    return Container(
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(color: Colors.grey),
-                        ),
-                      ),
-                      child: ListTile(
-                        title: Text(transaction.type),
-                        subtitle: Text(transaction.date),
-                        trailing: Text(transaction.amount),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
+          Consumer<RiwayatTopUpViewModel>(
+            builder: (context, viewModel, _) {
+              // Access the viewmodel and call the getRiwayatTopUp method
+              viewModel.getRiwayatTopUp();
+
+              // Use the data from the viewmodel to display the transactions
+              List<Transaction> transactions = viewModel.transactions;
+
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: transactions.length,
+                      itemBuilder: (context, index) {
+                        Transaction transaction = transactions[index];
+                        return Container(
+                          decoration: const BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(color: Colors.grey),
+                            ),
+                          ),
+                          child: ListTile(
+                            title: Text(transaction.jenis),
+                            subtitle: Text(transaction.date),
+                            trailing: Text(transaction.amount),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
           const Navigasi(),
           const NavigasiMid(),
@@ -54,12 +73,4 @@ class _RiwayatPageState extends State<RiwayatPage> {
       ),
     );
   }
-}
-
-class Transaction {
-  final String type;
-  final String date;
-  final String amount;
-
-  Transaction(this.type, this.date, this.amount);
 }
