@@ -40,6 +40,7 @@ class InvestasiInvestorViewModel extends BaseViewModel<ChangeNotifier?> {
           investasiData = InvestasiInvestorModel(
             danaDiberikan: document.get('dana_diberikan'),
             proyekId: document.get('proyek_id'),
+            tanggalMulai: document.get('tanggal_mulai'),
             userId: document.get('user_id'),
           );
 
@@ -50,19 +51,8 @@ class InvestasiInvestorViewModel extends BaseViewModel<ChangeNotifier?> {
           if (umkmDocument.docs.isNotEmpty) {
             pinjamanData = PinjamanUmkmModel(
               periodePembayaran: umkmDocument.docs[0].get('periode_pembayaran'),
-              status: umkmDocument.docs[0].get('status'),
               tenggatPelunasan: umkmDocument.docs[0].get('tenggat_pelunasan'),
             );
-
-            if (pinjamanData?.status == 'Selesai') {
-              totalSelesai++;
-            } else {
-              totalInvestasi++;
-            }
-          } else {
-            if (kDebugMode) {
-              print('gagal mendapatkan data umkm');
-            }
           }
 
           jumlahDanaDiberikan += investasiData?.danaDiberikan ?? 0;
