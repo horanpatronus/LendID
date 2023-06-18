@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:homepage/views/landing_page.dart';
 import 'package:homepage/views/navigasi.dart';
 import 'package:homepage/views/navigasi_mid.dart';
 
@@ -9,8 +10,28 @@ class TopUpPage extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Top Up'),
+          title: Row(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      //pergi ke halaman akun
+                      builder: (context) => LandingPage(),
+                    ),
+                  );
+                },
+                child: Container(
+                  margin: EdgeInsets.only(right: 2),
+                  child: Icon(Icons.arrow_back),
+                ),
+              ),
+              Text("Top Up"),
+            ],
+          ),
           backgroundColor: Color(0xFF005555),
+          // iconTheme: IconThemeData(color: Colors.amber),
         ),
         body: Stack(
           children: [

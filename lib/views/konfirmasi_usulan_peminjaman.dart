@@ -62,6 +62,7 @@ class KonfirmasiUsulanPeminjamanState
         title: 'Konfirmasi Usulan Peminjaman Page',
         home: Scaffold(
           appBar: AppBar(
+            backgroundColor: Color(0xff005555),
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () {
@@ -433,6 +434,10 @@ class KonfirmasiUsulanPeminjamanState
                     //     )
                     //   ),
                     // ),
+
+                    Container(
+                      height: 50,
+                    ),
                   ],
                 ),
               ),
