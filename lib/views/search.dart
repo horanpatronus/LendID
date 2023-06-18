@@ -44,61 +44,15 @@ class SearchButtonState extends State<SearchButton> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(
-                    "Filter :",
-                    style: TextStyle(fontSize: 12),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      DropdownGenerate(
-                          title: 'Imbal',
-                          menuItems: [
-                            '3%',
-                            '7%',
-                            '9%',
-                          ],
-                          onChanged: (value) {
-                            setState(() {
-                              selectedImbal = value;
-                            });
-                          }),
-                      DropdownGenerate(
-                        title: 'Dana Terkumpul',
-                        menuItems: [
-                          ' > 25%',
-                          ' > 50%',
-                          ' > 90%',
-                        ],
-                        onChanged: (value) {
-                          selectedDanaTerkumpul = value;
-                        },
-                      ),
-                      DropdownGenerate(
-                        title: 'Waktu Tersisa',
-                        menuItems: [
-                          'Kurang dari 1 Hari',
-                          'Kurang dari 1 Minggu',
-                          'Kurang dari 1 Bulan',
-                        ],
-                        onChanged: (value) {
-                          selectedWaktuTersisa = value;
-                        },
-                      ),
-                    ],
-                  ),
-                  Text(
-                    "Hasil Filter :",
-                    style: TextStyle(fontSize: 12),
-                  ),
                 ],
               ),
             ),
             Container(
               margin: const EdgeInsets.only(
-                top: 260,
+                top: 50,
                 right: 20,
                 left: 20,
+                bottom: 90,
               ),
               child: InvestItems(
                 selectedImbal: selectedImbal,
