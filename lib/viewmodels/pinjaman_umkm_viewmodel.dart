@@ -23,6 +23,14 @@ class PinjamanUmkmViewModel extends BaseViewModel<ChangeNotifier?> {
   int jumlahPinjaman = 0;
   int jumlahDibayar = 0;
   int sisaHutang = 0;
+  int totalSelesai = 0;
+  int totalPinjaman = 0;
+  int bungaDidapat = 0;
+  int jumlahDanaDipinjam = 0;
+  int jumlahUtangTerbayar = 0;
+
+  List<dynamic> mergedList = [];
+  List<dynamic> mergedListSelesai = [];
 
   Future<void> getPinjamanUmkm() async {
     User? user = _auth.currentUser;
@@ -32,6 +40,65 @@ class PinjamanUmkmViewModel extends BaseViewModel<ChangeNotifier?> {
           .where('user_id', isEqualTo: user.uid)
           .get();
       if (snapshot.docs.isNotEmpty) {
+        List<DocumentSnapshot> riwayatPinjaman = snapshot.docs;
+        mergedList = [];
+
+        for (var document in riwayatPinjaman) {
+          Map<String, dynamic> riwayatData =
+              document.data() as Map<String, dynamic>;
+
+          String? userId = riwayatData['user_id'];
+          String? namaProyek = riwayatData['nama_proyek'];
+          String? deskripsiProyek = riwayatData['deskripsi_proyek'];
+          String? statusPendanaan = riwayatData['status'];
+          String? estimasiTanggal = riwayatData['tenggat_pelunasan']
+              .toDate()
+              .toLocal()
+              .toString()
+              .split(' ')[0];
+          String? totalPembayaran = riwayatData['jumlah_dibayar'].toString();
+          String? jumlahDana2 = riwayatData['jumlah_pinjaman'].toString();
+          String? bunga = riwayatData['periode_pembayaran'].toString();
+          String? tanggalPeminjaman = riwayatData['waktu_peminjaman']
+              .toDate()
+              .toLocal()
+              .toString()
+              .split(' ')[0];
+
+          if (statusPendanaan == 'Selesai') {
+            totalSelesai++;
+            mergedListSelesai.add({
+              'nama_proyek': namaProyek,
+              'deskripsi_proyek': deskripsiProyek,
+              'tanggal_pelunasan': estimasiTanggal,
+              'tanggal_peminjaman': tanggalPeminjaman,
+              'status': statusPendanaan,
+              'jumlah_pembayaran': totalPembayaran,
+              'jumlah_pinjaman': jumlahDana2,
+              'bunga': bunga,
+              'user_id': userId,
+            });
+            jumlahDanaDipinjam += int.parse(jumlahDana2);
+            jumlahUtangTerbayar += int.parse(totalPembayaran);
+          } else {
+            totalPinjaman++;
+            mergedList.add({
+              'nama_proyek': namaProyek,
+              'deskripsi_proyek': deskripsiProyek,
+              'tanggal_pelunasan': estimasiTanggal,
+              'tanggal_peminjaman': tanggalPeminjaman,
+              'status': statusPendanaan,
+              'jumlah_pembayaran': totalPembayaran,
+              'jumlah_pinjaman': jumlahDana2,
+              'bunga': bunga,
+              'user_id': userId,
+            });
+          }
+
+          bungaDidapat = int.parse(totalPembayaran) - int.parse(jumlahDana2);
+        }
+        print('$mergedListSelesai');
+
         for (var document in snapshot.docs) {
           // Retrieve and process each document here
           pinjamanData = PinjamanUmkmModel(
