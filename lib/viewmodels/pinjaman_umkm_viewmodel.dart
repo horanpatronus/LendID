@@ -37,7 +37,6 @@ class PinjamanUmkmViewModel extends BaseViewModel<ChangeNotifier?> {
           pinjamanData = PinjamanUmkmModel(
             banyakCicilanLunas: document.get('cicilan_sudah_dibayar'),
             deskripsiProyek: document.get('deskripsi_proyek'),
-            foto: document.get('foto'),
             jumlahDibayar: document.get('jumlah_dibayar'),
             jumlahPinjaman: document.get('jumlah_pinjaman'),
             namaProyek: document.get('nama_proyek'),
@@ -71,15 +70,15 @@ class PinjamanUmkmViewModel extends BaseViewModel<ChangeNotifier?> {
       await pinjamanUmkmCollection.doc().set({
         'cicilan_sudah_dibayar': 0,
         'deskripsi_proyek': pinjamanData?.deskripsiProyek,
-        'foto': '',
         'jumlah_dibayar': 0,
         'jumlah_pinjaman': pinjamanData?.jumlahPinjaman,
         'nama_proyek': pinjamanData?.namaProyek,
         'periode_pembayaran': pinjamanData?.periodePembayaran,
         'status': pinjamanData?.status,
-        'tenggat_pelunasan':
-            pinjamanData?.waktuPengajuan?.toDate()?.add(Duration(days: 30)) ??
-                Timestamp.now(),
+        'tenggat_pelunasan': pinjamanData?.waktuPeminjaman?.toDate().add(
+                Duration(
+                    days: (30 * (pinjamanData?.periodePembayaran ?? 0)))) ??
+            Timestamp.now(),
         'user_id': user!.uid,
         'waktu_pengajuan': pinjamanData?.waktuPengajuan,
         'waktu_peminjaman': pinjamanData?.waktuPeminjaman,

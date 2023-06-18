@@ -96,7 +96,9 @@ class LandingPage extends StatelessWidget {
                       .format(investasiViewModel.estimasiHasil);
                 }
 
-                return Scaffold(
+                return MaterialApp(
+                    // debugShowCheckedModeBanner: false,
+                    home: Scaffold(
                   body: Container(
                     child: Stack(
                       children: [
@@ -677,7 +679,7 @@ class LandingPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                );
+                ));
               }
             },
           );

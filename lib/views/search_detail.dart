@@ -1,16 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:homepage/models/pinjaman_umkm_model.dart';
 import 'package:homepage/views/navigasi.dart';
 import 'package:homepage/views/navigasi_mid.dart';
 
 import 'package:homepage/views/progress_bar.dart';
 import 'package:homepage/views/search.dart';
 import 'package:homepage/views/search_detail_confirm.dart';
+import 'package:intl/intl.dart';
 
 class SearchDetail extends StatelessWidget {
-  const SearchDetail({super.key});
+  final PinjamanUmkmModel pinjaman;
+  final int totalDanaTerkumpul;
+
+  const SearchDetail(
+      {super.key, required this.pinjaman, required this.totalDanaTerkumpul});
 
   @override
   Widget build(BuildContext context) {
+    DateTime waktuPeminjaman =
+        pinjaman.waktuPeminjaman!.toDate(); // Convert Timestamp to DateTime
+    Duration difference = waktuPeminjaman.difference(DateTime.now());
+
+    final jumlahPinjaman = pinjaman.jumlahPinjaman ?? 0;
+    final persentaseJumlahPinjaman =
+        (totalDanaTerkumpul / jumlahPinjaman) * 100;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -50,7 +64,9 @@ class SearchDetail extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Center(child: Text("Pendanaan Berakir 3 Hari Lagi!")),
+                  child: Center(
+                      child: Text(
+                          "Pendanaan Berakhir ${difference.inDays.abs() + 1} Hari Lagi!")),
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 10),
@@ -69,7 +85,7 @@ class SearchDetail extends StatelessWidget {
                   ),
                   child: Center(
                       child: Text(
-                    "UMKM Aku Laku",
+                    "${pinjaman.namaProyek}",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   )),
                 ),
@@ -98,7 +114,7 @@ class SearchDetail extends StatelessWidget {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                        "${pinjaman.deskripsiProyek}",
                         textAlign: TextAlign.center,
                       ),
                     ],
@@ -152,21 +168,21 @@ class SearchDetail extends StatelessWidget {
                         margin:
                             EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                         child: Text(
-                          "Nama Proyek",
+                          "${pinjaman.namaProyek}",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
                       Container(
                         margin: EdgeInsets.symmetric(horizontal: 10),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text("Dana Proyek"),
                             Text(
-                              "Rp30.000.000,-",
+                              "Rp${NumberFormat('#,###', 'id_ID').format(pinjaman.jumlahPinjaman ?? 0)},-",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             )
                           ],
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         ),
                       ),
                       Container(
@@ -175,7 +191,7 @@ class SearchDetail extends StatelessWidget {
                           children: [
                             Text("Imbal"),
                             Text(
-                              "3%",
+                              "${pinjaman.periodePembayaran}%",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             )
                           ],
@@ -186,11 +202,12 @@ class SearchDetail extends StatelessWidget {
                         children: [
                           Container(
                               margin: EdgeInsets.symmetric(vertical: 10),
-                              child: Text("Dana Terkumpul : 50%")),
+                              child: Text(
+                                  "Dana Terkumpul : ${persentaseJumlahPinjaman.toStringAsFixed(2)}%")),
                           CustomProgressBar(
                               width: 300,
                               height: 10,
-                              value: 67.9 / 100,
+                              value: totalDanaTerkumpul / jumlahPinjaman,
                               backgroundColor: Colors.white,
                               foregroundColor: Color(0xff069A8E))
                         ],
@@ -208,7 +225,7 @@ class SearchDetail extends StatelessWidget {
                           children: [
                             Text("Estimasi Pelunasan"),
                             Text(
-                              "90 Hari",
+                              "${pinjaman.periodePembayaran! * 30} Hari",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             )
                           ],
@@ -221,7 +238,10 @@ class SearchDetail extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               //pergi ke halaman akun
-                              builder: (context) => SearchConfirm(),
+                              builder: (context) => SearchConfirm(
+                                idProyek: pinjaman.id!,
+                                model: pinjaman,
+                              ),
                             ),
                           );
                         },

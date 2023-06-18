@@ -7,8 +7,12 @@ import 'package:homepage/views/history_umkm.dart';
 import 'package:homepage/views/landing_page.dart';
 import 'package:homepage/views/login_page.dart';
 import 'package:homepage/views/profile_user.dart';
+import 'package:homepage/views/search.dart';
 import 'package:homepage/views/settings.dart';
-import 'package:homepage/views/status_peminjaman_umkm.dart';
+
+import 'package:homepage/views/status_investor.dart';
+import 'package:homepage/views/topup_status.dart';
+import 'package:homepage/views/topup_withdraw.dart';
 
 import 'views/intro.dart';
 import 'package:firebase_core/firebase_core.dart';

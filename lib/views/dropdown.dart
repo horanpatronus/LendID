@@ -8,7 +8,7 @@ class DropdownGenerate extends StatefulWidget {
   const DropdownGenerate({
     Key? key,
     required this.title,
-    required this.menuItems,
+    required this.menuItems, required Null Function(dynamic value) onChanged,
   }) : super(key: key);
 
   @override
