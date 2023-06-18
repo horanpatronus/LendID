@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homepage/views/detail_peminjaman_umkm.dart';
+import 'package:homepage/views/history_umkm.dart';
 import 'package:homepage/views/navigasi.dart';
 import 'package:homepage/views/navigasi_mid.dart';
 
@@ -31,7 +32,13 @@ class StatusPeminjamanUMKMState extends State<StatusPeminjamanUMKM> {
               IconButton(
                 icon: Icon(Icons.history),
                 onPressed: () {
-                  // Aksi yang ingin Anda lakukan saat tombol ditekan
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      //pergi ke halaman
+                      builder: (context) => const HistoryUMKM(),
+                    ),
+                  );
                 },
               ),
               Container(
