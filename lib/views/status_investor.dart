@@ -344,7 +344,7 @@ class _StatusInvestorState extends State<StatusInvestor>
                                                       Text(
                                                           "Dana yang diberikan"),
                                                       Text(
-                                                        'Rp${data['dana_diberikan']},-',
+                                                        '${data['dana_diberikan']}',
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight
