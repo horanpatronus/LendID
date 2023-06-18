@@ -82,7 +82,7 @@ class HistoryUMKM extends StatelessWidget {
                       children: [
                         Container(
                           child: Text(
-                            "Ringkasan Riawayat Peminjaman",
+                            "Ringkasan Riwayat Peminjaman",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               // color: Colors.white,
