@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:homepage/views/landing_page.dart';
 import 'package:homepage/views/navigasi.dart';
 import 'package:homepage/views/navigasi_mid.dart';
 import 'package:homepage/viewmodels/pinjaman_umkm_viewmodel.dart';
@@ -39,9 +40,10 @@ class KonfirmasiUsulanPeminjamanState
             TextButton(
               child: const Text('Kembali'),
               onPressed: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).pop();
-                Navigator.of(context).pop();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LandingPage()),
+                );
               },
             ),
           ],
