@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:intl/intl.dart';
 
 abstract class BaseViewModel<T extends ChangeNotifier?> extends ChangeNotifier {
   T? state;
@@ -50,8 +51,12 @@ class RiwayatTopUpViewModel extends BaseViewModel<ChangeNotifier?> {
                 riwayatDoc.data() as Map<String, dynamic>;
 
             String jenis = riwayatData['jenis'];
-            String date = riwayatData['date'].toDate().toString();
-            String amount = riwayatData['amount'].toString();
+            String date =
+                riwayatData['date'].toDate().toLocal().toString().split(' ')[0];
+            String amount = NumberFormat.currency(
+              locale: 'id_ID',
+              symbol: 'Rp',
+            ).format(riwayatData['amount']);
             transactions.add(Transaction(jenis, date, amount));
           }
 
